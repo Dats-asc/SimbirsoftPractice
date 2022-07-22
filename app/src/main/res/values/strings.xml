@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">SimbirsoftPracticeApp</string>
+    <string name="load">Загрузка...</string>
+    <string name="profile">Профль</string>
 </resources>
