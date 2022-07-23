@@ -1,6 +1,6 @@
 <resources>
     <string name="app_name">SimbirsoftPracticeApp</string>
-    <string name="load">Загрузка...</string>
+    <string name="load">Загрузка…</string>
     <string name="profile">Профиль</string>
     <string name="name_example">Константинов Денис</string>
     <string name="birth_day">День рождения</string>
@@ -19,4 +19,7 @@
     <string name="title_history">История</string>
     <string name="title_profile">Профиль</string>
     <string name="edit">Редактировать</string>
+    <string name="logo">Логотип</string>
+    <string name="simbirsoft_logo">Симбирсофт</string>
+    <string name="profile_image">Изображение профиля</string>
 </resources>
