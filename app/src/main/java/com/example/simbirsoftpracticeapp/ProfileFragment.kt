@@ -1,20 +1,36 @@
 package com.example.simbirsoftpracticeapp
 
+import android.app.Activity
+import android.app.Activity.RESULT_OK
 import android.app.AlertDialog
 import android.app.Dialog
+import android.content.ActivityNotFoundException
 import android.content.Context
 import android.content.DialogInterface
+import android.content.Intent
+import android.graphics.Bitmap
 import android.os.Bundle
+import android.provider.MediaStore
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.LinearLayout
+import androidx.activity.result.ActivityResult
+import androidx.activity.result.contract.ActivityResultContracts
 import com.example.simbirsoftpracticeapp.databinding.FragmentProfileBinding
 
 class ProfileFragment : Fragment() {
 
     private lateinit var binding: FragmentProfileBinding
+
+    private val startCameraForResult =
+        registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result: ActivityResult ->
+            if (result.resultCode == RESULT_OK) {
+                handleCameraIntent(result)
+            }
+        }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -31,16 +47,38 @@ class ProfileFragment : Fragment() {
 
     private fun init() {
         binding.profilePhotoHolder.setOnClickListener {
-            val dialogView = layoutInflater.inflate(R.layout.profile_custom_dialog, null)
-            val dialog = AlertDialog.Builder(requireContext()).apply {
-                setView(dialogView)
-            }.create()
-            dialogView.findViewById<LinearLayout>(R.id.action_delete).setOnClickListener {
-                binding.ivProfilePhoto.visibility = View.INVISIBLE
-                dialog.dismiss()
-            }
-            dialog.show()
+            showAlertDialog()
         }
+    }
+
+    private fun showAlertDialog() {
+        val dialog = ProfileAlertDialogView(requireContext())
+        dialog.onItemSelected { actionId ->
+            when (actionId) {
+                R.id.action_make_photo -> {
+                    dispatchTakePictureIntent()
+                }
+                R.id.action_delete -> {
+                    binding.ivProfilePhoto.visibility = View.INVISIBLE
+                    dialog.dismiss()
+                }
+            }
+        }
+        dialog.showDialog()
+    }
+
+    private fun dispatchTakePictureIntent() {
+        val takePictureIntent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
+        try {
+            startCameraForResult.launch(takePictureIntent)
+        } catch (e: ActivityNotFoundException) {
+            Log.e("", e.message.orEmpty())
+        }
+    }
+
+    private fun handleCameraIntent(result: ActivityResult) {
+        val image = result.data?.extras?.get("data") as Bitmap
+        binding.ivProfilePhoto.setImageBitmap(image)
     }
 
 }

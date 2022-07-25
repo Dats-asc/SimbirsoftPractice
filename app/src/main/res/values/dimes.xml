@@ -8,4 +8,5 @@
     <dimen name="info_row_text_size">16sp</dimen>
     <dimen name="friend_icon_width">48dp</dimen>
     <dimen name="friend_icon_height">48dp</dimen>
+    <dimen name="profile_option_padding">30dp</dimen>
 </resources>
