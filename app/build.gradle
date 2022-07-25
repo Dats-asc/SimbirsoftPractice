@@ -36,6 +36,8 @@ android {
 }
 
 dependencies {
+    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
+
 
     // region Retrofit
     def retrofit = "2.9.0"

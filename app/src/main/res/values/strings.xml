@@ -25,4 +25,13 @@
     <string name="pick_photo">Выбрать фото</string>
     <string name="make_photo">Сделать снимок</string>
     <string name="delete">Удалить</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="help">Помочь</string>
+    <string name="pick_category">Выберите категорию помощи</string>
+    <string name="kids">Дети</string>
+    <string name="adults">Взрослые</string>
+    <string name="elders">Пожилые</string>
+    <string name="animals">Животные</string>
+    <string name="events">Мероприятия</string>
 </resources>
