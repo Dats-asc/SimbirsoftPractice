@@ -22,4 +22,7 @@
     <string name="logo">Логотип</string>
     <string name="simbirsoft_logo">Симбирсофт</string>
     <string name="profile_image">Изображение профиля</string>
+    <string name="pick_photo">Выбрать фото</string>
+    <string name="make_photo">Сделать снимок</string>
+    <string name="delete">Удалить</string>
 </resources>

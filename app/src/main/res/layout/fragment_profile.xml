@@ -26,15 +26,18 @@
                 android:orientation="vertical"
                 app:layout_collapseMode="parallax">
 
-                <ImageView
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/profile_image_height"
-                    android:src="@drawable/img_man"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    android:contentDescription="@string/profile_image" />
+                <LinearLayout
+                    android:id="@+id/profile_photo_holder"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+                    <ImageView
+                        android:id="@+id/iv_profile_photo"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/profile_image_height"
+                        android:contentDescription="@string/profile_image"
+                        android:src="@drawable/img_man" />
+                </LinearLayout>
 
             </LinearLayout>
 
@@ -247,6 +250,7 @@
                 android:background="@color/cool_gray" />
 
             <Button
+                android:id="@+id/btn_logout"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
