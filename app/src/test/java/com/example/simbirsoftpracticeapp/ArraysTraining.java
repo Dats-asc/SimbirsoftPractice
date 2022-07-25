@@ -22,9 +22,10 @@ public class ArraysTraining {
         for (int i = 0; i < valuesArray.length; i++) {
             for (int j = 0; j < valuesArray.length - 1; j++) {
                 if (valuesArray[j] > valuesArray[j + 1]) {
-                    int temp = valuesArray[j];
-                    valuesArray[j] = valuesArray[j + 1];
-                    valuesArray[j + 1] = temp;
+                    valuesArray[j + 1] = valuesArray[j + 1] + valuesArray[j];
+                    valuesArray[j] = valuesArray[j + 1] - valuesArray[j];
+                    valuesArray[j + 1] = valuesArray[j + 1] - valuesArray[j];
+
                 }
             }
         }
@@ -60,13 +61,14 @@ public class ArraysTraining {
      * @return входящий массив в обратном порядке
      */
     public int[] reverse(int[] array) {
-        int[] reversedArray = new int[array.length];
-        int cnt = 0;
-        for (int i = array.length - 1; i >= 0; i--) {
-            reversedArray[cnt] = array[i];
-            cnt++;
+        for (int i = 0; i < array.length / 2; i++) {
+            if (i != array.length - 1 - i) {
+                array[i] = array[array.length - i - 1] + array[i];
+                array[array.length - 1 - i] = array[i] - array[array.length - 1 - i];
+                array[i] = array[i] - array[array.length - 1 - i];
+            }
         }
-        return reversedArray;
+        return array;
     }
 
     /**
@@ -82,16 +84,13 @@ public class ArraysTraining {
     public int[] fibonacciNumbers(int numbersCount) {
         if (numbersCount < 1) {
             return new int[]{};
-        } else if (numbersCount == 1) {
-            return new int[]{0, 1};
         } else {
             int[] result = new int[numbersCount];
-            result[0] = 0;
+            result[0] = 1;
             result[1] = 1;
             for (int i = 2; i < numbersCount; i++) {
                 result[i] = result[i - 1] + result[i - 2];
             }
-            int a = 0;
             return result;
         }
     }
@@ -109,11 +108,13 @@ public class ArraysTraining {
         for (int i = 0; i < array.length; i++) {
             int currentValueOrdinaryValCount = 0;
             for (int j = i; j < array.length; j++) {
-                if (array[i] == array[j])
+                if (array[i] == array[j]) {
                     currentValueOrdinaryValCount++;
+                }
             }
-            if (currentValueOrdinaryValCount > maxOrdinaryValCount)
+            if (currentValueOrdinaryValCount > maxOrdinaryValCount) {
                 maxOrdinaryValCount = currentValueOrdinaryValCount;
+            }
         }
         return maxOrdinaryValCount;
     }

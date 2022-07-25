@@ -1,7 +1,6 @@
 package com.example.simbirsoftpracticeapp;
 
 import org.junit.Test;
-import org.testng.annotations.BeforeClass;
 
 import static org.junit.Assert.*;
 

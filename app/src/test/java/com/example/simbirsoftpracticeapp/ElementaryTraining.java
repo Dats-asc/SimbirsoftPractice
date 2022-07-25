@@ -20,7 +20,6 @@ public class ElementaryTraining {
      * @return среднее значение для введенных чисел
      */
     public double averageValue(int firstValue, int secondValue) {
-        int a = 0;
         return (firstValue + secondValue) / 2.0;
     }
 
@@ -34,10 +33,9 @@ public class ElementaryTraining {
      * @return сумма новых трех чисел
      */
     public double complicatedAmount(int firstValue, int secondValue, int thirdValue) {
-        firstValue *=2;
+        firstValue *= 2;
         secondValue -= 3;
         thirdValue *= thirdValue;
-
         return firstValue + secondValue + thirdValue;
     }
 
@@ -67,9 +65,13 @@ public class ElementaryTraining {
         if (value < 10) {
             return value;
         } else {
-            String text = String.valueOf(value);
-            text = text.substring(text.length() - 1) + text.substring(1, text.length() - 1) + text.substring(0, 1);
-            return Integer.parseInt(text);
+            int swappedValue = 0;
+            int countOfDigits = (int) Math.ceil(Math.log10(value));
+            int firstDigit = (int) (value / Math.pow(10, countOfDigits - 1));
+            int lastDigit = value % 10;
+            swappedValue = (int) (lastDigit * Math.pow(10, countOfDigits - 1));
+            swappedValue += (int) ((value % Math.pow(10, countOfDigits - 1) / 10)) * 10 + firstDigit;
+            return swappedValue;
         }
     }
 
@@ -84,19 +86,19 @@ public class ElementaryTraining {
      * @return новое число
      */
     public int zeroEvenNumber(int value) {
-        if (value < 10){
+        if (value < 10) {
             return value;
         } else {
-            String strVal = String.valueOf(value);
-            StringBuilder result = new StringBuilder();
-            for (int i = 0; i < strVal.length(); i++){
-                if (Integer.parseInt(String.valueOf(strVal.charAt(i))) / 2 == 0){
-                    result.append('0');
-                } else {
-                    result.append(strVal.charAt(i));
+            int countOfDigits = (int) Math.ceil(Math.log10(value));
+            int newVal = 0;
+            for (int i = countOfDigits - 1; i >= 0; i--) {
+                int digit = (int) ((value / Math.pow(10, i)) % 10);
+                newVal *= 10;
+                if (digit % 2 != 0) {
+                    newVal += digit;
                 }
             }
+            return newVal;
         }
-        return 0;
     }
 }
