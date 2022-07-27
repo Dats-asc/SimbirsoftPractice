@@ -6,9 +6,7 @@
     android:layout_height="wrap_content"
     android:background="?attr/selectableItemBackground"
     android:orientation="horizontal"
-    android:paddingTop="20dp"
-    android:paddingEnd="20dp"
-    android:paddingBottom="20dp">
+    android:paddingVertical="20dp">
 
     <TextView
         android:id="@+id/tv_event_title"

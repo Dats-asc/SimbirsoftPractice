@@ -1,8 +1,6 @@
 
 v
 Fapp/src/test/java/com/example/simbirsoftpracticeapp/ExampleUnitTest.kt,2/8/289a16c46cba0010e6c976991e9389cfc9f6b240
-}
-Mapp/src/main/java/com/example/simbirsoftpracticeapp/ProfileAlertDialogView.kt,7/b/7b0b79ea7a82d89a7c6fbb9cdc9b20251dc97be2
 @
 app/build.gradle,f/4/f4a01d6a4fcb971362ec00a83903fd3902f52164
 o
@@ -11,8 +9,6 @@ v
 Fapp/src/main/java/com/example/simbirsoftpracticeapp/CategoryAdapter.kt,4/e/4e0eedf3d36f336e8518cb927b2d0620d7155448
 u
 Eapp/src/main/java/com/example/simbirsoftpracticeapp/CategoryHolder.kt,8/3/8380d7a1a5a6434af8f9b90634bde0031fc58cda
-v
-Fapp/src/main/java/com/example/simbirsoftpracticeapp/ProfileFragment.kt,1/f/1fafe302c0780e79d8aeca10c1ef4aa0bec22860
 P
  app/src/main/AndroidManifest.xml,8/c/8c55c3ccc257e5907959013f99656e4c8ec3903e
 u

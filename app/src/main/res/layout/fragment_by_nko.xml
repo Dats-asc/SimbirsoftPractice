@@ -28,6 +28,7 @@
         android:background="@drawable/search_recyclerview_background"
         android:nestedScrollingEnabled="true"
         android:paddingStart="20dp"
+        android:paddingEnd="8dp"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

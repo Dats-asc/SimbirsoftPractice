@@ -1,24 +1,18 @@
 package com.example.simbirsoftpracticeapp
 
-import android.app.Activity
 import android.app.Activity.RESULT_OK
-import android.app.AlertDialog
-import android.app.Dialog
 import android.content.ActivityNotFoundException
-import android.content.Context
-import android.content.DialogInterface
 import android.content.Intent
 import android.graphics.Bitmap
 import android.os.Bundle
 import android.provider.MediaStore
 import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.LinearLayout
 import androidx.activity.result.ActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.fragment.app.Fragment
 import com.example.simbirsoftpracticeapp.databinding.FragmentProfileBinding
 
 class ProfileFragment : Fragment() {

@@ -1,13 +1,9 @@
 package com.example.simbirsoftpracticeapp.search
 
-import android.app.SearchManager
-import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.SearchView
-import androidx.core.content.ContextCompat.getSystemService
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.viewpager2.adapter.FragmentStateAdapter
@@ -25,7 +21,7 @@ class SearchFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? = FragmentSearchBinding.inflate(inflater, container, false).let {
+    ) = FragmentSearchBinding.inflate(inflater, container, false).let {
         binding = FragmentSearchBinding.inflate(inflater, container, false)
         binding.root
     }

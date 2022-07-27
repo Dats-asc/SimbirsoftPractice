@@ -11,7 +11,7 @@ import com.example.simbirsoftpracticeapp.databinding.FragmentHelpBinding
 class HelpFragment : Fragment() {
 
     private val categories by lazy {
-        listOf<Category>(
+        listOf(
             Category(0, resources.getString(R.string.kids), R.drawable.ic_kids),
             Category(1, resources.getString(R.string.adults), R.drawable.ic_adults),
             Category(2, resources.getString(R.string.elders), R.drawable.ic_elder),
@@ -27,7 +27,7 @@ class HelpFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? = FragmentHelpBinding.inflate(inflater, container, false).let {
+    ) = FragmentHelpBinding.inflate(inflater, container, false).let {
         binding = FragmentHelpBinding.inflate(inflater, container, false)
         binding.root
     }
