@@ -1,14 +1,12 @@
-package com.example.simbirsoftpracticeapp
+package com.example.simbirsoftpracticeapp.help
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.GridLayout
-import androidx.recyclerview.widget.GridLayoutManager
+import com.example.simbirsoftpracticeapp.R
 import com.example.simbirsoftpracticeapp.databinding.FragmentHelpBinding
-import com.example.simbirsoftpracticeapp.databinding.FragmentProfileBinding
 
 class HelpFragment : Fragment() {
 

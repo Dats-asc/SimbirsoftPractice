@@ -1,20 +1,18 @@
-package com.example.simbirsoftpracticeapp
+package com.example.simbirsoftpracticeapp.search
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.example.simbirsoftpracticeapp.databinding.ItemCategoryBinding
+import com.example.simbirsoftpracticeapp.databinding.ItemSearchResultBinding
 
-class CategoryHolder(
-    private val binding: ItemCategoryBinding,
+class ResultsHolder(
+    private val binding: ItemSearchResultBinding,
     private val onListItemClick: (Int) -> Unit
 ) : RecyclerView.ViewHolder(binding.root) {
 
-    fun bind(item: Category) {
-        with(binding) {
-            tvCategoryTitle.text = item.title
-            ivCategoryLogo.setImageResource(item.imgResId)
-        }
+    fun bind(item: SearchResult) {
+        binding.tvEventTitle.text = item.resultTitle
+        binding.tvEventTitle.isSelected = true
 
         itemView.setOnClickListener { onListItemClick(item.id) }
     }
@@ -23,8 +21,8 @@ class CategoryHolder(
         fun create(
             parent: ViewGroup,
             action: (Int) -> Unit
-        ) = CategoryHolder(
-            ItemCategoryBinding.inflate(
+        ) = ResultsHolder(
+            ItemSearchResultBinding.inflate(
                 LayoutInflater.from(parent.context),
                 parent,
                 false

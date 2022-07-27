@@ -1,4 +1,4 @@
-package com.example.simbirsoftpracticeapp
+package com.example.simbirsoftpracticeapp.help
 
 data class Category(
     val id: Int,

@@ -3,6 +3,8 @@ package com.example.simbirsoftpracticeapp
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.example.simbirsoftpracticeapp.databinding.ActivityMainBinding
+import com.example.simbirsoftpracticeapp.help.HelpFragment
+import com.example.simbirsoftpracticeapp.search.SearchFragment
 
 class MainActivity : AppCompatActivity() {
 
@@ -22,13 +24,17 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun setupNavigation() {
-        binding.bottomNavigationView.selectedItemId = R.id.navigation_search
+        binding.bottomNavigationView.selectedItemId = R.id.navigation_help
         binding.bottomNavigationView.setOnItemSelectedListener { item ->
             when (item.itemId) {
                 R.id.navigation_news -> {
                     true
                 }
                 R.id.navigation_search -> {
+                    supportFragmentManager.beginTransaction().run {
+                        replace(R.id.fragment_container_view, SearchFragment())
+                        commit()
+                    }
                     true
                 }
                 R.id.navigation_help -> {

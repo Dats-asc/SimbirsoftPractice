@@ -1,4 +1,4 @@
-package com.example.simbirsoftpracticeapp
+package com.example.simbirsoftpracticeapp.help
 
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView

@@ -34,4 +34,14 @@
     <string name="elders">Пожилые</string>
     <string name="animals">Животные</string>
     <string name="events">Мероприятия</string>
+    <string name="input_organisation_name">Введите название организации</string>
+    <string name="search_label">test</string>
+    <string name="search_hint">Введите название организации</string>
+    <string name="settings_description">test</string>
+    <string name="by_events">По мероприятиям</string>
+    <string name="by_nko">По НКО</string>
+    <string name="events_msg">Напишите в строке поиска название мероприятия или ключевые слова.</string>
+    <string name="for_example">Например,</string>
+    <string name="materclass_help">мастер-класс, помощь</string>
+    <string name="search_result">Ключевые слова: мастер-класс, помощь\nРезультаты поиска: 109 мероприятий</string>
 </resources>
