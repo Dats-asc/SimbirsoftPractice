@@ -1,8 +1,9 @@
-package com.example.simbirsoftpracticeapp
+package com.example.simbirsoftpracticeapp.profile
 
 import android.app.AlertDialog
 import android.content.Context
 import android.widget.LinearLayout
+import com.example.simbirsoftpracticeapp.R
 
 class ProfileAlertDialogView(context: Context) : AlertDialog(context) {
 
@@ -31,9 +32,23 @@ class ProfileAlertDialogView(context: Context) : AlertDialog(context) {
     }
 
     private fun setListeners() {
-        optionUpdate.setOnClickListener { onItemSelected?.invoke(R.id.action_upload) }
-        optionMakePhoto.setOnClickListener { onItemSelected?.invoke(R.id.action_make_photo) }
-        optionDelete.setOnClickListener { onItemSelected?.invoke(R.id.action_delete) }
+        optionUpdate.setOnClickListener {
+            onItemSelected?.invoke(R.id.action_upload)
+            alertDialog?.dismiss()
+        }
+        optionMakePhoto.setOnClickListener {
+            onItemSelected?.invoke(R.id.action_make_photo)
+            alertDialog?.dismiss()
+        }
+        optionDelete.setOnClickListener {
+            onItemSelected?.invoke(R.id.action_delete)
+            alertDialog?.dismiss()
+        }
+    }
+
+    override fun dismiss() {
+        super.dismiss()
+        alertDialog?.dismiss()
     }
 
     fun showDialog() {

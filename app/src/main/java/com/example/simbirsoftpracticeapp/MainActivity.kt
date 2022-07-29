@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.example.simbirsoftpracticeapp.databinding.ActivityMainBinding
 import com.example.simbirsoftpracticeapp.help.HelpFragment
+import com.example.simbirsoftpracticeapp.profile.ProfileFragment
 import com.example.simbirsoftpracticeapp.search.SearchFragment
 
 class MainActivity : AppCompatActivity() {

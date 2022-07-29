@@ -3,8 +3,6 @@ v
 Fapp/src/test/java/com/example/simbirsoftpracticeapp/ExampleUnitTest.kt,2/8/289a16c46cba0010e6c976991e9389cfc9f6b240
 @
 app/build.gradle,f/4/f4a01d6a4fcb971362ec00a83903fd3902f52164
-P
- app/src/main/AndroidManifest.xml,8/c/8c55c3ccc257e5907959013f99656e4c8ec3903e
 z
 Japp/src/main/java/com/example/simbirsoftpracticeapp/search/SearchResult.kt,7/b/7b5deeaaa9fb1d92534bdfb804402bff6698e0c9
 t
@@ -13,15 +11,17 @@ Dapp/src/main/java/com/example/simbirsoftpracticeapp/help/Category.kt,5/0/50460
 Kapp/src/main/java/com/example/simbirsoftpracticeapp/help/CategoryAdapter.kt,3/2/3254181c747319a21103a98c23f97c5ab39600ac
 z
 Japp/src/main/java/com/example/simbirsoftpracticeapp/help/CategoryHolder.kt,3/b/3b9644c5ac0a2d5b5cf76c9fa903e4b5697e317c
-s
-Capp/src/main/java/com/example/simbirsoftpracticeapp/MainActivity.kt,3/2/3268e2b68b8641d47dc9b0ac0ee247fe0a28a9a3
-}
-Mapp/src/main/java/com/example/simbirsoftpracticeapp/ProfileAlertDialogView.kt,7/b/7b0b79ea7a82d89a7c6fbb9cdc9b20251dc97be2
 {
 Kapp/src/main/java/com/example/simbirsoftpracticeapp/search/ByNkoFragment.kt,b/1/b12fe87b0f91bdf1b9306f7e76e1fdbb3b83c5ac
-v
-Fapp/src/main/java/com/example/simbirsoftpracticeapp/ProfileFragment.kt,1/f/1fafe302c0780e79d8aeca10c1ef4aa0bec22860
 |
 Lapp/src/main/java/com/example/simbirsoftpracticeapp/search/SearchFragment.kt,6/e/6ed838ef6982a684b1d960119f6288ddb5905d4d
 x
 Happ/src/main/java/com/example/simbirsoftpracticeapp/help/HelpFragment.kt,2/c/2c463c43a920838138f364561e0b3dea166a094a
+
+Oapp/src/main/java/com/example/simbirsoftpracticeapp/search/EventsTabFragment.kt,8/2/82073bace041ef2bea8fb66f0925c51ad48e4aa4
+|
+Lapp/src/main/java/com/example/simbirsoftpracticeapp/search/ResultsAdapter.kt,a/f/aff24d8bca8b6675b513202ab027c36dfec64ab3
+{
+Kapp/src/main/java/com/example/simbirsoftpracticeapp/search/ResultsHolder.kt,a/c/acecb1788b2904c0cf964b76114025d82ade2533
+}
+Mapp/src/main/java/com/example/simbirsoftpracticeapp/ProfileAlertDialogView.kt,7/b/7b0b79ea7a82d89a7c6fbb9cdc9b20251dc97be2
