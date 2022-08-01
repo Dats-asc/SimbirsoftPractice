@@ -6,11 +6,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.simbirsoftpracticeapp.Utils
 import com.example.simbirsoftpracticeapp.databinding.ItemEventCardBinding
 import com.example.simbirsoftpracticeapp.news.data.CharityEvent
-import com.jakewharton.threetenabp.AndroidThreeTen
-import org.threeten.bp.Instant
-import org.threeten.bp.Month
-import org.threeten.bp.ZoneId
-import org.threeten.bp.ZonedDateTime
 
 class NewsHolder(
     private val binding: ItemEventCardBinding,

@@ -40,7 +40,7 @@ class HelpFragment : Fragment() {
 
     private fun initAdapter() {
         categoryAdapter = CategoryAdapter(categories) {
-            val a = 0
+            //TODO
         }
         binding.rvCategories.adapter = categoryAdapter
     }
