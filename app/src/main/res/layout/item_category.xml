@@ -13,7 +13,7 @@
         android:layout_width="@dimen/category_img_width"
         android:layout_height="@dimen/category_img_height"
         android:layout_gravity="center"
-        tools:src="@drawable/ic_kids" />
+        tools:src="@raw/ic_kids" />
 
     <TextView
         android:id="@+id/tv_category_title"

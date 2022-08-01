@@ -19,7 +19,7 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/search_recyclerview_background"
+            android:background="@drawable/recyclerview_background"
             android:orientation="horizontal">
 
             <androidx.appcompat.widget.SearchView

@@ -5,24 +5,40 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/light_gray_2"
-    tools:context=".search.ByNkoFragment">
+    tools:context=".news.NewsFilterFragment">
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/appbar_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <com.google.android.material.appbar.MaterialToolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:theme="@style/MainToolbarTheme"
+            app:menu="@menu/filter_toolbar_manu"
+            app:navigationIcon="@drawable/ic_back_arrow"
+            app:title="@string/filter"
+            app:titleTextAppearance="@style/Toolbar.TitleText" />
+
+    </com.google.android.material.appbar.AppBarLayout>
 
     <TextView
-        android:id="@+id/tv_results_msg"
+        android:id="@+id/tv_msg"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:fontFamily="@font/roboto"
         android:padding="20dp"
-        android:text="@string/search_result"
+        android:text="@string/how_can_you_help"
         android:textAlignment="textStart"
         android:textColor="@color/black_54"
         android:textSize="14sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@id/appbar_layout" />
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rv_search_results"
+        android:id="@+id/rv_categories"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/recyclerview_background"
@@ -33,10 +49,10 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tv_results_msg"
+        app:layout_constraintTop_toBottomOf="@id/tv_msg"
         app:layout_constraintVertical_bias="0"
         tools:itemCount="5"
-        tools:listitem="@layout/item_search_result"
+        tools:listitem="@layout/item_filter_category"
         tools:visibility="visible" />
 
 

@@ -44,4 +44,21 @@
     <string name="for_example">Например,</string>
     <string name="materclass_help">мастер-класс, помощь</string>
     <string name="search_result">Ключевые слова: мастер-класс, помощь\nРезультаты поиска: 109 мероприятий</string>
+    <string name="example_card_description">Дубовская школа-интернат для детей с ограниченными возможностями здоровья стала первой в области</string>
+    <string name="example_card_title_text">Спонсоры отремонтируют школу-интернат</string>
+    <string name="exmaple_card_button_text">Осталось 13 дней (21.09 – 20.10)</string>
+    <string name="filter">Фильтр</string>
+    <string name="news">Новости</string>
+    <string name="apply">Подтвердить</string>
+    <string name="how_can_you_help">Как вы хотите помочь?</string>
+    <string name="exmaple_news_detail_title">Спонсоры отремонтируют</string>
+    <string name="share">Поделиться</string>
+    <string name="have_a_question">У вас есть вопросы?</string>
+    <string name="write_to_us">Напишите нам</string>
+    <string name="example_event_description">Участники и болельщики смогли весело и активно провести время на «Петербургском благотворительном марафоне» и при этом финансово поучаствовать в помощи детям.\n\nПри этом финансово поучаствовать в помощи детям. При этом финансово поучаствовать в помощи детям.</string>
+    <string name="go_to_organisation_website">Перейти на сайт организаии</string>
+    <string name="help_with_clothes">Помочь вещами</string>
+    <string name="became_volunteer">Стать волонтером</string>
+    <string name="professional_help">Проф. помощь</string>
+    <string name="help_with_money">Помочь деньгами</string>
 </resources>

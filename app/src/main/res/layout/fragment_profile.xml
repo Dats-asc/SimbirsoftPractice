@@ -33,7 +33,7 @@
                     android:layout_height="wrap_content"
                     android:adjustViewBounds="true"
                     android:contentDescription="@string/profile_image"
-                    android:src="@drawable/img_man" />
+                    android:src="@raw/img_man" />
 
             </LinearLayout>
 
@@ -180,7 +180,7 @@
                     <com.google.android.material.imageview.ShapeableImageView
                         android:layout_width="@dimen/friend_icon_width"
                         android:layout_height="@dimen/friend_icon_height"
-                        android:src="@drawable/avatar_3" />
+                        android:src="@raw/avatar_3" />
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -203,7 +203,7 @@
                     <com.google.android.material.imageview.ShapeableImageView
                         android:layout_width="@dimen/friend_icon_width"
                         android:layout_height="@dimen/friend_icon_height"
-                        android:src="@drawable/avatar_2" />
+                        android:src="@raw/avatar_2" />
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -226,7 +226,7 @@
                     <com.google.android.material.imageview.ShapeableImageView
                         android:layout_width="@dimen/friend_icon_width"
                         android:layout_height="@dimen/friend_icon_height"
-                        android:src="@drawable/avatar_1" />
+                        android:src="@raw/avatar_1" />
 
                     <TextView
                         android:layout_width="wrap_content"

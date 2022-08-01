@@ -9,4 +9,8 @@
     <dimen name="category_card_horizontal_padding">24dp</dimen>
     <dimen name="category_card_width">168dp</dimen>
     <dimen name="category_card_height">128dp</dimen>
+    <dimen name="card_title_text_size">21sp</dimen>
+    <dimen name="card_title_horizontal_margin">40dp</dimen>
+    <dimen name="card_title_line_spacing">8dp</dimen>
+    <dimen name="card_button_height">32dp</dimen>
 </resources>
