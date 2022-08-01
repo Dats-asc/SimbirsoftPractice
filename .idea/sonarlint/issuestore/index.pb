@@ -34,7 +34,3 @@ Papp/src/main/java/com/example/simbirsoftpracticeapp/news/FilterCategoryHolder.k
 :
 
 .gitignore,a/5/a5cc2925ca8258af241be7e5b0381edf30266302
-v
-Fapp/src/main/java/com/example/simbirsoftpracticeapp/news/Filterable.kt,8/f/8fb2c79916ca618d57ea8a1158f80a7ea2ed955d
-s
-Capp/src/main/java/com/example/simbirsoftpracticeapp/MainActivity.kt,3/2/3268e2b68b8641d47dc9b0ac0ee247fe0a28a9a3

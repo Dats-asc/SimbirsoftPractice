@@ -6,7 +6,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.example.simbirsoftpracticeapp.R
+import com.example.simbirsoftpracticeapp.Utils
 import com.example.simbirsoftpracticeapp.databinding.FragmentNewsFilterBinding
+import com.example.simbirsoftpracticeapp.news.adapters.FilterCategoryAdapter
+import com.example.simbirsoftpracticeapp.news.data.FilterCategory
 
 class NewsFilterFragment : Fragment(), Filterable {
 
@@ -17,13 +20,7 @@ class NewsFilterFragment : Fragment(), Filterable {
     private var onFilterChanged: ((List<FilterCategory>) -> Unit)? = null
 
     private val filterCategories by lazy {
-        listOf(
-            FilterCategory(0, resources.getString(R.string.kids), true),
-            FilterCategory(1, resources.getString(R.string.adults), true),
-            FilterCategory(2, resources.getString(R.string.elders), true),
-            FilterCategory(3, resources.getString(R.string.animals), true),
-            FilterCategory(4, resources.getString(R.string.events), true),
-        )
+        Utils.getCategories(requireContext().applicationContext)
     }
 
     override fun onCreateView(
@@ -48,7 +45,7 @@ class NewsFilterFragment : Fragment(), Filterable {
             toolbar.setOnMenuItemClickListener {
                 when (it.itemId) {
                     R.id.action_apply -> {
-                        val a = onFilterChanged?.invoke(filterCategories)
+                        onFilterChanged?.invoke(filterCategories.categories.filter { filterCategory -> filterCategory.isChecked })
                         requireActivity().supportFragmentManager.popBackStack()
                         true
                     }
@@ -61,8 +58,8 @@ class NewsFilterFragment : Fragment(), Filterable {
     }
 
     private fun initAdapter() {
-        adapter = FilterCategoryAdapter(filterCategories) { categoryId, isChecked ->
-            filterCategories.find { category -> category.id == categoryId }?.let {
+        adapter = FilterCategoryAdapter(filterCategories.categories) { categoryId, isChecked ->
+            filterCategories.categories.find { category -> category.id == categoryId }?.let {
                 it.isChecked = isChecked
             }
         }

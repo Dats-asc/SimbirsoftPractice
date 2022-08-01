@@ -18,7 +18,8 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:background="@color/white">
 
             <com.google.android.material.imageview.ShapeableImageView
                 android:id="@+id/iv_event_photo"
@@ -27,11 +28,11 @@
                 android:adjustViewBounds="true"
                 android:foreground="@drawable/ic_fade"
                 android:padding="4dp"
+                android:src="@raw/card_example_1"
                 app:circularflow_radiusInDP="2dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                tools:src="@raw/card_example_1" />
+                app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
                 android:id="@+id/tv_event_title"
@@ -39,6 +40,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="@dimen/card_title_horizontal_margin"
+                android:background="@android:color/transparent"
                 android:textAlignment="center"
                 android:translationY="-16dp"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -50,6 +52,7 @@
                 android:id="@+id/iv_separator"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:background="@android:color/transparent"
                 android:src="@drawable/ic_card_separator"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -61,6 +64,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="28dp"
                 android:layout_marginTop="10dp"
+                android:background="@android:color/transparent"
                 android:ellipsize="end"
                 android:maxLines="3"
                 android:paddingHorizontal="8dp"
@@ -73,14 +77,17 @@
                 tools:text="@string/example_card_description" />
 
             <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn_date"
                 style="@style/CardButtonStyle"
                 android:layout_width="0dp"
                 android:layout_height="@dimen/card_button_height"
                 android:layout_marginTop="16dp"
+                android:backgroundTint="@color/turtle_green"
                 android:insetTop="0dp"
                 android:insetBottom="0dp"
                 android:text="@string/exmaple_card_button_text"
                 android:textAppearance="@style/CardButtonText"
+                app:cornerRadius="0dp"
                 app:icon="@drawable/ic_calendar"
                 app:iconGravity="textStart"
                 app:layout_constraintBottom_toBottomOf="parent"
