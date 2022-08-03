@@ -53,10 +53,6 @@
         <item name="tabSelectedTextColor">@color/white</item>
     </style>
 
-    <style name="DefaultFragmentStyle">
-        <item name="android:background">@color/light_gray_2</item>
-    </style>
-
     <style name="EventCardTitle">
         <item name="android:textColor">@color/blue_gray</item>
         <item name="android:textSize">@dimen/card_title_text_size</item>

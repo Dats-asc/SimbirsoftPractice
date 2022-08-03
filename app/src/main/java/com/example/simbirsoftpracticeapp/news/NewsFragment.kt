@@ -1,6 +1,8 @@
 package com.example.simbirsoftpracticeapp.news
 
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -11,7 +13,10 @@ import com.example.simbirsoftpracticeapp.R
 import com.example.simbirsoftpracticeapp.Utils
 import com.example.simbirsoftpracticeapp.databinding.FragmentNewsBinding
 import com.example.simbirsoftpracticeapp.news.adapters.NewsAdapter
+import com.example.simbirsoftpracticeapp.news.data.CharityEvents
+import com.example.simbirsoftpracticeapp.news.data.FilterCategories
 import com.example.simbirsoftpracticeapp.news.data.FilterCategory
+import java.util.concurrent.Executors
 
 class NewsFragment : Fragment() {
 
@@ -21,9 +26,7 @@ class NewsFragment : Fragment() {
 
     private var adapter: NewsAdapter? = null
 
-    private val events by lazy {
-        Utils.getEvents(requireContext().applicationContext)
-    }
+    private var events: CharityEvents? = null
 
     private var changedFilters: List<FilterCategory>? = null
 
@@ -38,12 +41,26 @@ class NewsFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         init()
-        initAdapter()
+    }
+
+    override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
+        outState.putSerializable(EVENTS, events)
+    }
+
+    override fun onViewStateRestored(savedInstanceState: Bundle?) {
+        super.onViewStateRestored(savedInstanceState)
+        savedInstanceState?.getSerializable(EVENTS)?.let {
+            events = it as CharityEvents
+            initAdapter()
+        } ?: kotlin.run {
+            getEvents()
+        }
     }
 
     private fun initAdapter() {
         if (adapter == null) {
-            adapter = NewsAdapter(events.events) { eventId ->
+            adapter = NewsAdapter(events?.events ?: listOf()) { eventId ->
                 pushNewsDetail(eventId)
             }
             binding.rvEvents.adapter = adapter
@@ -80,12 +97,24 @@ class NewsFragment : Fragment() {
         }
     }
 
+    private fun getEvents() {
+        binding.progressBar.visibility = View.VISIBLE
+        Executors.newSingleThreadExecutor().execute {
+            Thread.sleep(5_000)
+            events = Utils.getEvents(requireContext())
+            Handler(Looper.getMainLooper()).post {
+                initAdapter()
+                binding.progressBar.visibility = View.GONE
+            }
+        }
+    }
+
     private fun updateEvents() {
-        val filteredEvents = events.events.filter { event ->
+        val filteredEvents = events?.events?.filter { event ->
             val filter = changedFilters?.find { filter -> filter.id == event.categoryId }
             filter != null
         }
-        adapter?.updateEvents(filteredEvents)
+        adapter?.updateEvents(filteredEvents ?: listOf())
     }
 
     private fun pushNewsDetail(eventId: Int) {
@@ -98,5 +127,9 @@ class NewsFragment : Fragment() {
                 })
             commit()
         }
+    }
+
+    companion object {
+        const val EVENTS = "EVENTS"
     }
 }

@@ -1,3 +1,5 @@
 package com.example.simbirsoftpracticeapp.news.data
 
-class FilterCategories(val categories: List<FilterCategory>)
+import java.io.Serializable
+
+class FilterCategories(val categories: List<FilterCategory>) : Serializable

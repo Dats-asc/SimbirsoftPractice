@@ -1,6 +1,7 @@
 package com.example.simbirsoftpracticeapp.news.data
 
 import com.google.gson.annotations.SerializedName
+import java.io.Serializable
 
 data class CharityEvent(
     @SerializedName("id")
@@ -33,4 +34,4 @@ data class CharityEvent(
     val email: String,
     @SerializedName("category_id")
     val categoryId: Int
-)
+) : Serializable

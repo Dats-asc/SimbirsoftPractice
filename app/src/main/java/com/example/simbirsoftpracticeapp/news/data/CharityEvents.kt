@@ -1,3 +1,5 @@
 package com.example.simbirsoftpracticeapp.news.data
 
-class CharityEvents(val events: List<CharityEvent>)
+import java.io.Serializable
+
+class CharityEvents(val events: List<CharityEvent>) : Serializable
