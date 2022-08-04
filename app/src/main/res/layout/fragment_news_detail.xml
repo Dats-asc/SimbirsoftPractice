@@ -216,12 +216,12 @@
 
             <TextView
                 android:id="@+id/tv_org_link"
+                style="@style/Link"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
                 android:layout_marginBottom="10dp"
-                android:text="@string/go_to_organisation_website"
-                android:textColorLink="@color/leaf" />
+                android:text="@string/go_to_organisation_website" />
         </LinearLayout>
 
 

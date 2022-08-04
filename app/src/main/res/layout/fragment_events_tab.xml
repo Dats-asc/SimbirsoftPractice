@@ -51,11 +51,12 @@
             android:textSize="14sp" />
 
         <TextView
+            style="@style/Link"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="4dp"
             android:autoLink="web"
-            android:text="@string/materclass_help"
+            android:text="@string/masterclass_help"
             android:textAlignment="center"
             android:textColor="@color/black_70"
             android:textSize="14sp" />

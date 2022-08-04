@@ -42,7 +42,7 @@
     <string name="by_nko">По НКО</string>
     <string name="events_msg">Напишите в строке поиска название мероприятия или ключевые слова.</string>
     <string name="for_example">Например,</string>
-    <string name="materclass_help">мастер-класс, помощь</string>
+    <string name="masterclass_help"><a href="">мастер-класс, помощь</a></string>
     <string name="search_result">Ключевые слова: мастер-класс, помощь\nРезультаты поиска: 109 мероприятий</string>
     <string name="example_card_description">Дубовская школа-интернат для детей с ограниченными возможностями здоровья стала первой в области</string>
     <string name="example_card_title_text">Спонсоры отремонтируют школу-интернат</string>
@@ -54,9 +54,9 @@
     <string name="exmaple_news_detail_title">Спонсоры отремонтируют</string>
     <string name="share">Поделиться</string>
     <string name="have_a_question">У вас есть вопросы?</string>
-    <string name="write_to_us">Напишите нам</string>
+    <string name="write_to_us"><a href="">Напишите нам</a></string>
     <string name="example_event_description">Участники и болельщики смогли весело и активно провести время на «Петербургском благотворительном марафоне» и при этом финансово поучаствовать в помощи детям.\n\nПри этом финансово поучаствовать в помощи детям. При этом финансово поучаствовать в помощи детям.</string>
-    <string name="go_to_organisation_website">Перейти на сайт организаии</string>
+    <string name="go_to_organisation_website"><a href="">Перейти на сайт организаии</a></string>
     <string name="help_with_clothes">Помочь вещами</string>
     <string name="became_volunteer">Стать волонтером</string>
     <string name="professional_help">Проф. помощь</string>
