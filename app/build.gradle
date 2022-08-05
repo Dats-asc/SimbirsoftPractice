@@ -44,6 +44,14 @@ dependencies {
     implementation "com.squareup.retrofit2:retrofit:$retrofit"
     // endregion
 
+    // region RxJava
+    def rxjava = "3.1.5"
+    def rxAndroid ="3.0.0"
+    implementation "io.reactivex.rxjava3:rxjava:$rxjava"
+    implementation "io.reactivex.rxjava3:rxandroid:$rxAndroid"
+    implementation 'com.jakewharton.rxbinding:rxbinding:0.4.0'
+    // endregion
+
     // ThreeTen
     implementation 'com.jakewharton.threetenabp:threetenabp:1.4.0'
 
