@@ -54,7 +54,11 @@ class NewsFragment : Fragment() {
             events = it as CharityEvents
             initAdapter()
         } ?: kotlin.run {
-            getEvents()
+            if (adapter == null) {
+                getEvents()
+            } else {
+                binding.rvEvents.adapter = adapter
+            }
         }
     }
 

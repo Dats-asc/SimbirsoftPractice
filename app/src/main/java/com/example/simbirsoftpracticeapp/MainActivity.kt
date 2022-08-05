@@ -2,6 +2,8 @@ package com.example.simbirsoftpracticeapp
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
+import com.example.simbirsoftpracticeapp.auth.AuthFragment
 import com.example.simbirsoftpracticeapp.databinding.ActivityMainBinding
 import com.example.simbirsoftpracticeapp.help.HelpFragment
 import com.example.simbirsoftpracticeapp.news.NewsFragment
@@ -9,7 +11,7 @@ import com.example.simbirsoftpracticeapp.profile.ProfileFragment
 import com.example.simbirsoftpracticeapp.search.SearchFragment
 import com.jakewharton.threetenabp.AndroidThreeTen
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), Navigator {
 
     private lateinit var binding: ActivityMainBinding
 
@@ -18,9 +20,12 @@ class MainActivity : AppCompatActivity() {
         AndroidThreeTen.init(this)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
+        if (savedInstanceState != null) {
+            return;
+        }
         supportFragmentManager.beginTransaction().run {
-            add(R.id.fragment_container_view, HelpFragment())
+            binding.bottomNavigationView.visibility = View.GONE
+            add(R.id.fragment_container_view, AuthFragment())
             commit()
         }
 
@@ -64,6 +69,14 @@ class MainActivity : AppCompatActivity() {
                 }
                 else -> false
             }
+        }
+    }
+
+    override fun onAuthSuccesses() {
+        binding.bottomNavigationView.visibility = View.VISIBLE
+        supportFragmentManager.beginTransaction().run {
+            replace(R.id.fragment_container_view, HelpFragment())
+            commit()
         }
     }
 }
