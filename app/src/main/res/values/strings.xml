@@ -61,4 +61,14 @@
     <string name="became_volunteer">Стать волонтером</string>
     <string name="professional_help">Проф. помощь</string>
     <string name="help_with_money">Помочь деньгами</string>
+    <string name="authorization">Авторизация</string>
+    <string name="auth_msg">Для участия в мероприятиях войдите в приложение через социальые сети</string>
+    <string name="or_auth_with_app">Или авторизуйтесь через приложение</string>
+    <string name="email">E-mail</string>
+    <string name="email_hint">Введите e-mail</string>
+    <string name="password">Пароль</string>
+    <string name="password_hint">Введите пароль</string>
+    <string name="sign_in">Войти</string>
+    <string name="forgot_password"><a href="">Забыли пароль?</a></string>
+    <string name="registration"><a href="">Регистрация</a></string>
 </resources>
