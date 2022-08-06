@@ -7,7 +7,8 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.example.simbirsoftpracticeapp.Navigator
 import com.example.simbirsoftpracticeapp.databinding.FragmentAuthBinding
-import com.jakewharton.rxbinding.widget.RxTextView
+import com.jakewharton.rxbinding4.widget.textChangeEvents
+import com.jakewharton.rxbinding4.widget.textChanges
 
 class AuthFragment : Fragment() {
 
@@ -44,12 +45,11 @@ class AuthFragment : Fragment() {
                 requireActivity().onBackPressed()
             }
 
-            RxTextView.textChanges(etEmail)
+            binding.etEmail.textChanges()
                 .subscribe {
                     onTextChanged()
                 }
-
-            RxTextView.textChanges(etPassword)
+            binding.etPassword.textChanges()
                 .subscribe {
                     onTextChanged()
                 }
@@ -61,8 +61,7 @@ class AuthFragment : Fragment() {
     }
 
     private fun onTextChanged() {
-        binding.btnSignIn.isEnabled =
-            binding.etEmail.text.length >= 6 && binding.etPassword.text.length >= 6
+//        binding.btnSignIn.isEnabled = binding.etEmail.text.length >= 6 && binding.etPassword.text.length >= 6
     }
 
     companion object {
