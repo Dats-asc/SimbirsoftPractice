@@ -8,6 +8,7 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.DividerItemDecoration
 import com.example.simbirsoftpracticeapp.R
 import com.example.simbirsoftpracticeapp.databinding.FragmentByNkoBinding
+import com.example.simbirsoftpracticeapp.search.adapters.ResultsAdapter
 import kotlin.random.Random
 
 class ByNkoFragment : Fragment() {

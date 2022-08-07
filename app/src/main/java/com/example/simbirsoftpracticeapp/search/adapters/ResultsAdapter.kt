@@ -1,7 +1,8 @@
-package com.example.simbirsoftpracticeapp.search
+package com.example.simbirsoftpracticeapp.search.adapters
 
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.example.simbirsoftpracticeapp.search.SearchResult
 
 class ResultsAdapter(
     private val results: List<SearchResult>,

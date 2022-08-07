@@ -1,18 +1,18 @@
-package com.example.simbirsoftpracticeapp.search
+package com.example.simbirsoftpracticeapp.search.adapters
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.simbirsoftpracticeapp.databinding.ItemSearchResultBinding
+import com.example.simbirsoftpracticeapp.news.data.CharityEvent
 
-class ResultsHolder(
+class EventsHolder(
     private val binding: ItemSearchResultBinding,
     private val onListItemClick: (Int) -> Unit
 ) : RecyclerView.ViewHolder(binding.root) {
 
-    fun bind(item: SearchResult) {
-        binding.tvEventTitle.text = item.resultTitle
-        binding.tvEventTitle.isSelected = true
+    fun bind(item: CharityEvent) {
+        binding.tvEventTitle.text = item.title
 
         itemView.setOnClickListener { onListItemClick(item.id) }
     }
@@ -21,7 +21,7 @@ class ResultsHolder(
         fun create(
             parent: ViewGroup,
             action: (Int) -> Unit
-        ) = ResultsHolder(
+        ) = EventsHolder(
             ItemSearchResultBinding.inflate(
                 LayoutInflater.from(parent.context),
                 parent,

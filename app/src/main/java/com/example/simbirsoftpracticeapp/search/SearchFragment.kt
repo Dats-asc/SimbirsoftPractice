@@ -10,6 +10,7 @@ import androidx.viewpager2.adapter.FragmentStateAdapter
 import com.example.simbirsoftpracticeapp.R
 import com.example.simbirsoftpracticeapp.databinding.FragmentSearchBinding
 import com.google.android.material.tabs.TabLayoutMediator
+import com.jakewharton.rxbinding4.appcompat.queryTextChanges
 
 
 class SearchFragment : Fragment() {
@@ -23,7 +24,10 @@ class SearchFragment : Fragment() {
         savedInstanceState: Bundle?
     ) = FragmentSearchBinding.inflate(inflater, container, false).let {
         binding = FragmentSearchBinding.inflate(inflater, container, false)
-        binding.root
+        binding.root.also {
+            (fragments.first() as Searchable).searchViewListener =
+                binding.searchView.queryTextChanges()
+        }
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

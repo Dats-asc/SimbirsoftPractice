@@ -5,10 +5,14 @@ import android.util.Log
 import com.example.simbirsoftpracticeapp.news.data.CharityEvents
 import com.example.simbirsoftpracticeapp.news.data.FilterCategories
 import com.google.gson.Gson
+import io.reactivex.rxjava3.core.Observable
+import io.reactivex.rxjava3.core.Single
 import org.threeten.bp.Instant
 import org.threeten.bp.Month
 import org.threeten.bp.ZoneId
 import org.threeten.bp.ZonedDateTime
+import java.util.*
+import java.util.concurrent.TimeUnit
 
 object Utils {
 
@@ -26,6 +30,24 @@ object Utils {
         } catch (e: Exception) {
             Log.e("", e.message.orEmpty())
             throw e
+        }
+    }
+
+    fun getEventsRxJava(appContext: Context): Observable<CharityEvents> {
+        return Observable.create {
+            try {
+                val data = appContext.assets
+                    .open(CHARITY_EVENTS_JSON)
+                    .bufferedReader()
+
+                val gson = Gson()
+                val result = gson.fromJson(data, CharityEvents::class.java)
+                it.onNext(result)
+                it.onComplete()
+            } catch (e: Exception) {
+                Log.e("", e.message.orEmpty())
+                it.onError(e)
+            }
         }
     }
 
