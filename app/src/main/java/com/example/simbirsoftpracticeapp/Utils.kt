@@ -6,7 +6,10 @@ import com.example.simbirsoftpracticeapp.news.data.CharityEvents
 import com.example.simbirsoftpracticeapp.news.data.FilterCategories
 import com.google.gson.Gson
 import io.reactivex.rxjava3.core.Observable
+import io.reactivex.rxjava3.core.Scheduler
 import io.reactivex.rxjava3.core.Single
+import io.reactivex.rxjava3.internal.schedulers.RxThreadFactory
+import io.reactivex.rxjava3.schedulers.Schedulers
 import org.threeten.bp.Instant
 import org.threeten.bp.Month
 import org.threeten.bp.ZoneId
@@ -19,22 +22,28 @@ object Utils {
     private const val CATEGORIES_JSON = "categories.json"
     private const val CHARITY_EVENTS_JSON = "charity_events.json"
 
-    fun getCategories(appContext: Context): FilterCategories {
-        try {
-            val data = appContext.assets
-                .open(CATEGORIES_JSON)
-                .bufferedReader()
+    fun getCategoriesRxJava(appContext: Context): Observable<FilterCategories> {
+        return Observable.create<FilterCategories?> { subscriber ->
+            try {
+                val data = appContext.assets
+                    .open(CATEGORIES_JSON)
+                    .bufferedReader()
 
-            val gson = Gson()
-            return gson.fromJson(data, FilterCategories::class.java)
-        } catch (e: Exception) {
-            Log.e("", e.message.orEmpty())
-            throw e
+                val gson = Gson()
+                val result = gson.fromJson(data, FilterCategories::class.java)
+                subscriber.onNext(result)
+                Log.e("Current thread is ", Thread.currentThread().name)
+                subscriber.onComplete()
+            } catch (e: Exception) {
+                Log.e("", e.message.orEmpty())
+                throw e
+            }
         }
+            .subscribeOn(Schedulers.newThread())
     }
 
     fun getEventsRxJava(appContext: Context): Observable<CharityEvents> {
-        return Observable.create {
+        return Observable.create<CharityEvents> {
             try {
                 val data = appContext.assets
                     .open(CHARITY_EVENTS_JSON)
@@ -42,6 +51,7 @@ object Utils {
 
                 val gson = Gson()
                 val result = gson.fromJson(data, CharityEvents::class.java)
+                Log.e("Current thread is ", Thread.currentThread().name)
                 it.onNext(result)
                 it.onComplete()
             } catch (e: Exception) {
@@ -49,21 +59,7 @@ object Utils {
                 it.onError(e)
             }
         }
-    }
-
-    fun getEvents(appContext: Context): CharityEvents {
-        try {
-            val data = appContext.assets
-                .open(CHARITY_EVENTS_JSON)
-                .bufferedReader()
-
-            val gson = Gson()
-            val result = gson.fromJson(data, CharityEvents::class.java)
-            return result
-        } catch (e: Exception) {
-            Log.e("", e.message.orEmpty())
-            throw e
-        }
+            .subscribeOn(Schedulers.newThread())
     }
 
     fun getFormatedDate(date: String): String {

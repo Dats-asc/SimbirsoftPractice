@@ -1,6 +1,7 @@
 package com.example.simbirsoftpracticeapp.search
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -73,34 +74,34 @@ class EventsTabFragment : Fragment(), Searchable {
 
     private fun subscribeToSearchView() {
         searchViewListener?.let {
-            it.delay(1000, TimeUnit.MILLISECONDS)
-                .debounce(SEARCH_DELAY_MILLISECONDS, TimeUnit.MILLISECONDS)
+            it.debounce(SEARCH_DELAY_MILLISECONDS, TimeUnit.MILLISECONDS)
                 .subscribeOn(AndroidSchedulers.mainThread())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe { request ->
-                    if (request.isEmpty()) {
-                        binding.placeholder.visibility = View.VISIBLE
-                        binding.rvEvents.visibility = View.GONE
-                    } else {
-                        binding.rvEvents.visibility = View.VISIBLE
-                        binding.placeholder.visibility = View.GONE
-                        Utils.getEventsRxJava(requireContext())
-                            .subscribeOn(Schedulers.io())
-                            .map {
-                                it.events.filter { event ->
-                                    event.title.contains(
-                                        request.toString(),
-                                        true
-                                    )
-                                }
-                            }
-                            .observeOn(AndroidSchedulers.mainThread())
-                            .timeout(5000, TimeUnit.MILLISECONDS)
-                            .subscribe { events ->
-                                this.events = events
-                                adapter?.updateEvents(events)
-                            }
+                    onRequest(request.toString())
+                }
+        }
+    }
+
+    private fun onRequest(request: String) {
+        if (request.isEmpty()) {
+            binding.placeholder.visibility = View.VISIBLE
+            binding.rvEvents.visibility = View.GONE
+        } else {
+            binding.rvEvents.visibility = View.VISIBLE
+            binding.placeholder.visibility = View.GONE
+            Utils.getEventsRxJava(requireContext())
+                .map {
+                    it.events.filter { event ->
+                        event.title.contains(request, true)
                     }
+                }
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe { events ->
+                    Log.e("Current thread is ", Thread.currentThread().name)
+                    this.events = events
+                    adapter?.updateEvents(events)
                 }
         }
     }

@@ -8,6 +8,7 @@ import android.os.AsyncTask
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -19,6 +20,8 @@ import com.example.simbirsoftpracticeapp.databinding.FragmentNewsFilterBinding
 import com.example.simbirsoftpracticeapp.news.adapters.FilterCategoryAdapter
 import com.example.simbirsoftpracticeapp.news.data.FilterCategories
 import com.example.simbirsoftpracticeapp.news.data.FilterCategory
+import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
+import io.reactivex.rxjava3.schedulers.Schedulers
 import java.util.concurrent.Executors
 
 class NewsFilterFragment : Fragment(), Filterable {
@@ -102,8 +105,15 @@ class NewsFilterFragment : Fragment(), Filterable {
 
     private fun getFilterCategoriesWithAsyncTask() {
         val getFilterCategoriesAsync = object : AsyncTask<Context, Unit, FilterCategories>() {
-            override fun doInBackground(vararg p0: Context?): FilterCategories {
-                return Utils.getCategories(p0.first()!!)
+            override fun doInBackground(vararg p0: Context?): FilterCategories? {
+                var categories: FilterCategories? = null
+                Utils.getCategoriesRxJava(p0.first()!!)
+                    .subscribeOn(Schedulers.newThread())
+                    .subscribe {
+                        Log.e("Current thread is ", Thread.currentThread().name)
+                        categories = it
+                    }
+                return categories
             }
 
             override fun onPostExecute(result: FilterCategories?) {
@@ -122,11 +132,15 @@ class NewsFilterFragment : Fragment(), Filterable {
         binding.progressBar.visibility = View.VISIBLE
         Executors.newSingleThreadExecutor().execute {
             Thread.sleep(5_000)
-            filterCategories = Utils.getCategories(requireContext())
-            Handler(Looper.getMainLooper()).post {
-                initAdapter()
-                binding.progressBar.visibility = View.GONE
-            }
+            Utils.getCategoriesRxJava(requireContext())
+                .subscribeOn(Schedulers.computation())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe {
+                    Log.e("Current thread is ", Thread.currentThread().name)
+                    filterCategories = it
+                    initAdapter()
+                    binding.progressBar.visibility = View.GONE
+                }
         }
     }
 

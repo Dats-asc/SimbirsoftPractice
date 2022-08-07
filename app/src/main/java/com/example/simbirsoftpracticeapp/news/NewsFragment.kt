@@ -16,6 +16,8 @@ import com.example.simbirsoftpracticeapp.news.adapters.NewsAdapter
 import com.example.simbirsoftpracticeapp.news.data.CharityEvents
 import com.example.simbirsoftpracticeapp.news.data.FilterCategories
 import com.example.simbirsoftpracticeapp.news.data.FilterCategory
+import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
+import io.reactivex.rxjava3.schedulers.Schedulers
 import java.util.concurrent.Executors
 
 class NewsFragment : Fragment() {
@@ -105,11 +107,14 @@ class NewsFragment : Fragment() {
         binding.progressBar.visibility = View.VISIBLE
         Executors.newSingleThreadExecutor().execute {
             Thread.sleep(5_000)
-            events = Utils.getEvents(requireContext())
-            Handler(Looper.getMainLooper()).post {
-                initAdapter()
-                binding.progressBar.visibility = View.GONE
-            }
+            Utils.getEventsRxJava(requireContext())
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe { events ->
+                    this.events = events
+                    initAdapter()
+                    binding.progressBar.visibility = View.GONE
+                }
         }
     }
 

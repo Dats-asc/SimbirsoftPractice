@@ -8,6 +8,9 @@ import androidx.fragment.app.Fragment
 import com.example.simbirsoftpracticeapp.Constants
 import com.example.simbirsoftpracticeapp.Utils
 import com.example.simbirsoftpracticeapp.databinding.FragmentNewsDetailBinding
+import com.example.simbirsoftpracticeapp.news.data.CharityEvent
+import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
+import io.reactivex.rxjava3.schedulers.Schedulers
 
 class NewsDetailFragment : Fragment() {
 
@@ -15,10 +18,7 @@ class NewsDetailFragment : Fragment() {
 
     private var eventId: Int? = null
 
-    private val currentEvent by lazy {
-        val events = Utils.getEvents(requireContext().applicationContext)
-        events.events.find { event -> event.id == eventId }
-    }
+    private var currentEvent: CharityEvent? = null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -33,10 +33,22 @@ class NewsDetailFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        init()
+        getEvent()
     }
 
-    private fun init() {
+    private fun getEvent() {
+        Utils.getEventsRxJava(requireContext().applicationContext)
+            .map { it.events.find { event -> event.id == eventId } }
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe { event ->
+                currentEvent = event
+                setData()
+            }
+    }
+
+    private fun setData() {
+
         with(binding) {
             currentEvent?.let { event ->
                 toolbar.title = event.title
