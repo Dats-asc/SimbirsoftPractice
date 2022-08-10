@@ -25,7 +25,7 @@ class MainActivity : AppCompatActivity(), Navigator, Readable {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
         if (savedInstanceState != null) {
-            return;
+            return
         }
         _subjects = Subjects(this)
         supportFragmentManager.beginTransaction().run {

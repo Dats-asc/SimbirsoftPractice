@@ -17,14 +17,6 @@ object Utils {
 
     private const val CATEGORIES_JSON = "categories.json"
     private const val CHARITY_EVENTS_JSON = "charity_events.json"
-    private val testEvents = CharityEvents(
-        events = listOf(
-            CharityEvent(10, "Test 10", "test", "test", "12345", listOf(), "", "", "", "", listOf(), 20, "", "", 2),
-            CharityEvent(10, "Test 11", "test", "test", "12345", listOf(), "", "", "", "", listOf(), 20, "", "", 1),
-            CharityEvent(10, "Test 12", "test", "test", "12345", listOf(), "", "", "", "", listOf(), 20, "", "", 0),
-            CharityEvent(10, "Test 13", "test", "test", "12345", listOf(), "", "", "", "", listOf(), 20, "", "", 1)
-        )
-    )
 
     fun getCategories(appContext: Context): Observable<FilterCategories> {
         return Observable.create<FilterCategories?> { subscriber ->

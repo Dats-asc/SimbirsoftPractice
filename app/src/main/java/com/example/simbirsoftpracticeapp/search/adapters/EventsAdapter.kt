@@ -5,7 +5,6 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.example.simbirsoftpracticeapp.news.adapters.EventsDiffUtils
 import com.example.simbirsoftpracticeapp.news.data.CharityEvent
-import com.example.simbirsoftpracticeapp.search.SearchResult
 
 class EventsAdapter(
     private var events: List<CharityEvent>,
