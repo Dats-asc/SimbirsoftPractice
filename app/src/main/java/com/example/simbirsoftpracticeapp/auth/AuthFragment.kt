@@ -5,9 +5,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import com.example.simbirsoftpracticeapp.Navigator
 import com.example.simbirsoftpracticeapp.databinding.FragmentAuthBinding
-import com.jakewharton.rxbinding4.widget.textChangeEvents
+import com.example.simbirsoftpracticeapp.main.Navigator
 import com.jakewharton.rxbinding4.widget.textChanges
 
 class AuthFragment : Fragment() {

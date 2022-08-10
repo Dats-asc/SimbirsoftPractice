@@ -107,7 +107,7 @@ class NewsFilterFragment : Fragment(), Filterable {
         val getFilterCategoriesAsync = object : AsyncTask<Context, Unit, FilterCategories>() {
             override fun doInBackground(vararg p0: Context?): FilterCategories? {
                 var categories: FilterCategories? = null
-                Utils.getCategoriesRxJava(p0.first()!!)
+                Utils.getCategories(p0.first()!!)
                     .subscribeOn(Schedulers.newThread())
                     .subscribe {
                         Log.e("Current thread is ", Thread.currentThread().name)
@@ -132,7 +132,7 @@ class NewsFilterFragment : Fragment(), Filterable {
         binding.progressBar.visibility = View.VISIBLE
         Executors.newSingleThreadExecutor().execute {
             Thread.sleep(5_000)
-            Utils.getCategoriesRxJava(requireContext())
+            Utils.getCategories(requireContext())
                 .subscribeOn(Schedulers.computation())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe {

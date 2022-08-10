@@ -1,8 +1,6 @@
 package com.example.simbirsoftpracticeapp.news
 
 import android.os.Bundle
-import android.os.Handler
-import android.os.Looper
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -12,9 +10,9 @@ import com.example.simbirsoftpracticeapp.Constants
 import com.example.simbirsoftpracticeapp.R
 import com.example.simbirsoftpracticeapp.Utils
 import com.example.simbirsoftpracticeapp.databinding.FragmentNewsBinding
+import com.example.simbirsoftpracticeapp.main.Readable
 import com.example.simbirsoftpracticeapp.news.adapters.NewsAdapter
 import com.example.simbirsoftpracticeapp.news.data.CharityEvents
-import com.example.simbirsoftpracticeapp.news.data.FilterCategories
 import com.example.simbirsoftpracticeapp.news.data.FilterCategory
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.schedulers.Schedulers
@@ -32,6 +30,8 @@ class NewsFragment : Fragment() {
 
     private var changedFilters: List<FilterCategory>? = null
 
+    private val subjects by lazy { (requireActivity() as Readable).subject }
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -42,26 +42,39 @@ class NewsFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        init()
-    }
-
-    override fun onSaveInstanceState(outState: Bundle) {
-        super.onSaveInstanceState(outState)
-        outState.putSerializable(EVENTS, events)
-    }
-
-    override fun onViewStateRestored(savedInstanceState: Bundle?) {
-        super.onViewStateRestored(savedInstanceState)
         savedInstanceState?.getSerializable(EVENTS)?.let {
-            events = it as CharityEvents
+            (it as CharityEvents).let {
+                val unreadEvents = it.events.filter { event ->
+                    val subject =
+                        (requireActivity() as Readable).subject.find { subject -> subject.event.id == event.id }!!
+                    !subject.isRead
+                }
+                events = CharityEvents(unreadEvents)
+            }
             initAdapter()
         } ?: kotlin.run {
             if (adapter == null) {
                 getEvents()
             } else {
                 binding.rvEvents.adapter = adapter
+                events?.let {
+                    val unreadEvents = it.events.filter { event ->
+                        val subject =
+                            (requireActivity() as Readable).subject.find { subject -> subject.event.id == event.id }!!
+                        !subject.isRead
+                    }
+                    events = CharityEvents(unreadEvents)
+                    adapter?.updateEvents(unreadEvents)
+                    (requireActivity() as Readable).setNotificationBadge(unreadEvents.size)
+                }
             }
         }
+        init()
+    }
+
+    override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
+        outState.putSerializable(EVENTS, events)
     }
 
     private fun initAdapter() {
@@ -106,8 +119,15 @@ class NewsFragment : Fragment() {
     private fun getEvents() {
         binding.progressBar.visibility = View.VISIBLE
         Executors.newSingleThreadExecutor().execute {
-            Thread.sleep(5_000)
-            Utils.getEventsRxJava(requireContext())
+            Thread.sleep(1_000)
+            Utils.getEvents(requireContext())
+                .map { events ->
+                    events.events.filter { event ->
+                        val subject = subjects.find { subject -> subject.event.id == event.id }!!
+                        !subject.isRead
+                    }
+                }
+                .map { events -> CharityEvents(events) }
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe { events ->

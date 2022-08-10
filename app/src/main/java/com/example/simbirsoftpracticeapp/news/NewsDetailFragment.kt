@@ -8,6 +8,7 @@ import androidx.fragment.app.Fragment
 import com.example.simbirsoftpracticeapp.Constants
 import com.example.simbirsoftpracticeapp.Utils
 import com.example.simbirsoftpracticeapp.databinding.FragmentNewsDetailBinding
+import com.example.simbirsoftpracticeapp.main.Readable
 import com.example.simbirsoftpracticeapp.news.data.CharityEvent
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.schedulers.Schedulers
@@ -37,13 +38,14 @@ class NewsDetailFragment : Fragment() {
     }
 
     private fun getEvent() {
-        Utils.getEventsRxJava(requireContext().applicationContext)
+        Utils.getEvents(requireContext().applicationContext)
             .map { it.events.find { event -> event.id == eventId } }
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe { event ->
                 currentEvent = event
                 setData()
+                (requireActivity() as Readable).setAsRead(event?.id ?: 0)
             }
     }
 

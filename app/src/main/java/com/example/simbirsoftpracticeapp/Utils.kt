@@ -2,27 +2,31 @@ package com.example.simbirsoftpracticeapp
 
 import android.content.Context
 import android.util.Log
+import com.example.simbirsoftpracticeapp.news.data.CharityEvent
 import com.example.simbirsoftpracticeapp.news.data.CharityEvents
 import com.example.simbirsoftpracticeapp.news.data.FilterCategories
 import com.google.gson.Gson
 import io.reactivex.rxjava3.core.Observable
-import io.reactivex.rxjava3.core.Scheduler
-import io.reactivex.rxjava3.core.Single
-import io.reactivex.rxjava3.internal.schedulers.RxThreadFactory
 import io.reactivex.rxjava3.schedulers.Schedulers
 import org.threeten.bp.Instant
 import org.threeten.bp.Month
 import org.threeten.bp.ZoneId
 import org.threeten.bp.ZonedDateTime
-import java.util.*
-import java.util.concurrent.TimeUnit
 
 object Utils {
 
     private const val CATEGORIES_JSON = "categories.json"
     private const val CHARITY_EVENTS_JSON = "charity_events.json"
+    private val testEvents = CharityEvents(
+        events = listOf(
+            CharityEvent(10, "Test 10", "test", "test", "12345", listOf(), "", "", "", "", listOf(), 20, "", "", 2),
+            CharityEvent(10, "Test 11", "test", "test", "12345", listOf(), "", "", "", "", listOf(), 20, "", "", 1),
+            CharityEvent(10, "Test 12", "test", "test", "12345", listOf(), "", "", "", "", listOf(), 20, "", "", 0),
+            CharityEvent(10, "Test 13", "test", "test", "12345", listOf(), "", "", "", "", listOf(), 20, "", "", 1)
+        )
+    )
 
-    fun getCategoriesRxJava(appContext: Context): Observable<FilterCategories> {
+    fun getCategories(appContext: Context): Observable<FilterCategories> {
         return Observable.create<FilterCategories?> { subscriber ->
             try {
                 val data = appContext.assets
@@ -42,7 +46,7 @@ object Utils {
             .subscribeOn(Schedulers.newThread())
     }
 
-    fun getEventsRxJava(appContext: Context): Observable<CharityEvents> {
+    fun getEvents(appContext: Context): Observable<CharityEvents> {
         return Observable.create<CharityEvents> {
             try {
                 val data = appContext.assets

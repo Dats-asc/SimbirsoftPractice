@@ -12,7 +12,7 @@ class CategoriesIntentService : IntentService("") {
     override fun onHandleIntent(p0: Intent?) {
         var categories: FilterCategories? = null
         try {
-            Utils.getCategoriesRxJava(this.applicationContext)
+            Utils.getCategories(this.applicationContext)
                 .map { it.categories }
                 .subscribeOn(Schedulers.computation())
                 .observeOn(Schedulers.newThread())

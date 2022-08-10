@@ -15,7 +15,6 @@ import com.example.simbirsoftpracticeapp.news.data.CharityEvent
 import com.example.simbirsoftpracticeapp.news.data.CharityEvents
 import com.example.simbirsoftpracticeapp.search.adapters.EventsAdapter
 import com.jakewharton.rxbinding4.InitialValueObservable
-import com.jakewharton.rxbinding4.widget.SearchViewQueryTextEvent
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.schedulers.Schedulers
 import java.util.concurrent.TimeUnit
@@ -90,7 +89,7 @@ class EventsTabFragment : Fragment(), Searchable {
         } else {
             binding.rvEvents.visibility = View.VISIBLE
             binding.placeholder.visibility = View.GONE
-            Utils.getEventsRxJava(requireContext())
+            Utils.getEvents(requireContext())
                 .map {
                     it.events.filter { event ->
                         event.title.contains(request, true)

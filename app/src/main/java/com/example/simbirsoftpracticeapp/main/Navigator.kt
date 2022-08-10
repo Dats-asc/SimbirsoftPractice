@@ -1,4 +1,4 @@
-package com.example.simbirsoftpracticeapp
+package com.example.simbirsoftpracticeapp.main
 
 interface Navigator {
 
