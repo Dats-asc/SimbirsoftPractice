@@ -16,6 +16,7 @@ import androidx.fragment.app.Fragment
 import com.example.simbirsoftpracticeapp.Constants
 import com.example.simbirsoftpracticeapp.R
 import com.example.simbirsoftpracticeapp.Utils
+import com.example.simbirsoftpracticeapp.data.CharityRepository
 import com.example.simbirsoftpracticeapp.databinding.FragmentNewsFilterBinding
 import com.example.simbirsoftpracticeapp.news.adapters.FilterCategoryAdapter
 import com.example.simbirsoftpracticeapp.news.data.FilterCategories
@@ -23,6 +24,7 @@ import com.example.simbirsoftpracticeapp.news.data.FilterCategory
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.schedulers.Schedulers
 import java.util.concurrent.Executors
+import java.util.concurrent.TimeUnit
 
 class NewsFilterFragment : Fragment(), Filterable {
 
@@ -35,6 +37,8 @@ class NewsFilterFragment : Fragment(), Filterable {
     private var filterCategories: FilterCategories? = null
 
     private var broadcastReceiver: CategoriesBroadcastReceiver? = null
+
+    private val charityApi = CharityRepository().charityApi()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -103,60 +107,30 @@ class NewsFilterFragment : Fragment(), Filterable {
         binding.rvCategories.adapter = adapter
     }
 
-    private fun getFilterCategoriesWithAsyncTask() {
-        val getFilterCategoriesAsync = object : AsyncTask<Context, Unit, FilterCategories>() {
-            override fun doInBackground(vararg p0: Context?): FilterCategories? {
-                var categories: FilterCategories? = null
-                Utils.getCategories(p0.first()!!)
-                    .subscribeOn(Schedulers.newThread())
-                    .subscribe {
-                        Log.e("Current thread is ", Thread.currentThread().name)
-                        categories = it
-                    }
-                return categories
-            }
-
-            override fun onPostExecute(result: FilterCategories?) {
-                super.onPostExecute(result)
-                Handler(Looper.getMainLooper()).post {
-                    filterCategories = result
-                    initAdapter()
-                }
-            }
-        }
-        getFilterCategoriesAsync.execute(requireActivity())
-
-    }
-
     private fun getFilterCategoriesWithExecutor() {
-        binding.progressBar.visibility = View.VISIBLE
-        Executors.newSingleThreadExecutor().execute {
-            Thread.sleep(5_000)
-            Utils.getCategories(requireContext())
-                .subscribeOn(Schedulers.computation())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe {
-                    Log.e("Current thread is ", Thread.currentThread().name)
-                    filterCategories = it
-                    initAdapter()
-                    binding.progressBar.visibility = View.GONE
-                }
-        }
-    }
-
-    private fun getFilterCategoriesWithIntentService() {
-        broadcastReceiver = CategoriesBroadcastReceiver()
-        requireActivity().startService(
-            Intent(
-                requireContext(),
-                CategoriesIntentService::class.java
-            )
-        )
-
-        requireContext().registerReceiver(
-            broadcastReceiver,
-            IntentFilter(Constants.ACTION_SEND_CATEGORIES).apply { addCategory(Intent.CATEGORY_DEFAULT) })
-
+        charityApi.getCategories()
+            .delay(1000, TimeUnit.MILLISECONDS)
+            .map { categories -> FilterCategories(categories) }
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .doOnSubscribe { binding.progressBar.visibility = View.VISIBLE }
+            .doAfterSuccess { binding.progressBar.visibility = View.GONE }
+            .subscribe({ categories ->
+                filterCategories = categories
+                initAdapter()
+            }, { e ->
+                Log.e(this.tag, e.message.orEmpty())
+                Utils.getCategories(requireContext())
+                    .subscribeOn(Schedulers.io())
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .doOnComplete { binding.progressBar.visibility = View.GONE }
+                    .subscribe({ categories ->
+                        filterCategories = categories
+                        initAdapter()
+                    }, { e ->
+                        Log.e(this.tag, e.message.orEmpty())
+                    })
+            })
     }
 
     override fun onFiltersChanged(onFiltersChanged: (List<FilterCategory>) -> Unit) {

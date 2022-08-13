@@ -1,17 +1,19 @@
 package com.example.simbirsoftpracticeapp.news
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.example.simbirsoftpracticeapp.Constants
 import com.example.simbirsoftpracticeapp.Utils
+import com.example.simbirsoftpracticeapp.data.CharityRepository
 import com.example.simbirsoftpracticeapp.databinding.FragmentNewsDetailBinding
-import com.example.simbirsoftpracticeapp.main.Readable
 import com.example.simbirsoftpracticeapp.news.data.CharityEvent
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.schedulers.Schedulers
+import java.util.concurrent.TimeUnit
 
 class NewsDetailFragment : Fragment() {
 
@@ -20,6 +22,8 @@ class NewsDetailFragment : Fragment() {
     private var eventId: Int? = null
 
     private var currentEvent: CharityEvent? = null
+
+    private val charityApi = CharityRepository().charityApi()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -34,19 +38,30 @@ class NewsDetailFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
         getEvent()
     }
 
     private fun getEvent() {
-        Utils.getEvents(requireContext().applicationContext)
-            .map { it.events.find { event -> event.id == eventId } }
+        charityApi.getEventById(eventId ?: 0)
+            .delay(1000, TimeUnit.MILLISECONDS)
+            .map { event -> event.first() }
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
-            .subscribe { event ->
+            .doOnSubscribe {
+                binding.progressBar.visibility = View.VISIBLE
+                binding.detailInfo.visibility = View.INVISIBLE
+            }
+            .doAfterSuccess {
+                binding.progressBar.visibility = View.GONE
+                binding.detailInfo.visibility = View.VISIBLE
+            }
+            .subscribe({ event ->
                 currentEvent = event
                 setData()
-                (requireActivity() as Readable).setAsRead(event?.id ?: 0)
-            }
+            }, { throwable ->
+                Log.e(this.tag, throwable.message.orEmpty())
+            })
     }
 
     private fun setData() {

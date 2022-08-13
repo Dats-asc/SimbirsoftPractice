@@ -42,11 +42,18 @@ dependencies {
     // region Retrofit
     def retrofit = "2.9.0"
     implementation "com.squareup.retrofit2:retrofit:$retrofit"
+    implementation "com.squareup.retrofit2:adapter-rxjava3:$retrofit"
+    implementation "com.squareup.retrofit2:converter-gson:$retrofit"
+    implementation 'com.squareup.okhttp3:logging-interceptor:4.9.0'
+    // endregion
+
+    // region OkHttp
+    implementation 'com.squareup.okhttp3:okhttp:4.10.0'
     // endregion
 
     // region RxJava
     def rxjava = "3.1.5"
-    def rxAndroid ="3.0.0"
+    def rxAndroid = "3.0.0"
     implementation "io.reactivex.rxjava3:rxjava:$rxjava"
     implementation "io.reactivex.rxjava3:rxandroid:$rxAndroid"
 

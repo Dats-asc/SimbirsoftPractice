@@ -1,6 +1,7 @@
 package com.example.simbirsoftpracticeapp.news
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -9,14 +10,14 @@ import androidx.core.os.bundleOf
 import com.example.simbirsoftpracticeapp.Constants
 import com.example.simbirsoftpracticeapp.R
 import com.example.simbirsoftpracticeapp.Utils
+import com.example.simbirsoftpracticeapp.data.CharityRepository
 import com.example.simbirsoftpracticeapp.databinding.FragmentNewsBinding
-import com.example.simbirsoftpracticeapp.main.Readable
 import com.example.simbirsoftpracticeapp.news.adapters.NewsAdapter
 import com.example.simbirsoftpracticeapp.news.data.CharityEvents
 import com.example.simbirsoftpracticeapp.news.data.FilterCategory
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.schedulers.Schedulers
-import java.util.concurrent.Executors
+import java.util.concurrent.TimeUnit
 
 class NewsFragment : Fragment() {
 
@@ -30,7 +31,7 @@ class NewsFragment : Fragment() {
 
     private var changedFilters: List<FilterCategory>? = null
 
-    private val subjects by lazy { (requireActivity() as Readable).subject }
+    private val charityApi = CharityRepository().charityApi()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -43,30 +44,13 @@ class NewsFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         savedInstanceState?.getSerializable(EVENTS)?.let {
-            (it as CharityEvents).let {
-                val unreadEvents = it.events.filter { event ->
-                    val subject =
-                        (requireActivity() as Readable).subject.find { subject -> subject.event.id == event.id }!!
-                    !subject.isRead
-                }
-                events = CharityEvents(unreadEvents)
-            }
+            this.events = (it as CharityEvents)
             initAdapter()
         } ?: kotlin.run {
             if (adapter == null) {
                 getEvents()
             } else {
                 binding.rvEvents.adapter = adapter
-                events?.let {
-                    val unreadEvents = it.events.filter { event ->
-                        val subject =
-                            (requireActivity() as Readable).subject.find { subject -> subject.event.id == event.id }!!
-                        !subject.isRead
-                    }
-                    events = CharityEvents(unreadEvents)
-                    adapter?.updateEvents(unreadEvents)
-                    (requireActivity() as Readable).setNotificationBadge(unreadEvents.size)
-                }
             }
         }
         init()
@@ -117,25 +101,29 @@ class NewsFragment : Fragment() {
     }
 
     private fun getEvents() {
-        binding.progressBar.visibility = View.VISIBLE
-        Executors.newSingleThreadExecutor().execute {
-            Thread.sleep(1_000)
-            Utils.getEvents(requireContext())
-                .map { events ->
-                    events.events.filter { event ->
-                        val subject = subjects.find { subject -> subject.event.id == event.id }!!
-                        !subject.isRead
-                    }
-                }
-                .map { events -> CharityEvents(events) }
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe { events ->
-                    this.events = events
-                    initAdapter()
-                    binding.progressBar.visibility = View.GONE
-                }
-        }
+        charityApi.getEvents()
+            .delay(1000, TimeUnit.MILLISECONDS)
+            .map { events -> CharityEvents(events) }
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .doOnSubscribe { binding.progressBar.visibility = View.VISIBLE }
+            .doAfterSuccess { binding.progressBar.visibility = View.GONE }
+            .subscribe({ events ->
+                this.events = events
+                initAdapter()
+            }, { e ->
+                Log.e(this.tag, e.message.orEmpty())
+                Utils.getEvents(requireContext())
+                    .subscribeOn(Schedulers.io())
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .doOnComplete { binding.progressBar.visibility = View.GONE }
+                    .subscribe({ events ->
+                        this.events = events
+                        init()
+                    }, { e ->
+                        Log.e(this.tag, e.message.orEmpty())
+                    })
+            })
     }
 
     private fun updateEvents() {
