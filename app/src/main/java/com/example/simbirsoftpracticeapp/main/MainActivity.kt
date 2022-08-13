@@ -35,40 +35,44 @@ class MainActivity : AppCompatActivity(), Navigator {
     private fun setupNavigation() {
         binding.bottomNavigationView.selectedItemId = R.id.navigation_help
         binding.bottomNavigationView.setOnItemSelectedListener { item ->
-            when (item.itemId) {
-                R.id.navigation_news -> {
-                    supportFragmentManager.beginTransaction().run {
-                        replace(R.id.fragment_container_view, NewsFragment())
-                        commit()
-                    }
-                    true
+            onBottomNavigationItemSelected(item.itemId)
+        }
+    }
+
+    private fun onBottomNavigationItemSelected(itemId: Int): Boolean {
+        return when (itemId) {
+            R.id.navigation_news -> {
+                supportFragmentManager.beginTransaction().run {
+                    replace(R.id.fragment_container_view, NewsFragment())
+                    commit()
                 }
-                R.id.navigation_search -> {
-                    supportFragmentManager.beginTransaction().run {
-                        replace(R.id.fragment_container_view, SearchFragment())
-                        commit()
-                    }
-                    true
-                }
-                R.id.navigation_help -> {
-                    supportFragmentManager.beginTransaction().run {
-                        replace(R.id.fragment_container_view, HelpFragment())
-                        commit()
-                    }
-                    true
-                }
-                R.id.navigation_history -> {
-                    true
-                }
-                R.id.navigation_profile -> {
-                    supportFragmentManager.beginTransaction().run {
-                        replace(R.id.fragment_container_view, ProfileFragment())
-                        commit()
-                    }
-                    true
-                }
-                else -> false
+                true
             }
+            R.id.navigation_search -> {
+                supportFragmentManager.beginTransaction().run {
+                    replace(R.id.fragment_container_view, SearchFragment())
+                    commit()
+                }
+                true
+            }
+            R.id.navigation_help -> {
+                supportFragmentManager.beginTransaction().run {
+                    replace(R.id.fragment_container_view, HelpFragment())
+                    commit()
+                }
+                true
+            }
+            R.id.navigation_history -> {
+                true
+            }
+            R.id.navigation_profile -> {
+                supportFragmentManager.beginTransaction().run {
+                    replace(R.id.fragment_container_view, ProfileFragment())
+                    commit()
+                }
+                true
+            }
+            else -> false
         }
     }
 

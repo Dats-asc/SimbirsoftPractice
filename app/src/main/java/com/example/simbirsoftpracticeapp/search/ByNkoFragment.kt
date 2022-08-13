@@ -48,7 +48,7 @@ class ByNkoFragment : Fragment() {
             dataset.add(searchResults[Random.nextInt(searchResults.size)])
         }
         resultsAdapter = ResultsAdapter(dataset) {
-            //TODO on search result item clicked
+            //TODO: on search result item clicked
         }
         binding.rvSearchResults.adapter = resultsAdapter
 

@@ -65,7 +65,6 @@ class NewsDetailFragment : Fragment() {
     }
 
     private fun setData() {
-
         with(binding) {
             currentEvent?.let { event ->
                 toolbar.title = event.title
@@ -75,10 +74,10 @@ class NewsDetailFragment : Fragment() {
                 tvEventDescription.text = event.description
                 var phoneNumbers = ""
                 for (i in 0 until event.phoneNumbers.count()) {
-                    if (i == event.phoneNumbers.count() - 1) {
-                        phoneNumbers += event.phoneNumbers[i]
+                    phoneNumbers += if (i == event.phoneNumbers.count() - 1) {
+                        event.phoneNumbers[i]
                     } else {
-                        phoneNumbers += event.phoneNumbers[i] + "\n"
+                        event.phoneNumbers[i] + "\n"
                     }
                 }
                 tvPhoneNumber.text = phoneNumbers
@@ -86,7 +85,6 @@ class NewsDetailFragment : Fragment() {
                     tvMembersCount.text = "+${event.membersCount - 5}"
                 }
             }
-
             toolbar.setNavigationOnClickListener {
                 requireActivity().supportFragmentManager.popBackStack()
             }

@@ -3,11 +3,7 @@ package com.example.simbirsoftpracticeapp.news
 import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
-import android.content.IntentFilter
-import android.os.AsyncTask
 import android.os.Bundle
-import android.os.Handler
-import android.os.Looper
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -23,7 +19,6 @@ import com.example.simbirsoftpracticeapp.news.data.FilterCategories
 import com.example.simbirsoftpracticeapp.news.data.FilterCategory
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.schedulers.Schedulers
-import java.util.concurrent.Executors
 import java.util.concurrent.TimeUnit
 
 class NewsFilterFragment : Fragment(), Filterable {
