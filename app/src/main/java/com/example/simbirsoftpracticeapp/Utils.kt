@@ -1,8 +1,12 @@
 package com.example.simbirsoftpracticeapp
 
 import android.content.Context
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.util.Log
-import com.example.simbirsoftpracticeapp.news.data.CharityEvent
+import android.widget.ImageView
+import com.bumptech.glide.Glide
+import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.example.simbirsoftpracticeapp.news.data.CharityEvents
 import com.example.simbirsoftpracticeapp.news.data.FilterCategories
 import com.google.gson.Gson
@@ -84,4 +88,14 @@ object Utils {
         }
     }
 
+    fun loadImage(view: ImageView, url: String) {
+
+        Glide.with(view.context)
+            .load(url)
+            .placeholder(ColorDrawable(Color.LTGRAY))
+            .error(R.drawable.ic_round_icon_placeholder)
+            .diskCacheStrategy(DiskCacheStrategy.NONE)
+            .skipMemoryCache(true)
+            .into(view)
+    }
 }

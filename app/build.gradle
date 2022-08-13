@@ -64,6 +64,9 @@ dependencies {
     // ThreeTen
     implementation 'com.jakewharton.threetenabp:threetenabp:1.4.0'
 
+    // Glide
+    implementation 'com.github.bumptech.glide:glide:4.13.1'
+
     // Gson
     implementation 'com.google.code.gson:gson:2.8.8'
 
