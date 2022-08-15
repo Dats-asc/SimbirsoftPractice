@@ -7,9 +7,14 @@ import android.util.Log
 import android.widget.ImageView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
-import com.example.simbirsoftpracticeapp.news.data.CharityEvents
-import com.example.simbirsoftpracticeapp.news.data.FilterCategories
+import com.example.simbirsoftpracticeapp.data.database.categories.CategoryEntity
+import com.example.simbirsoftpracticeapp.data.database.events.CharityEventEntity
+import com.example.simbirsoftpracticeapp.data.database.events.EventMembersList
+import com.example.simbirsoftpracticeapp.data.database.events.PhoneNumbersList
+import com.example.simbirsoftpracticeapp.news.data.*
 import com.google.gson.Gson
+import com.google.gson.JsonArray
+import com.google.gson.JsonObject
 import io.reactivex.rxjava3.core.Observable
 import io.reactivex.rxjava3.schedulers.Schedulers
 import org.threeten.bp.Instant
@@ -21,6 +26,8 @@ object Utils {
 
     private const val CATEGORIES_JSON = "categories.json"
     private const val CHARITY_EVENTS_JSON = "charity_events.json"
+
+    private val gson = Gson()
 
     fun getCategories(appContext: Context): Observable<FilterCategories> {
         return Observable.create<FilterCategories?> { subscriber ->
@@ -97,5 +104,61 @@ object Utils {
             .diskCacheStrategy(DiskCacheStrategy.NONE)
             .skipMemoryCache(true)
             .into(view)
+    }
+
+    fun mapCharityEvent(event: CharityEvent): CharityEventEntity {
+        return CharityEventEntity(
+            id = event.id,
+            title = event.title,
+            date = event.date,
+            charitableFoundation = event.charitableFoundation,
+            address = event.address,
+            phoneNumbers = gson.toJson(PhoneNumbersList(event.phoneNumbers)),
+            img1 = event.img1,
+            img2 = event.img2,
+            img3 = event.img3,
+            description = event.description,
+            members = gson.toJson(EventMembersList(event.members)),
+            membersCount = event.membersCount,
+            sourceUrl = event.sourceUrl,
+            email = event.email,
+            categoryId = event.categoryId,
+        )
+    }
+
+    fun mapCharityEventEntity(eventEntity: CharityEventEntity): CharityEvent {
+        return CharityEvent(
+            id = eventEntity.id,
+            title = eventEntity.title,
+            date = eventEntity.date,
+            charitableFoundation = eventEntity.charitableFoundation,
+            address = eventEntity.address,
+            phoneNumbers = gson.fromJson(eventEntity.phoneNumbers, PhoneNumbersList::class.java).list,
+            img1 = eventEntity.img1,
+            img2 = eventEntity.img2,
+            img3 = eventEntity.img3,
+            description = eventEntity.description,
+            members = gson.fromJson(eventEntity.members, EventMembersList::class.java).list,
+            membersCount = eventEntity.membersCount,
+            sourceUrl = eventEntity.sourceUrl,
+            email = eventEntity.email,
+            categoryId = eventEntity.categoryId
+        )
+    }
+
+    fun mapCategory(category: FilterCategory): CategoryEntity {
+        return CategoryEntity(
+            id = category.id,
+            title = category.title,
+            isChecked = category.isChecked
+        )
+    }
+
+    fun mapCategoryEntity(categoryEntity: CategoryEntity): FilterCategory {
+        return FilterCategory(
+            id = categoryEntity.id,
+            title = categoryEntity.title,
+            isChecked = categoryEntity.isChecked
+        )
     }
 }

@@ -14,6 +14,7 @@ class FilterCategoryHolder(
 
     fun bind(item: FilterCategory) {
         binding.tvFilterTitle.text = item.title
+        binding.categorySwitch.isChecked = item.isChecked
         binding.categorySwitch.setOnCheckedChangeListener { _: CompoundButton, isChecked ->
             onCategorySwitch(item.id, isChecked)
         }

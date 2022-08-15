@@ -13,6 +13,7 @@ import com.example.simbirsoftpracticeapp.Constants
 import com.example.simbirsoftpracticeapp.R
 import com.example.simbirsoftpracticeapp.Utils
 import com.example.simbirsoftpracticeapp.data.CharityRepository
+import com.example.simbirsoftpracticeapp.data.database.AppDatabase
 import com.example.simbirsoftpracticeapp.databinding.FragmentNewsFilterBinding
 import com.example.simbirsoftpracticeapp.news.adapters.FilterCategoryAdapter
 import com.example.simbirsoftpracticeapp.news.data.FilterCategories
@@ -34,6 +35,8 @@ class NewsFilterFragment : Fragment(), Filterable {
     private var broadcastReceiver: CategoriesBroadcastReceiver? = null
 
     private val charityApi = CharityRepository().charityApi()
+
+    private val db by lazy { AppDatabase(requireContext()) }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -59,7 +62,7 @@ class NewsFilterFragment : Fragment(), Filterable {
             filterCategories = it as FilterCategories
             initAdapter()
         } ?: kotlin.run {
-            getFilterCategoriesWithExecutor()
+            getCategoriesFromDb()
         }
     }
 
@@ -80,6 +83,11 @@ class NewsFilterFragment : Fragment(), Filterable {
                 when (it.itemId) {
                     R.id.action_apply -> {
                         filterCategories?.categories?.let { categories ->
+                            db.categoriesDao().updateAll(categories.map { filterCategory ->
+                                Utils.mapCategory(filterCategory)
+                            })
+                                .subscribeOn(Schedulers.io())
+                                .subscribe()
                             onFilterChanged?.invoke(categories.filter { category -> category.isChecked })
                         }
                         requireActivity().supportFragmentManager.popBackStack()
@@ -102,7 +110,33 @@ class NewsFilterFragment : Fragment(), Filterable {
         binding.rvCategories.adapter = adapter
     }
 
-    private fun getFilterCategoriesWithExecutor() {
+    private fun getCategoriesFromDb() {
+        db.categoriesDao().getAll()
+            .delay(250, TimeUnit.MILLISECONDS)
+            .map { categories ->
+                categories.map { categoryEntity ->
+                    Utils.mapCategoryEntity(
+                        categoryEntity
+                    )
+                }
+            }
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .doOnSubscribe { binding.progressBar.visibility = View.VISIBLE }
+            .doAfterSuccess { binding.progressBar.visibility = View.GONE }
+            .subscribe({ categories ->
+                if (categories.isNullOrEmpty()) {
+                    getFilterCategories()
+                } else {
+                    filterCategories = FilterCategories(categories)
+                    initAdapter()
+                }
+            }, { e ->
+                Log.e(this.tag, e.message.orEmpty())
+            })
+    }
+
+    private fun getFilterCategories() {
         charityApi.getCategories()
             .delay(1000, TimeUnit.MILLISECONDS)
             .map { categories -> FilterCategories(categories) }
@@ -113,6 +147,14 @@ class NewsFilterFragment : Fragment(), Filterable {
             .subscribe({ categories ->
                 filterCategories = categories
                 initAdapter()
+                db.categoriesDao()
+                    .insertAll(categories.categories.map { category -> Utils.mapCategory(category) })
+                    .subscribeOn(Schedulers.io())
+                    .subscribe({
+                        Log.e("", "Categories inserted into database")
+                    }, { e ->
+                        Log.e(this.tag, e.message.orEmpty())
+                    })
             }, { e ->
                 Log.e(this.tag, e.message.orEmpty())
                 Utils.getCategories(requireContext())

@@ -11,6 +11,7 @@ import com.example.simbirsoftpracticeapp.Constants
 import com.example.simbirsoftpracticeapp.R
 import com.example.simbirsoftpracticeapp.Utils
 import com.example.simbirsoftpracticeapp.data.CharityRepository
+import com.example.simbirsoftpracticeapp.data.database.AppDatabase
 import com.example.simbirsoftpracticeapp.databinding.FragmentNewsBinding
 import com.example.simbirsoftpracticeapp.news.adapters.NewsAdapter
 import com.example.simbirsoftpracticeapp.news.data.CharityEvents
@@ -33,6 +34,8 @@ class NewsFragment : Fragment() {
 
     private val charityApi = CharityRepository().charityApi()
 
+    private val db by lazy { AppDatabase(requireContext()) }
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -48,7 +51,7 @@ class NewsFragment : Fragment() {
             initAdapter()
         } ?: kotlin.run {
             if (adapter == null) {
-                getEvents()
+                getEventsFromDb()
             } else {
                 binding.rvEvents.adapter = adapter
             }
@@ -100,6 +103,29 @@ class NewsFragment : Fragment() {
         }
     }
 
+    private fun getEventsFromDb() {
+        db.charityEventsDao().getAll()
+            .map { eventsEntity ->
+                eventsEntity.map { eventEntity ->
+                    Utils.mapCharityEventEntity(eventEntity)
+                }
+            }
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .doOnSubscribe { binding.progressBar.visibility = View.VISIBLE }
+            .doAfterSuccess { binding.progressBar.visibility = View.GONE }
+            .subscribe({ events ->
+                if (events.isNullOrEmpty()) {
+                    getEvents()
+                } else {
+                    this.events = CharityEvents(events)
+                    initAdapter()
+                }
+            }, { e ->
+                Log.e(this.tag, e.message.orEmpty())
+            })
+    }
+
     private fun getEvents() {
         charityApi.getEvents()
             .delay(1000, TimeUnit.MILLISECONDS)
@@ -111,18 +137,14 @@ class NewsFragment : Fragment() {
             .subscribe({ events ->
                 this.events = events
                 initAdapter()
+                db.charityEventsDao()
+                    .insertAll(events.events.map { event -> Utils.mapCharityEvent(event) })
+                    .subscribeOn(Schedulers.io())
+                    .subscribe(
+                        { Log.e("", "Events inserted into database") },
+                        { e -> Log.e(this.tag, e.message.orEmpty()) })
             }, { e ->
                 Log.e(this.tag, e.message.orEmpty())
-                Utils.getEvents(requireContext())
-                    .subscribeOn(Schedulers.io())
-                    .observeOn(AndroidSchedulers.mainThread())
-                    .doOnComplete { binding.progressBar.visibility = View.GONE }
-                    .subscribe({ events ->
-                        this.events = events
-                        init()
-                    }, { e ->
-                        Log.e(this.tag, e.message.orEmpty())
-                    })
             })
     }
 

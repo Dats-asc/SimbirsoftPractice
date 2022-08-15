@@ -9,6 +9,7 @@ import androidx.fragment.app.Fragment
 import com.example.simbirsoftpracticeapp.Constants
 import com.example.simbirsoftpracticeapp.Utils
 import com.example.simbirsoftpracticeapp.data.CharityRepository
+import com.example.simbirsoftpracticeapp.data.database.AppDatabase
 import com.example.simbirsoftpracticeapp.databinding.FragmentNewsDetailBinding
 import com.example.simbirsoftpracticeapp.news.data.CharityEvent
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
@@ -25,6 +26,8 @@ class NewsDetailFragment : Fragment() {
 
     private val charityApi = CharityRepository().charityApi()
 
+    private val db by lazy { AppDatabase(requireContext()) }
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -38,16 +41,25 @@ class NewsDetailFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-        getEvent()
+        binding.toolbar.setNavigationOnClickListener {
+            requireActivity().supportFragmentManager.popBackStack()
+        }
+        getEventFromDb()
     }
 
-    private fun getEvent() {
-        charityApi.getEventById(eventId ?: 0)
-            .delay(1000, TimeUnit.MILLISECONDS)
-            .map { event -> event.first() }
+    private fun getEventFromDb() {
+        db.charityEventsDao().getById(eventId ?: 0)
+            .map { eventEntity -> Utils.mapCharityEventEntity(eventEntity) }
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
+            .doOnSubscribe {
+                binding.detailInfo.visibility = View.INVISIBLE
+                binding.progressBar.visibility = View.VISIBLE
+            }
+            .doAfterSuccess {
+                binding.detailInfo.visibility = View.VISIBLE
+                binding.progressBar.visibility = View.GONE
+            }
             .doOnSubscribe {
                 binding.progressBar.visibility = View.VISIBLE
                 binding.detailInfo.visibility = View.INVISIBLE
@@ -59,8 +71,18 @@ class NewsDetailFragment : Fragment() {
             .subscribe({ event ->
                 currentEvent = event
                 setData()
-            }, { throwable ->
-                Log.e(this.tag, throwable.message.orEmpty())
+            }, { e ->
+                Log.e(this.tag, e.message.orEmpty())
+                charityApi.getEventById(eventId ?: 0)
+                    .map { events -> events.first() }
+                    .subscribeOn(Schedulers.io())
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribe({ event ->
+                        currentEvent = event
+                        setData()
+                    }, { e ->
+                        Log.e(this.tag, e.message.orEmpty())
+                    })
             })
     }
 
@@ -84,9 +106,6 @@ class NewsDetailFragment : Fragment() {
                 if (event.membersCount - 5 > 0) {
                     tvMembersCount.text = "+${event.membersCount - 5}"
                 }
-            }
-            toolbar.setNavigationOnClickListener {
-                requireActivity().supportFragmentManager.popBackStack()
             }
         }
     }
