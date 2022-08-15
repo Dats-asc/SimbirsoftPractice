@@ -11,10 +11,11 @@ import com.example.simbirsoftpracticeapp.data.database.categories.CategoryEntity
 import com.example.simbirsoftpracticeapp.data.database.events.CharityEventEntity
 import com.example.simbirsoftpracticeapp.data.database.events.EventMembersList
 import com.example.simbirsoftpracticeapp.data.database.events.PhoneNumbersList
-import com.example.simbirsoftpracticeapp.news.data.*
+import com.example.simbirsoftpracticeapp.news.data.CharityEvent
+import com.example.simbirsoftpracticeapp.news.data.CharityEvents
+import com.example.simbirsoftpracticeapp.news.data.FilterCategories
+import com.example.simbirsoftpracticeapp.news.data.FilterCategory
 import com.google.gson.Gson
-import com.google.gson.JsonArray
-import com.google.gson.JsonObject
 import io.reactivex.rxjava3.core.Observable
 import io.reactivex.rxjava3.schedulers.Schedulers
 import org.threeten.bp.Instant

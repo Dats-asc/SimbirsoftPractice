@@ -14,7 +14,6 @@ import com.example.simbirsoftpracticeapp.databinding.FragmentNewsDetailBinding
 import com.example.simbirsoftpracticeapp.news.data.CharityEvent
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.schedulers.Schedulers
-import java.util.concurrent.TimeUnit
 
 class NewsDetailFragment : Fragment() {
 
