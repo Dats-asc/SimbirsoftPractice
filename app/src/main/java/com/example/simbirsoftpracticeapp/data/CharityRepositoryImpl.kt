@@ -8,7 +8,6 @@ import com.example.simbirsoftpracticeapp.domain.entity.CharityEvents
 import com.example.simbirsoftpracticeapp.domain.entity.FilterCategories
 import com.example.simbirsoftpracticeapp.domain.entity.FilterCategory
 import com.example.simbirsoftpracticeapp.domain.repository.CharityRepository
-import com.example.simbirsoftpracticeapp.presentation.search.SearchResult
 import io.reactivex.rxjava3.core.Single
 import io.reactivex.rxjava3.schedulers.Schedulers
 import java.util.concurrent.TimeUnit

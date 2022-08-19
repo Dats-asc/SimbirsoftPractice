@@ -1,24 +1,19 @@
 package com.example.simbirsoftpracticeapp.presentation.search
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
-import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.DividerItemDecoration
 import com.example.simbirsoftpracticeapp.R
 import com.example.simbirsoftpracticeapp.common.BaseFragment
-import com.example.simbirsoftpracticeapp.common.Utils
 import com.example.simbirsoftpracticeapp.databinding.FragmentEventsTabBinding
 import com.example.simbirsoftpracticeapp.domain.entity.CharityEvent
 import com.example.simbirsoftpracticeapp.domain.entity.CharityEvents
-import com.example.simbirsoftpracticeapp.presentation.news.NewsDetailPresenter
 import com.example.simbirsoftpracticeapp.presentation.search.adapters.EventsAdapter
 import com.jakewharton.rxbinding4.InitialValueObservable
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
-import io.reactivex.rxjava3.schedulers.Schedulers
 import moxy.presenter.InjectPresenter
 import moxy.presenter.ProvidePresenter
 import java.util.concurrent.TimeUnit

@@ -2,7 +2,6 @@ package com.example.simbirsoftpracticeapp.di
 
 import com.example.simbirsoftpracticeapp.App
 import com.example.simbirsoftpracticeapp.di.module.*
-import com.example.simbirsoftpracticeapp.presentation.main.MainActivity
 import dagger.BindsInstance
 import dagger.Component
 import dagger.android.support.AndroidSupportInjectionModule

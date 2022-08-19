@@ -2,8 +2,6 @@ package com.example.simbirsoftpracticeapp.data
 
 import com.example.simbirsoftpracticeapp.data.entity.CategoriesResponse
 import com.example.simbirsoftpracticeapp.data.entity.EventsResponse
-import com.example.simbirsoftpracticeapp.domain.entity.CharityEvent
-import com.example.simbirsoftpracticeapp.domain.entity.FilterCategory
 import io.reactivex.rxjava3.core.Single
 import retrofit2.http.GET
 import retrofit2.http.Query

@@ -1,8 +1,6 @@
 package com.example.simbirsoftpracticeapp.presentation.news
 
 import android.util.Log
-import com.example.simbirsoftpracticeapp.data.database.categories.CategoriesDao
-import com.example.simbirsoftpracticeapp.domain.entity.FilterCategories
 import com.example.simbirsoftpracticeapp.domain.entity.FilterCategory
 import com.example.simbirsoftpracticeapp.domain.usecase.GetCategoriesUseCase
 import com.example.simbirsoftpracticeapp.domain.usecase.UpdateCategoriesUseCase

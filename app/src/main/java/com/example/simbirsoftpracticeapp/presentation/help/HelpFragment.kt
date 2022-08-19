@@ -40,7 +40,7 @@ class HelpFragment : BaseFragment(), HelpView {
 
     private fun initAdapter() {
         categoryAdapter = CategoryAdapter(categories) {
-            //TODO: do on item click
+            TODO("do on item click")
         }
         binding.rvCategories.adapter = categoryAdapter
     }

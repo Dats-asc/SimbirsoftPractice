@@ -179,7 +179,7 @@
         android:layout_marginHorizontal="20dp"
         android:layout_marginTop="28dp"
         android:background="@drawable/sign_in_button_background"
-        android:enabled="true"
+        android:enabled="false"
         android:text="@string/sign_in"
         android:textAllCaps="true"
         android:textAppearance="@style/SignInButton"

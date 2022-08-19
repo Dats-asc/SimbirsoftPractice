@@ -1,7 +1,6 @@
 package com.example.simbirsoftpracticeapp.presentation.search
 
 import android.util.Log
-import com.example.simbirsoftpracticeapp.domain.usecase.GetEventsUseCase
 import com.example.simbirsoftpracticeapp.domain.usecase.SearchEventsUseCase
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.disposables.CompositeDisposable

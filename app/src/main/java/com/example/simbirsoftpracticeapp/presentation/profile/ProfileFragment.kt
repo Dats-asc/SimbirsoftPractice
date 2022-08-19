@@ -13,10 +13,9 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.activity.result.ActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
-import androidx.fragment.app.Fragment
-import com.example.simbirsoftpracticeapp.common.Constants
 import com.example.simbirsoftpracticeapp.R
 import com.example.simbirsoftpracticeapp.common.BaseFragment
+import com.example.simbirsoftpracticeapp.common.Constants
 import com.example.simbirsoftpracticeapp.common.Utils
 import com.example.simbirsoftpracticeapp.databinding.FragmentProfileBinding
 

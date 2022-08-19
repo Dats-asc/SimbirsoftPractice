@@ -3,9 +3,7 @@ package com.example.simbirsoftpracticeapp.data.database.events
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.Query
-import com.example.simbirsoftpracticeapp.domain.entity.CharityEvent
 import io.reactivex.rxjava3.core.Completable
-import io.reactivex.rxjava3.core.Maybe
 import io.reactivex.rxjava3.core.Single
 
 @Dao

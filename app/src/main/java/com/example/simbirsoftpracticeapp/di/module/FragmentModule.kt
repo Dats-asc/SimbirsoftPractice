@@ -8,7 +8,6 @@ import com.example.simbirsoftpracticeapp.presentation.profile.ProfileFragment
 import com.example.simbirsoftpracticeapp.presentation.search.ByNkoFragment
 import com.example.simbirsoftpracticeapp.presentation.search.EventsTabFragment
 import com.example.simbirsoftpracticeapp.presentation.search.SearchFragment
-import com.example.simbirsoftpracticeapp.presentation.search.SearchView
 import dagger.Module
 import dagger.android.ContributesAndroidInjector
 

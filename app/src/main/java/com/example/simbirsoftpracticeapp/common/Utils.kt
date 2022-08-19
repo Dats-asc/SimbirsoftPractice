@@ -1,73 +1,17 @@
 package com.example.simbirsoftpracticeapp.common
 
-import android.content.Context
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
-import android.util.Log
 import android.widget.ImageView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.example.simbirsoftpracticeapp.R
-import com.example.simbirsoftpracticeapp.data.database.categories.CategoryEntity
-import com.example.simbirsoftpracticeapp.data.database.events.CharityEventEntity
-import com.example.simbirsoftpracticeapp.data.database.events.EventMembersList
-import com.example.simbirsoftpracticeapp.data.database.events.PhoneNumbersList
-import com.example.simbirsoftpracticeapp.domain.entity.CharityEvent
-import com.example.simbirsoftpracticeapp.domain.entity.CharityEvents
-import com.example.simbirsoftpracticeapp.domain.entity.FilterCategories
-import com.example.simbirsoftpracticeapp.domain.entity.FilterCategory
-import com.google.gson.Gson
-import io.reactivex.rxjava3.core.Observable
-import io.reactivex.rxjava3.schedulers.Schedulers
 import org.threeten.bp.Instant
 import org.threeten.bp.Month
 import org.threeten.bp.ZoneId
 import org.threeten.bp.ZonedDateTime
 
 object Utils {
-
-    private const val CATEGORIES_JSON = "categories.json"
-    private const val CHARITY_EVENTS_JSON = "charity_events.json"
-
-    fun getCategories(appContext: Context): Observable<FilterCategories> {
-        return Observable.create<FilterCategories?> { subscriber ->
-            try {
-                val data = appContext.assets
-                    .open(CATEGORIES_JSON)
-                    .bufferedReader()
-
-                val gson = Gson()
-                val result = gson.fromJson(data, FilterCategories::class.java)
-                subscriber.onNext(result)
-                Log.e("Current thread is ", Thread.currentThread().name)
-                subscriber.onComplete()
-            } catch (e: Exception) {
-                Log.e("", e.message.orEmpty())
-                throw e
-            }
-        }
-            .subscribeOn(Schedulers.newThread())
-    }
-
-    fun getEvents(appContext: Context): Observable<CharityEvents> {
-        return Observable.create<CharityEvents> {
-            try {
-                val data = appContext.assets
-                    .open(CHARITY_EVENTS_JSON)
-                    .bufferedReader()
-
-                val gson = Gson()
-                val result = gson.fromJson(data, CharityEvents::class.java)
-                Log.e("Current thread is ", Thread.currentThread().name)
-                it.onNext(result)
-                it.onComplete()
-            } catch (e: Exception) {
-                Log.e("", e.message.orEmpty())
-                it.onError(e)
-            }
-        }
-            .subscribeOn(Schedulers.newThread())
-    }
 
     fun getFormatedDate(date: String): String {
         val now = ZonedDateTime.ofInstant(Instant.now(), ZoneId.systemDefault())

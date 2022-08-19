@@ -1,23 +1,17 @@
 package com.example.simbirsoftpracticeapp.presentation.news
 
 import android.os.Bundle
-import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.os.bundleOf
-import com.example.simbirsoftpracticeapp.common.Constants
 import com.example.simbirsoftpracticeapp.R
 import com.example.simbirsoftpracticeapp.common.BaseFragment
-import com.example.simbirsoftpracticeapp.common.Utils
-import com.example.simbirsoftpracticeapp.data.database.AppDatabase
+import com.example.simbirsoftpracticeapp.common.Constants
 import com.example.simbirsoftpracticeapp.databinding.FragmentNewsBinding
-import com.example.simbirsoftpracticeapp.presentation.news.adapters.NewsAdapter
 import com.example.simbirsoftpracticeapp.domain.entity.CharityEvents
 import com.example.simbirsoftpracticeapp.domain.entity.FilterCategory
-import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
-import io.reactivex.rxjava3.schedulers.Schedulers
+import com.example.simbirsoftpracticeapp.presentation.news.adapters.NewsAdapter
 import moxy.presenter.InjectPresenter
 import moxy.presenter.ProvidePresenter
 import javax.inject.Inject

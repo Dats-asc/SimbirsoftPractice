@@ -33,8 +33,6 @@
             android:name=".presentation.main.MainActivity"
             android:exported="false"></activity>
 
-        <service android:name=".presentation.news.CategoriesIntentService" />
-
     </application>
 
 </manifest>

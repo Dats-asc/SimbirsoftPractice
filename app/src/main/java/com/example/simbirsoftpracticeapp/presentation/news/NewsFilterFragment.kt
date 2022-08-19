@@ -5,14 +5,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.example.simbirsoftpracticeapp.R
-import com.example.simbirsoftpracticeapp.data.database.AppDatabase
+import com.example.simbirsoftpracticeapp.common.BaseFragment
 import com.example.simbirsoftpracticeapp.databinding.FragmentNewsFilterBinding
 import com.example.simbirsoftpracticeapp.domain.entity.FilterCategories
 import com.example.simbirsoftpracticeapp.domain.entity.FilterCategory
-import com.example.simbirsoftpracticeapp.common.BaseFragment
-import com.example.simbirsoftpracticeapp.common.Utils
 import com.example.simbirsoftpracticeapp.presentation.news.adapters.FilterCategoryAdapter
-import io.reactivex.rxjava3.schedulers.Schedulers
 import moxy.presenter.InjectPresenter
 import moxy.presenter.ProvidePresenter
 import javax.inject.Inject

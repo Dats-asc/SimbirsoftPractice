@@ -2,7 +2,6 @@ package com.example.simbirsoftpracticeapp.presentation.news
 
 import com.example.simbirsoftpracticeapp.domain.entity.CharityEvents
 import moxy.MvpView
-import moxy.viewstate.strategy.alias.AddToEndSingle
 import moxy.viewstate.strategy.alias.OneExecution
 
 interface NewsView : MvpView {
