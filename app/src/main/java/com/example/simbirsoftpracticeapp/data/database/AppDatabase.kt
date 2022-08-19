@@ -8,6 +8,7 @@ import com.example.simbirsoftpracticeapp.data.database.categories.CategoriesDao
 import com.example.simbirsoftpracticeapp.data.database.categories.CategoryEntity
 import com.example.simbirsoftpracticeapp.data.database.events.CharityEventEntity
 import com.example.simbirsoftpracticeapp.data.database.events.EventsDao
+import com.example.simbirsoftpracticeapp.common.Constants
 
 @Database(entities = [CharityEventEntity::class, CategoryEntity::class], version = 1)
 abstract class AppDatabase : RoomDatabase() {
@@ -18,8 +19,6 @@ abstract class AppDatabase : RoomDatabase() {
 
     companion object {
 
-        private const val DATABASE_NAME = "app.db"
-
         @Volatile
         private var instance: AppDatabase? = null
         private val LOCK = Any()
@@ -29,7 +28,7 @@ abstract class AppDatabase : RoomDatabase() {
         }
 
         private fun buildDatabase(context: Context) =
-            Room.databaseBuilder(context, AppDatabase::class.java, DATABASE_NAME)
+            Room.databaseBuilder(context, AppDatabase::class.java, Constants.DATABASE_NAME)
                 .fallbackToDestructiveMigration()
                 .build()
     }

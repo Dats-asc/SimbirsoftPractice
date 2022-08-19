@@ -1,6 +1,6 @@
 package com.example.simbirsoftpracticeapp.data.database.events
 
-import com.example.simbirsoftpracticeapp.news.data.EventMember
+import com.example.simbirsoftpracticeapp.domain.entity.EventMember
 import com.google.gson.annotations.SerializedName
 
 data class EventMembersList(
