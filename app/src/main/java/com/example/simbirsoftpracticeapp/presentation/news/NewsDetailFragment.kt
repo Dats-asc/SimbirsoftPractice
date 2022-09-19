@@ -1,14 +1,20 @@
 package com.example.simbirsoftpracticeapp.presentation.news
 
+import android.app.AlertDialog
+import android.app.Dialog
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
+import com.example.simbirsoftpracticeapp.R
 import com.example.simbirsoftpracticeapp.common.Constants
 import com.example.simbirsoftpracticeapp.common.Utils
 import com.example.simbirsoftpracticeapp.databinding.FragmentNewsDetailBinding
 import com.example.simbirsoftpracticeapp.domain.entity.CharityEvent
 import com.example.simbirsoftpracticeapp.common.BaseFragment
+import com.example.simbirsoftpracticeapp.presentation.profile.ProfileAlertDialogView
 import moxy.presenter.InjectPresenter
 import moxy.presenter.ProvidePresenter
 import javax.inject.Inject
@@ -43,6 +49,19 @@ class NewsDetailFragment : BaseFragment(), NewsDetailView {
             requireActivity().supportFragmentManager.popBackStack()
         }
         presenter.getEvent(eventId ?: 0)
+
+        binding.helpWithMoney.setOnClickListener {
+            val dialog = DonationAlertDialog(
+                requireContext(),
+                object : DonationAlertDialog.Listener {
+                    override fun onSend(amount: Double) {
+                        TODO("")
+                    }
+                }
+            )
+
+            dialog.showDialog()
+        }
     }
 
     override fun setEventDetail(event: CharityEvent) {

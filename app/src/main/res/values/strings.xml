@@ -71,4 +71,14 @@
     <string name="sign_in">Войти</string>
     <string name="forgot_password"><a href="">Забыли пароль?</a></string>
     <string name="registration"><a href="">Регистрация</a></string>
+    <string name="donation_dialog_title">Спасибо за решение помочь!</string>
+    <string name="donation_dialog_message">Выберите размер пожертвования</string>
+    <string name="donation_dialog_option1">100 ₽</string>
+    <string name="donation_dialog_option2">500 ₽</string>
+    <string name="donation_dialog_option3">1000 ₽</string>
+    <string name="donation_dialog_option4">2000 ₽</string>
+    <string name="enter_amount_of_money">или введите нужную сумму</string>
+    <string name="edit_text_enter_amount_of_money">Введите сумму</string>
+    <string name="cancel">Отмена</string>
+    <string name="send">Перевести</string>
 </resources>
