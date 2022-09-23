@@ -26,6 +26,7 @@ class DonationAlertDialog(
 
         btnSend?.setOnClickListener {
             listener.onSend(amountOfMoneyEditText?.text.toString().toDoubleOrNull() ?: 0.0)
+            alertDialog?.dismiss()
         }
 
         amountOfMoneyEditText?.addTextChangedListener { text ->

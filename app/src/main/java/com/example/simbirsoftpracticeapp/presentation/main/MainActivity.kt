@@ -1,11 +1,15 @@
 package com.example.simbirsoftpracticeapp.presentation.main
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
+import androidx.core.os.bundleOf
 import com.example.simbirsoftpracticeapp.R
+import com.example.simbirsoftpracticeapp.common.Constants
 import com.example.simbirsoftpracticeapp.databinding.ActivityMainBinding
 import com.example.simbirsoftpracticeapp.presentation.auth.AuthFragment
 import com.example.simbirsoftpracticeapp.presentation.help.HelpFragment
+import com.example.simbirsoftpracticeapp.presentation.news.NewsDetailFragment
 import com.example.simbirsoftpracticeapp.presentation.news.NewsFragment
 import com.example.simbirsoftpracticeapp.presentation.profile.ProfileFragment
 import com.example.simbirsoftpracticeapp.presentation.search.SearchFragment
@@ -29,6 +33,7 @@ class MainActivity : MvpAppCompatActivity(), HasAndroidInjector, Navigator {
         AndroidInjection.inject(this)
         super.onCreate(savedInstanceState)
         AndroidThreeTen.init(this)
+
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
         if (savedInstanceState != null) {
@@ -38,6 +43,19 @@ class MainActivity : MvpAppCompatActivity(), HasAndroidInjector, Navigator {
             binding.bottomNavigationView.visibility = View.GONE
             add(R.id.fragment_container_view, AuthFragment())
             commit()
+        }
+
+        if (intent.extras?.getInt(Constants.EVENT_ID) != null) {
+            val eventId = intent?.extras?.getInt(Constants.EVENT_ID) ?: -1
+            if (eventId != -1) {
+                supportFragmentManager.beginTransaction().run {
+                    replace(R.id.fragment_container_view, NewsDetailFragment().apply {
+                        arguments = bundleOf(Constants.EVENT_ID to eventId)
+                    })
+                    addToBackStack(NewsDetailFragment::class.java.name)
+                    commit()
+                }
+            }
         }
     }
 

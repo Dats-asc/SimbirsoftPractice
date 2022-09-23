@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><!--suppress ALL -->
+<?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.simbirsoftpracticeapp">
 
@@ -19,19 +19,32 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.SimbirsoftPracticeApp"
         android:usesCleartextTraffic="true">
+        <receiver
+            android:name=".presentation.news.DonationPushNotificationWorker$RemindLaterBroadcastReceiver"
+            android:enabled="true"
+            android:exported="true"></receiver>
 
         <activity
             android:name=".presentation.main.SplashScreen"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
         <activity
             android:name=".presentation.main.MainActivity"
-            android:exported="false"></activity>
+            android:exported="true">
+            <intent-filter>
+                <data
+                    android:scheme="app"
+                    android:host="com.example.simbirsoftpracticeapp"
+                    android:path="/newsdetail" />
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT"/>
+                <category android:name="android.intent.category.BROWSABLE"/>
+            </intent-filter>
+        </activity>
 
     </application>
 
