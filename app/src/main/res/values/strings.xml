@@ -22,4 +22,26 @@
     <string name="logo">Логотип</string>
     <string name="simbirsoft_logo">Симбирсофт</string>
     <string name="profile_image">Изображение профиля</string>
+    <string name="pick_photo">Выбрать фото</string>
+    <string name="make_photo">Сделать снимок</string>
+    <string name="delete">Удалить</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="help">Помочь</string>
+    <string name="pick_category">Выберите категорию помощи</string>
+    <string name="kids">Дети</string>
+    <string name="adults">Взрослые</string>
+    <string name="elders">Пожилые</string>
+    <string name="animals">Животные</string>
+    <string name="events">Мероприятия</string>
+    <string name="input_organisation_name">Введите название организации</string>
+    <string name="search_label">test</string>
+    <string name="search_hint">Введите название организации</string>
+    <string name="settings_description">test</string>
+    <string name="by_events">По мероприятиям</string>
+    <string name="by_nko">По НКО</string>
+    <string name="events_msg">Напишите в строке поиска название мероприятия или ключевые слова.</string>
+    <string name="for_example">Например,</string>
+    <string name="materclass_help">мастер-класс, помощь</string>
+    <string name="search_result">Ключевые слова: мастер-класс, помощь\nРезультаты поиска: 109 мероприятий</string>
 </resources>
