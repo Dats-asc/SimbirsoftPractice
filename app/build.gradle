@@ -3,6 +3,8 @@ plugins {
     id 'org.jetbrains.kotlin.android'
 }
 
+apply plugin: 'kotlin-kapt'
+
 android {
     compileSdk 32
 
@@ -49,6 +51,30 @@ dependencies {
 
     // region OkHttp
     implementation 'com.squareup.okhttp3:okhttp:4.10.0'
+    // endregion
+
+    // region Room
+    def room_version = "2.4.3"
+    implementation "androidx.room:room-runtime:$room_version"
+    annotationProcessor "androidx.room:room-compiler:$room_version"
+    implementation "androidx.room:room-rxjava3:$room_version"
+    kapt "androidx.room:room-compiler:$room_version"
+    // endregion
+
+    // region Moxy
+    def moxy = "2.2.2"
+    implementation "com.github.moxy-community:moxy:$moxy"
+    implementation "com.github.moxy-community:moxy-androidx:$moxy"
+    implementation "com.github.moxy-community:moxy-ktx:$moxy"
+    kapt "com.github.moxy-community:moxy-compiler:$moxy"
+    // endregion
+
+    // region Dagger
+    def dagger = "2.41"
+    implementation "com.google.dagger:dagger:${dagger}"
+    implementation "com.google.dagger:dagger-android-support:${dagger}"
+    kapt "com.google.dagger:dagger-android-processor:${dagger}"
+    kapt "com.google.dagger:dagger-compiler:${dagger}"
     // endregion
 
     // region RxJava
