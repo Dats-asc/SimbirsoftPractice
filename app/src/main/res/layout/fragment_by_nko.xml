@@ -25,7 +25,7 @@
         android:id="@+id/rv_search_results"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/search_recyclerview_background"
+        android:background="@drawable/recyclerview_background"
         android:nestedScrollingEnabled="true"
         android:paddingStart="20dp"
         android:paddingEnd="8dp"

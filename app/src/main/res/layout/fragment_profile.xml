@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ProfileFragment">
+    tools:context=".profile.ProfileFragment">
 
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/appbar_layout"
@@ -30,9 +30,10 @@
                 <ImageView
                     android:id="@+id/iv_profile_photo"
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/profile_image_height"
+                    android:layout_height="wrap_content"
+                    android:adjustViewBounds="true"
                     android:contentDescription="@string/profile_image"
-                    android:src="@drawable/img_man" />
+                    android:src="@raw/img_man" />
 
             </LinearLayout>
 
@@ -179,7 +180,7 @@
                     <com.google.android.material.imageview.ShapeableImageView
                         android:layout_width="@dimen/friend_icon_width"
                         android:layout_height="@dimen/friend_icon_height"
-                        android:src="@drawable/avatar_3" />
+                        android:src="@raw/avatar_3" />
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -202,7 +203,7 @@
                     <com.google.android.material.imageview.ShapeableImageView
                         android:layout_width="@dimen/friend_icon_width"
                         android:layout_height="@dimen/friend_icon_height"
-                        android:src="@drawable/avatar_2" />
+                        android:src="@raw/avatar_2" />
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -225,7 +226,7 @@
                     <com.google.android.material.imageview.ShapeableImageView
                         android:layout_width="@dimen/friend_icon_width"
                         android:layout_height="@dimen/friend_icon_height"
-                        android:src="@drawable/avatar_1" />
+                        android:src="@raw/avatar_1" />
 
                     <TextView
                         android:layout_width="wrap_content"

@@ -22,4 +22,10 @@
     <color name="light_gray_2">#e8eded</color>
     <color name="black_54">#8a000000</color>
     <color name="warm_gray">#979797</color>
+    <color name="black_35">#59000000</color>
+    <color name="blue_gray">#627f8f</color>
+    <color name="gray">#94998a</color>
+    <color name="black_40">#66000000</color>
+    <color name="off_white">#fffffd</color>
+    <color name="brown_grey">#aaaaaa</color>
 </resources>

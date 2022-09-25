@@ -12,11 +12,11 @@ class HelpFragment : Fragment() {
 
     private val categories by lazy {
         listOf(
-            Category(0, resources.getString(R.string.kids), R.drawable.ic_kids),
-            Category(1, resources.getString(R.string.adults), R.drawable.ic_adults),
-            Category(2, resources.getString(R.string.elders), R.drawable.ic_elder),
-            Category(3, resources.getString(R.string.animals), R.drawable.ic_animals),
-            Category(4, resources.getString(R.string.events), R.drawable.ic_events)
+            Category(0, resources.getString(R.string.kids), R.raw.ic_kids),
+            Category(1, resources.getString(R.string.adults), R.raw.ic_adults),
+            Category(2, resources.getString(R.string.elders), R.raw.ic_elder),
+            Category(3, resources.getString(R.string.animals), R.raw.ic_animals),
+            Category(4, resources.getString(R.string.events), R.raw.ic_events)
         )
     }
 
@@ -40,7 +40,7 @@ class HelpFragment : Fragment() {
 
     private fun initAdapter() {
         categoryAdapter = CategoryAdapter(categories) {
-            val a = 0
+            //TODO
         }
         binding.rvCategories.adapter = categoryAdapter
     }
