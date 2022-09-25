@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="Switch" parent="Theme.AppCompat.Light">
+        <item name="colorControlActivated">@color/leaf</item>
+        <item name="colorSwitchThumbNormal">@color/leaf</item>
+        <item name="android:colorForeground">@color/leaf</item>
+    </style>
+
+    <style name="MainButton" parent="Widget.MaterialComponents.Button">
+        <item name="background">@drawable/button_background</item>
+        <item name="android:textAllCaps">false</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:fontFamily">@font/roboto</item>
+        <item name="android:paddingStart">16dp</item>
+        <item name="android:paddingEnd">16dp</item>
+    </style>
+
+    <style name="MainToolbarTheme" parent="ThemeOverlay.AppCompat.Dark.ActionBar">
+        <item name="android:textColor">@color/white</item>
+        <item name="android:background">@color/leaf</item>
+        <item name="titleCentered">true</item>
+    </style>
+
+    <style name="Toolbar.TitleText" parent="TextAppearance.Widget.AppCompat.Toolbar.Title">
+        <item name="android:textSize">@dimen/toolbar_title_text_size</item>
+        <item name="fontFamily">@font/officinasansextraboldscc</item>
+        <item name="titleCentered">true</item>
+        <item name="android:ellipsize">end</item>
+    </style>
+
+    <style name="CategoryTitle" parent="Widget.AppCompat.TextView">
+        <item name="android:textSize">@dimen/category_title_text_size</item>
+        <item name="android:fontFamily">@font/officinasansextraboldscc</item>
+        <item name="android:textColor">@color/light_olive_green</item>
+    </style>
+
+    <style name="CategoryCard">
+        <item name="android:background">@color/light_gray</item>
+        <item name="android:foreground">?attr/selectableItemBackground</item>
+    </style>
+
+    <style name="SearchView" parent="Widget.AppCompat.Light.SearchView">
+        <item name="android:background">@drawable/searchview_background</item>
+        <item name="android:queryHint">dasdad</item>
+    </style>
+
+    <style name="SearchTabLayout">
+        <item name="tabTextColor">@color/white_70</item>
+        <item name="tabIndicatorColor">@color/macaroni_and_cheese</item>
+        <item name="tabBackground">@color/leaf</item>
+        <item name="tabSelectedTextColor">@color/white</item>
+    </style>
+
+    <style name="EventCardTitle">
+        <item name="android:textColor">@color/blue_gray</item>
+        <item name="android:textSize">@dimen/card_title_text_size</item>
+        <item name="android:fontFamily">@font/officinasansextraboldscc</item>
+        <item name="android:textAlignment">center</item>
+        <item name="android:lineSpacingExtra">8dp</item>
+    </style>
+
+    <style name="CardButtonStyle" parent="Widget.Material3.Button.Icon">
+        <item name="icon">@drawable/ic_calendar</item>
+    </style>
+
+    <style name="CardButtonText" parent="TextAppearance.Widget.AppCompat.Toolbar.Title">
+        <item name="android:textSize">12sp</item>
+        <item name="fontFamily">@font/roboto</item>
+    </style>
+
+    <style name="ListItemText">
+        <item name="android:fontFamily">@font/roboto</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:textColor">@color/black_87</item>
+        <item name="android:maxLines">1</item>
+        <item name="android:ellipsize">end</item>
+    </style>
+
+    <style name="RegularText">
+        <item name="android:textSize">14sp</item>
+        <item name="android:textColor">@color/black_70</item>
+        <item name="android:fontFamily">@font/roboto</item>
+    </style>
+
+    <style name="Link">
+        <item name="android:textColorLink">@color/leaf</item>
+        <item name="android:linksClickable">true</item>
+    </style>
+
+    <style name="TextStyle11">
+        <item name="android:textSize">12sp</item>
+        <item name="android:textColor">@color/black_40</item>
+        <item name="android:fontFamily">@font/roboto</item>
+    </style>
+
+    <style name="user_round_icon">
+        <item name="cornerSize">50%</item>
+    </style>
+
+    <style name="SmallText">
+        <item name="android:textSize">12sp</item>
+        <item name="android:textColor">@color/black_38</item>
+        <item name="android:fontFamily">@font/roboto</item>
+    </style>
+
+    <style name="AuthEditText">
+        <item name="android:textSize">16sp</item>
+    </style>
+
+    <style name="SignInButton">
+        <item name="android:textSize">16sp</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:fontFamily">@font/roboto</item>
+    </style>
+</resources>

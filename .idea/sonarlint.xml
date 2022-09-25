@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="SonarLintProjectSettings">
+    <option name="fileExclusions">
+      <list>
+        <option value="FILE:app/build/generated/source/kapt/debug/com/example/simbirsoftpracticeapp/data/database/AppDatabase_Impl.java" />
+        <option value="FILE:app/build/generated/source/buildConfig/debug/com/example/simbirsoftpracticeapp/BuildConfig.java" />
+        <option value="FILE:app/build/generated/source/kapt/debug/com/example/simbirsoftpracticeapp/data/database/categories/CategoriesDao_Impl.java" />
+        <option value="FILE:app/build/generated/source/kapt/debug/com/example/simbirsoftpracticeapp/data/database/events/EventsDao_Impl.java" />
+        <option value="FILE:app/src/test/java/com/example/simbirsoftpracticeapp/RxCombiningTrainingTest.java" />
+      </list>
+    </option>
+  </component>
+</project>

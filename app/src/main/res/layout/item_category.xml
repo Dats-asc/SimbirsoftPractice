@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    style="@style/CategoryCard"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="4dp"
+    android:orientation="vertical"
+    android:paddingVertical="@dimen/category_card_vertical_padding">
+
+    <ImageView
+        android:id="@+id/iv_category_logo"
+        android:layout_width="@dimen/category_img_width"
+        android:layout_height="@dimen/category_img_height"
+        android:layout_gravity="center"
+        tools:src="@raw/ic_kids" />
+
+    <TextView
+        android:id="@+id/tv_category_title"
+        style="@style/CategoryTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="6dp"
+        tools:text="@string/kids" />
+
+
+</LinearLayout>
