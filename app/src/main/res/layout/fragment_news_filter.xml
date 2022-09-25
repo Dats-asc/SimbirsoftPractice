@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/light_gray_2"
-    tools:context=".news.NewsFilterFragment">
+    tools:context=".presentation.news.NewsFilterFragment">
 
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/appbar_layout"
@@ -52,7 +52,18 @@
         app:layout_constraintTop_toBottomOf="@id/tv_msg"
         app:layout_constraintVertical_bias="0"
         tools:itemCount="5"
-        tools:listitem="@layout/item_filter_category"
+        tools:listitem="@layout/item_filter_category" />
+
+    <ProgressBar
+        android:id="@+id/progress_bar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:indeterminateTint="@color/leaf"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
         tools:visibility="visible" />
 
 
