@@ -3,6 +3,8 @@ plugins {
     id 'org.jetbrains.kotlin.android'
 }
 
+apply plugin: 'kotlin-kapt'
+
 android {
     compileSdk 32
 
@@ -42,11 +44,42 @@ dependencies {
     // region Retrofit
     def retrofit = "2.9.0"
     implementation "com.squareup.retrofit2:retrofit:$retrofit"
+    implementation "com.squareup.retrofit2:adapter-rxjava3:$retrofit"
+    implementation "com.squareup.retrofit2:converter-gson:$retrofit"
+    implementation 'com.squareup.okhttp3:logging-interceptor:4.9.0'
+    // endregion
+
+    // region OkHttp
+    implementation 'com.squareup.okhttp3:okhttp:4.10.0'
+    // endregion
+
+    // region Room
+    def room_version = "2.4.3"
+    implementation "androidx.room:room-runtime:$room_version"
+    annotationProcessor "androidx.room:room-compiler:$room_version"
+    implementation "androidx.room:room-rxjava3:$room_version"
+    kapt "androidx.room:room-compiler:$room_version"
+    // endregion
+
+    // region Moxy
+    def moxy = "2.2.2"
+    implementation "com.github.moxy-community:moxy:$moxy"
+    implementation "com.github.moxy-community:moxy-androidx:$moxy"
+    implementation "com.github.moxy-community:moxy-ktx:$moxy"
+    kapt "com.github.moxy-community:moxy-compiler:$moxy"
+    // endregion
+
+    // region Dagger
+    def dagger = "2.41"
+    implementation "com.google.dagger:dagger:${dagger}"
+    implementation "com.google.dagger:dagger-android-support:${dagger}"
+    kapt "com.google.dagger:dagger-android-processor:${dagger}"
+    kapt "com.google.dagger:dagger-compiler:${dagger}"
     // endregion
 
     // region RxJava
     def rxjava = "3.1.5"
-    def rxAndroid ="3.0.0"
+    def rxAndroid = "3.0.0"
     implementation "io.reactivex.rxjava3:rxjava:$rxjava"
     implementation "io.reactivex.rxjava3:rxandroid:$rxAndroid"
 
@@ -63,6 +96,9 @@ dependencies {
 
     // ThreeTen
     implementation 'com.jakewharton.threetenabp:threetenabp:1.4.0'
+
+    // Glide
+    implementation 'com.github.bumptech.glide:glide:4.13.1'
 
     // Gson
     implementation 'com.google.code.gson:gson:2.8.8'
