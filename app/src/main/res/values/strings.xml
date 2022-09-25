@@ -1,3 +1,25 @@
 <resources>
-    <string name="app_name">SimbirsoftPracticeApp</string>
+    <string name="app_name">Хочу помочь</string>
+    <string name="load">Загрузка…</string>
+    <string name="profile">Профиль</string>
+    <string name="name_example">Константинов Денис</string>
+    <string name="birth_day">День рождения</string>
+    <string name="birth_day_example">01 февраля 1980</string>
+    <string name="sphere">Сфера деятельности</string>
+    <string name="sphere_example">Хирургия, травмотология</string>
+    <string name="get_push_notifications">Получить push-уведомления</string>
+    <string name="your_friends">Ваши друзья</string>
+    <string name="name_example_3">Дмитрий Валерьевич</string>
+    <string name="name_example_2">Евгений Александров</string>
+    <string name="name_example_1">Виктор Кузнецов</string>
+    <string name="logout">Выйти из аккаунта</string>
+    <string name="title_news">Новости</string>
+    <string name="title_search">Поиск</string>
+    <string name="title_help">Помочь</string>
+    <string name="title_history">История</string>
+    <string name="title_profile">Профиль</string>
+    <string name="edit">Редактировать</string>
+    <string name="logo">Логотип</string>
+    <string name="simbirsoft_logo">Симбирсофт</string>
+    <string name="profile_image">Изображение профиля</string>
 </resources>

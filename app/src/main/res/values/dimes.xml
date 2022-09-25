@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="profile_image_height">250dp</dimen>
+    <dimen name="toolbar_title_text_size">21sp</dimen>
+    <dimen name="profile_information_block_padding">20dp</dimen>
+    <dimen name="profile_name_text_size">24sp</dimen>
+    <dimen name="article_text_size">12sp</dimen>
+    <dimen name="info_row_text_size">16sp</dimen>
+    <dimen name="friend_icon_width">48dp</dimen>
+    <dimen name="friend_icon_height">48dp</dimen>
+</resources>
