@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".news.NewsDetailFragment">
+    tools:context=".presentation.news.NewsDetailFragment">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -29,423 +29,448 @@
 
         </com.google.android.material.appbar.AppBarLayout>
 
-        <LinearLayout
-            android:id="@+id/content"
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/detail_info"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:padding="20dp"
+            android:layout_height="match_parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/appbar_layout">
 
-            <TextView
-                android:id="@+id/tv_event_title"
-                style="@style/EventCardTitle"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textAlignment="textStart"
-                tools:text="@string/example_card_title_text" />
-
             <LinearLayout
+                android:id="@+id/content"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:orientation="horizontal">
-
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginEnd="5dp"
-                    android:src="@drawable/ic_calendar"
-                    app:tint="@color/gray" />
+                android:orientation="vertical"
+                android:padding="20dp"
+                app:layout_constraintTop_toTopOf="parent">
 
                 <TextView
-                    android:id="@+id/tv_end_date"
+                    android:id="@+id/tv_event_title"
+                    style="@style/EventCardTitle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:fontFamily="@font/roboto"
-                    android:textColor="@color/gray"
-                    android:textSize="12sp"
-                    tools:text="Осталось 13 дней (21.09 – 20.10)" />
+                    android:textAlignment="textStart"
+                    tools:text="@string/example_card_title_text" />
 
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:layout_marginEnd="80dp"
-                android:orientation="horizontal">
-
-                <ImageView
-                    android:layout_width="wrap_content"
+                <LinearLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginEnd="10dp"
-                    android:src="@drawable/ic_location"
-                    app:tint="@color/blue_gray" />
+                    android:layout_marginTop="16dp"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="5dp"
+                        android:src="@drawable/ic_calendar"
+                        app:tint="@color/gray" />
+
+                    <TextView
+                        android:id="@+id/tv_end_date"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:fontFamily="@font/roboto"
+                        android:textColor="@color/gray"
+                        android:textSize="12sp"
+                        tools:text="Осталось 13 дней (21.09 – 20.10)" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginEnd="80dp"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="10dp"
+                        android:src="@drawable/ic_location"
+                        app:tint="@color/blue_gray" />
+
+                    <TextView
+                        android:id="@+id/tv_address"
+                        style="@style/RegularText"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        tools:text="Санкт-Петербург, Кирочная улица, д. 50А, каб. 208" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginEnd="80dp"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="10dp"
+                        android:src="@drawable/ic_phone"
+                        app:tint="@color/blue_gray" />
+
+                    <TextView
+                        android:id="@+id/tv_phone_number"
+                        style="@style/RegularText"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        tools:text="+7 (937) 037 37-73\n+7 (937) 016 16-16" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="10dp"
+                        android:src="@drawable/ic_mail"
+                        app:tint="@color/blue_gray" />
+
+                    <TextView
+                        style="@style/RegularText"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:text="@string/have_a_question" />
+
+                    <TextView
+                        android:id="@+id/link"
+                        style="@style/Link"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginStart="6dp"
+                        android:text="@string/write_to_us" />
+
+                </LinearLayout>
+
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/photos"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginVertical="20dp">
+
+                    <ImageView
+                        android:id="@+id/iv_photo_1"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:adjustViewBounds="true"
+                        android:src="@raw/card_example_1"
+                        app:layout_constraintBottom_toBottomOf="@id/barrier"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="@id/barrier"
+                        app:layout_constraintWidth_percent="0.65" />
+
+                    <androidx.constraintlayout.widget.Barrier
+                        android:id="@+id/barrier"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        app:barrierDirection="end"
+                        app:constraint_referenced_ids="iv_photo_1"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <ImageView
+                        android:id="@+id/iv_photo_2"
+                        android:layout_width="0dp"
+                        android:layout_height="0dp"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginBottom="5dp"
+                        android:adjustViewBounds="true"
+                        android:src="@raw/card_example_1"
+                        app:layout_constraintBottom_toTopOf="@id/iv_photo_3"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="0"
+                        app:layout_constraintStart_toEndOf="@id/barrier"
+                        app:layout_constraintTop_toTopOf="@id/barrier"
+                        app:layout_constraintVertical_chainStyle="packed" />
+
+                    <ImageView
+                        android:id="@+id/iv_photo_3"
+                        android:layout_width="0dp"
+                        android:layout_height="0dp"
+                        android:layout_marginStart="10dp"
+                        android:adjustViewBounds="true"
+                        android:src="@raw/card_example_1"
+                        app:layout_constraintBottom_toBottomOf="@id/barrier"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="0"
+                        app:layout_constraintStart_toEndOf="@id/barrier"
+                        app:layout_constraintTop_toBottomOf="@id/iv_photo_2" />
+
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
 
                 <TextView
-                    android:id="@+id/tv_address"
+                    android:id="@+id/tv_event_description"
                     style="@style/RegularText"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    tools:text="Санкт-Петербург, Кирочная улица, д. 50А, каб. 208" />
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:layout_marginEnd="80dp"
-                android:orientation="horizontal">
-
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginEnd="10dp"
-                    android:src="@drawable/ic_phone"
-                    app:tint="@color/blue_gray" />
+                    android:text="@string/example_event_description" />
 
                 <TextView
-                    android:id="@+id/tv_phone_number"
-                    style="@style/RegularText"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    tools:text="+7 (937) 037 37-73\n+7 (937) 016 16-16" />
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:orientation="horizontal">
-
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginEnd="10dp"
-                    android:src="@drawable/ic_mail"
-                    app:tint="@color/blue_gray" />
-
-                <TextView
-                    style="@style/RegularText"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:text="@string/have_a_question" />
-
-                <TextView
-                    android:id="@+id/link"
+                    android:id="@+id/tv_org_link"
                     style="@style/Link"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_marginStart="6dp"
-                    android:text="@string/write_to_us" />
-
+                    android:layout_marginTop="20dp"
+                    android:layout_marginBottom="10dp"
+                    android:text="@string/go_to_organisation_website" />
             </LinearLayout>
 
 
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/photos"
+            <LinearLayout
+                android:id="@+id/users"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginVertical="20dp">
+                android:background="@color/light_gray_2"
+                android:orientation="horizontal"
+                android:padding="20dp"
+                app:layout_constraintTop_toBottomOf="@id/content">
 
-                <ImageView
-                    android:id="@+id/iv_photo_1"
-                    android:layout_width="205dp"
-                    android:layout_height="wrap_content"
-                    android:adjustViewBounds="true"
-                    android:src="@raw/card_example_1"
-                    app:layout_constraintBottom_toBottomOf="@id/barrier"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="@id/barrier" />
+                <com.google.android.material.imageview.ShapeableImageView
+                    android:layout_width="38dp"
+                    android:layout_height="38dp"
+                    android:src="@raw/photo_1" />
 
-                <androidx.constraintlayout.widget.Barrier
-                    android:id="@+id/barrier"
+                <com.google.android.material.imageview.ShapeableImageView
+                    android:layout_width="38dp"
+                    android:layout_height="38dp"
+                    android:src="@raw/photo_2"
+                    android:translationX="-4dp"
+                    android:translationZ="-1px" />
+
+                <com.google.android.material.imageview.ShapeableImageView
+                    android:layout_width="38dp"
+                    android:layout_height="38dp"
+                    android:src="@raw/photo_3"
+                    android:translationX="-8dp"
+                    android:translationZ="-2px" />
+
+                <com.google.android.material.imageview.ShapeableImageView
+                    android:layout_width="38dp"
+                    android:layout_height="38dp"
+                    android:src="@raw/photo_4"
+                    android:translationX="-12dp"
+                    android:translationZ="-3px" />
+
+                <com.google.android.material.imageview.ShapeableImageView
+                    android:layout_width="38dp"
+                    android:layout_height="38dp"
+                    android:src="@raw/photo_5"
+                    android:translationX="-16dp"
+                    android:translationZ="-4px" />
+
+                <TextView
+                    android:id="@+id/tv_members_count"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginStart="10dp"
+                    android:fontFamily="@font/roboto"
+                    android:textColorLink="@color/black_54"
+                    android:textSize="14sp"
+                    android:translationX="-16dp"
+                    tools:text="+102" />
+
+            </LinearLayout>
+
+            <View
+                android:id="@+id/separator"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="#d8d8d8"
+                app:layout_constraintTop_toBottomOf="@id/users" />
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@id/users">
+
+                <LinearLayout
+
+                    android:id="@+id/help_with_clothes"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
                     android:orientation="vertical"
-                    app:barrierDirection="end"
-                    app:constraint_referenced_ids="iv_photo_1"
+                    android:paddingTop="10dp"
+                    android:paddingBottom="5dp"
                     app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@id/became_volunteer"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:src="@drawable/ic_shirt" />
+
+                    <TextView
+                        style="@style/TextStyle11"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginHorizontal="10dp"
+                        android:layout_marginTop="7dp"
+                        android:text="@string/help_with_clothes"
+                        android:textAlignment="center" />
+
+                </LinearLayout>
+
+                <View
+                    android:layout_width="1dp"
+                    android:layout_height="0dp"
+                    android:layout_marginVertical="1dp"
+                    android:background="@drawable/separator_2"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@id/became_volunteer"
+                    app:layout_constraintStart_toEndOf="@id/help_with_clothes"
                     app:layout_constraintTop_toTopOf="parent" />
 
-                <ImageView
-                    android:id="@+id/iv_photo_2"
+                <LinearLayout
+                    android:id="@+id/became_volunteer"
                     android:layout_width="0dp"
-                    android:layout_height="0dp"
-                    android:layout_marginStart="10dp"
-                    android:layout_marginBottom="5dp"
-                    android:adjustViewBounds="true"
-                    android:src="@raw/card_example_1"
-                    app:layout_constraintBottom_toTopOf="@id/iv_photo_3"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0"
-                    app:layout_constraintStart_toEndOf="@id/barrier"
-                    app:layout_constraintTop_toTopOf="@id/barrier"
-                    app:layout_constraintVertical_chainStyle="packed" />
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:paddingTop="10dp"
+                    android:paddingBottom="5dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@id/professional_help"
+                    app:layout_constraintStart_toEndOf="@id/help_with_clothes"
+                    app:layout_constraintTop_toTopOf="parent">
 
-                <ImageView
-                    android:id="@+id/iv_photo_3"
-                    android:layout_width="0dp"
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:src="@drawable/ic_hands" />
+
+                    <TextView
+                        style="@style/TextStyle11"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginHorizontal="10dp"
+                        android:layout_marginTop="7dp"
+                        android:text="@string/became_volunteer"
+                        android:textAlignment="center" />
+
+                </LinearLayout>
+
+                <View
+                    android:layout_width="1dp"
                     android:layout_height="0dp"
-                    android:layout_marginStart="10dp"
-                    android:adjustViewBounds="true"
-                    android:src="@raw/card_example_1"
-                    app:layout_constraintBottom_toBottomOf="@id/barrier"
+                    android:layout_marginVertical="1dp"
+                    android:background="@drawable/separator_2"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@id/professional_help"
+                    app:layout_constraintStart_toEndOf="@id/became_volunteer"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <LinearLayout
+                    android:id="@+id/professional_help"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:paddingTop="10dp"
+                    android:paddingBottom="5dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@id/help_with_money"
+                    app:layout_constraintStart_toEndOf="@id/became_volunteer"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:src="@drawable/ic_tools" />
+
+                    <TextView
+                        style="@style/TextStyle11"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginHorizontal="10dp"
+                        android:layout_marginTop="7dp"
+                        android:text="@string/professional_help"
+                        android:textAlignment="center" />
+
+                </LinearLayout>
+
+                <View
+                    android:layout_width="1dp"
+                    android:layout_height="0dp"
+                    android:layout_marginVertical="1dp"
+                    android:background="@drawable/separator_2"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@id/help_with_money"
+                    app:layout_constraintStart_toEndOf="@id/professional_help"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <LinearLayout
+                    android:id="@+id/help_with_money"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:paddingTop="10dp"
+                    android:paddingBottom="5dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0"
-                    app:layout_constraintStart_toEndOf="@id/barrier"
-                    app:layout_constraintTop_toBottomOf="@id/iv_photo_2" />
+                    app:layout_constraintStart_toEndOf="@id/professional_help"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:src="@drawable/ic_coins" />
+
+                    <TextView
+                        style="@style/TextStyle11"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginHorizontal="10dp"
+                        android:layout_marginTop="7dp"
+                        android:text="@string/help_with_money"
+                        android:textAlignment="center" />
+
+                </LinearLayout>
 
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
-            <TextView
-                android:id="@+id/tv_event_description"
-                style="@style/RegularText"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/example_event_description" />
-
-            <TextView
-                android:id="@+id/tv_org_link"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                android:layout_marginBottom="10dp"
-                android:text="@string/go_to_organisation_website"
-                android:textColorLink="@color/leaf" />
-        </LinearLayout>
-
-
-        <LinearLayout
-            android:id="@+id/users"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@color/light_gray_2"
-            android:orientation="horizontal"
-            android:padding="20dp"
-            app:layout_constraintTop_toBottomOf="@id/content">
-
-            <com.google.android.material.imageview.ShapeableImageView
-                android:layout_width="38dp"
-                android:layout_height="38dp"
-                android:src="@raw/photo_1" />
-
-            <com.google.android.material.imageview.ShapeableImageView
-                android:layout_width="38dp"
-                android:layout_height="38dp"
-                android:src="@raw/photo_2"
-                android:translationX="-4dp"
-                android:translationZ="-1px" />
-
-            <com.google.android.material.imageview.ShapeableImageView
-                android:layout_width="38dp"
-                android:layout_height="38dp"
-                android:src="@raw/photo_3"
-                android:translationX="-8dp"
-                android:translationZ="-2px" />
-
-            <com.google.android.material.imageview.ShapeableImageView
-                android:layout_width="38dp"
-                android:layout_height="38dp"
-                android:src="@raw/photo_4"
-                android:translationX="-12dp"
-                android:translationZ="-3px" />
-
-            <com.google.android.material.imageview.ShapeableImageView
-                android:layout_width="38dp"
-                android:layout_height="38dp"
-                android:src="@raw/photo_5"
-                android:translationX="-16dp"
-                android:translationZ="-4px" />
-
-            <TextView
-                android:id="@+id/tv_members_count"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginStart="10dp"
-                android:fontFamily="@font/roboto"
-                android:textColorLink="@color/black_54"
-                android:textSize="14sp"
-                android:translationX="-16dp"
-                tools:text="+102" />
-
-        </LinearLayout>
-
-        <View
-            android:id="@+id/separator"
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="#d8d8d8"
-            app:layout_constraintTop_toBottomOf="@id/users" />
-
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:layout_constraintTop_toBottomOf="@id/users">
-
-            <LinearLayout
-
-                android:id="@+id/help_with_clothes"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:paddingTop="10dp"
-                android:paddingBottom="5dp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toStartOf="@id/became_volunteer"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent">
-
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:src="@drawable/ic_shirt" />
-
-                <TextView
-                    style="@style/TextStyle11"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_marginHorizontal="10dp"
-                    android:layout_marginTop="7dp"
-                    android:text="@string/help_with_clothes"
-                    android:textAlignment="center" />
-
-            </LinearLayout>
-
-            <View
-                android:layout_width="1dp"
-                android:layout_height="0dp"
-                android:layout_marginVertical="1dp"
-                android:background="@drawable/separator_2"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toStartOf="@id/became_volunteer"
-                app:layout_constraintStart_toEndOf="@id/help_with_clothes"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <LinearLayout
-                android:id="@+id/became_volunteer"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:paddingTop="10dp"
-                android:paddingBottom="5dp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toStartOf="@id/professional_help"
-                app:layout_constraintStart_toEndOf="@id/help_with_clothes"
-                app:layout_constraintTop_toTopOf="parent">
-
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:src="@drawable/ic_hands" />
-
-                <TextView
-                    style="@style/TextStyle11"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_marginHorizontal="10dp"
-                    android:layout_marginTop="7dp"
-                    android:text="@string/became_volunteer"
-                    android:textAlignment="center" />
-
-            </LinearLayout>
-
-            <View
-                android:layout_width="1dp"
-                android:layout_height="0dp"
-                android:layout_marginVertical="1dp"
-                android:background="@drawable/separator_2"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toStartOf="@id/professional_help"
-                app:layout_constraintStart_toEndOf="@id/became_volunteer"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <LinearLayout
-                android:id="@+id/professional_help"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:paddingTop="10dp"
-                android:paddingBottom="5dp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toStartOf="@id/help_with_money"
-                app:layout_constraintStart_toEndOf="@id/became_volunteer"
-                app:layout_constraintTop_toTopOf="parent">
-
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:src="@drawable/ic_tools" />
-
-                <TextView
-                    style="@style/TextStyle11"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_marginHorizontal="10dp"
-                    android:layout_marginTop="7dp"
-                    android:text="@string/professional_help"
-                    android:textAlignment="center" />
-
-            </LinearLayout>
-
-            <View
-                android:layout_width="1dp"
-                android:layout_height="0dp"
-                android:layout_marginVertical="1dp"
-                android:background="@drawable/separator_2"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toStartOf="@id/help_with_money"
-                app:layout_constraintStart_toEndOf="@id/professional_help"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <LinearLayout
-                android:id="@+id/help_with_money"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:paddingTop="10dp"
-                android:paddingBottom="5dp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@id/professional_help"
-                app:layout_constraintTop_toTopOf="parent">
-
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:src="@drawable/ic_coins" />
-
-                <TextView
-                    style="@style/TextStyle11"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_marginHorizontal="10dp"
-                    android:layout_marginTop="7dp"
-                    android:text="@string/help_with_money"
-                    android:textAlignment="center" />
-
-            </LinearLayout>
-
-
         </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <ProgressBar
+            android:id="@+id/progress_bar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:indeterminateTint="@color/leaf"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:visibility="visible" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
