@@ -61,6 +61,22 @@ dependencies {
     kapt "androidx.room:room-compiler:$room_version"
     // endregion
 
+    // region Moxy
+    def moxy = "2.2.2"
+    implementation "com.github.moxy-community:moxy:$moxy"
+    implementation "com.github.moxy-community:moxy-androidx:$moxy"
+    implementation "com.github.moxy-community:moxy-ktx:$moxy"
+    kapt "com.github.moxy-community:moxy-compiler:$moxy"
+    // endregion
+
+    // region Dagger
+    def dagger = "2.41"
+    implementation "com.google.dagger:dagger:${dagger}"
+    implementation "com.google.dagger:dagger-android-support:${dagger}"
+    kapt "com.google.dagger:dagger-android-processor:${dagger}"
+    kapt "com.google.dagger:dagger-compiler:${dagger}"
+    // endregion
+
     // region RxJava
     def rxjava = "3.1.5"
     def rxAndroid = "3.0.0"

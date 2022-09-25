@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".auth.AuthFragment">
+    tools:context=".presentation.auth.AuthFragment">
 
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/appbar_layout"
@@ -179,7 +179,7 @@
         android:layout_marginHorizontal="20dp"
         android:layout_marginTop="28dp"
         android:background="@drawable/sign_in_button_background"
-        android:enabled="true"
+        android:enabled="false"
         android:text="@string/sign_in"
         android:textAllCaps="true"
         android:textAppearance="@style/SignInButton"
