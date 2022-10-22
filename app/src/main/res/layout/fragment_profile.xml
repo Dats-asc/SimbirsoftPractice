@@ -72,6 +72,7 @@
                 android:padding="@dimen/profile_information_block_padding">
 
                 <TextView
+                    android:id="@+id/tv_name"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/roboto"
@@ -94,6 +95,7 @@
                         android:textSize="@dimen/article_text_size" />
 
                     <TextView
+                        android:id="@+id/tv_birthdate"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/roboto"
@@ -117,6 +119,7 @@
                         android:textSize="@dimen/article_text_size" />
 
                     <TextView
+                        android:id="@+id/tv_sphere"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/roboto"

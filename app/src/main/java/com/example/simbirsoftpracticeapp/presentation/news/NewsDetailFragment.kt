@@ -98,6 +98,7 @@ class NewsDetailFragment : BaseFragment(), NewsDetailView {
             tvPhoneNumber.text = phoneNumbers
             if (event.membersCount - 5 > 0) {
                 tvMembersCount.text = "+${event.membersCount - 5}"
+                val a = 0
             }
         }
     }

@@ -10,6 +10,7 @@ import com.example.simbirsoftpracticeapp.databinding.FragmentNewsFilterBinding
 import com.example.simbirsoftpracticeapp.domain.entity.FilterCategories
 import com.example.simbirsoftpracticeapp.domain.entity.FilterCategory
 import com.example.simbirsoftpracticeapp.presentation.news.adapters.FilterCategoryAdapter
+import com.google.android.material.snackbar.Snackbar
 import moxy.presenter.InjectPresenter
 import moxy.presenter.ProvidePresenter
 import javax.inject.Inject
@@ -95,5 +96,9 @@ class NewsFilterFragment : BaseFragment(), NewsFilterView, Filterable {
 
     override fun hideProgressbar() {
         binding.progressBar.visibility = View.GONE
+    }
+
+    override fun showError(msg: String) {
+        Snackbar.make(binding.root, msg, Snackbar.LENGTH_LONG).show()
     }
 }

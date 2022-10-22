@@ -15,4 +15,7 @@ interface NewsFilterView : MvpView {
 
     @OneExecution
     fun hideProgressbar()
+
+    @OneExecution
+    fun showError(msg: String)
 }

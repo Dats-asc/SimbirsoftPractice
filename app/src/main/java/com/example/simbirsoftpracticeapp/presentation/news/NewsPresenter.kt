@@ -20,11 +20,12 @@ class NewsPresenter @Inject constructor(
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .doOnSubscribe { viewState.showProgressbar() }
-                .doOnSuccess { viewState.hideProgressbar() }
+                .doAfterSuccess { viewState.hideProgressbar() }
                 .subscribe({ events ->
                     viewState.setEvents(events)
                 }, { e ->
-                    Log.e("", e.message.orEmpty())
+                    viewState.showError(e.message.orEmpty())
+                    viewState.hideProgressbar()
                 })
         )
     }

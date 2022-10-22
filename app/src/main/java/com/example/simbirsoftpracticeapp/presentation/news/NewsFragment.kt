@@ -12,6 +12,7 @@ import com.example.simbirsoftpracticeapp.databinding.FragmentNewsBinding
 import com.example.simbirsoftpracticeapp.domain.entity.CharityEvents
 import com.example.simbirsoftpracticeapp.domain.entity.FilterCategory
 import com.example.simbirsoftpracticeapp.presentation.news.adapters.NewsAdapter
+import com.google.android.material.snackbar.Snackbar
 import moxy.presenter.InjectPresenter
 import moxy.presenter.ProvidePresenter
 import javax.inject.Inject
@@ -133,6 +134,10 @@ class NewsFragment : BaseFragment(), NewsView {
 
     override fun hideProgressbar() {
         binding.progressBar.visibility = View.GONE
+    }
+
+    override fun showError(msg: String) {
+        Snackbar.make(binding.root, msg, Snackbar.LENGTH_LONG).show()
     }
 
     companion object {
