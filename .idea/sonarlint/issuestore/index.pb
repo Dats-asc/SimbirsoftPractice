@@ -413,8 +413,6 @@ Mapp/src/main/java/com/example/simbirsoftpracticeapp/di/scope/FragmentScope.kt,
 Œ
 \app/src/main/java/com/example/simbirsoftpracticeapp/presentation/news/adapters/NewsHolder.kt,1/8/18f5938bfb87406d73477fa05623b0f4db3dfa23
 …
-Uapp/src/main/java/com/example/simbirsoftpracticeapp/presentation/auth/AuthFragment.kt,3/e/3e57105324e378880cec37021c04b6c7a2b20d3b
-…
 Uapp/src/main/java/com/example/simbirsoftpracticeapp/presentation/main/MainActivity.kt,f/a/fa7bf8b9b70942142c204fe50c1e45ea074b8f13
 —
 gapp/src/main/java/com/example/simbirsoftpracticeapp/presentation/news/DonationPushNotificationWorker.kt,8/b/8b1c31b9a580aadeb9fd8ee2b85008723432d759
@@ -478,7 +476,5 @@ bapp/src/main/java/com/example/simbirsoftpracticeapp/presentation/profile/Profil
 ^app/src/androidTest/java/com/example/simbirsoftpracticeapp/presentation/utils/EspressoUtils.kt,e/5/e5e9aaabbf2c8a18e3882ffd1c44c65bb325dad9
 s
 Capp/src/main/java/com/example/simbirsoftpracticeapp/common/Utils.kt,4/a/4a6290eb537375f072cc151982d38ded5cbca132
-Œ
-\app/src/main/java/com/example/simbirsoftpracticeapp/presentation/news/NewsDetailPresenter.kt,7/f/7f29cacd5252326a36b882b7216ff5d7800627b6
 –
 fapp/src/androidTest/java/com/example/simbirsoftpracticeapp/presentation/profile/ProfileFragmentTest.kt,d/0/d0e6ccad764da0ff9ff11c6f329658d94f8bfe8a

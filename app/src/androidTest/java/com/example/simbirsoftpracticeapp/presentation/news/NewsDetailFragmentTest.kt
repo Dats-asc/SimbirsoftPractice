@@ -5,6 +5,7 @@ import androidx.core.os.bundleOf
 import androidx.fragment.app.testing.launchFragment
 import androidx.fragment.app.testing.launchFragmentInContainer
 import androidx.test.espresso.Espresso
+import androidx.test.espresso.Espresso.onData
 import androidx.test.espresso.Espresso.onView
 import androidx.test.espresso.UiController
 import androidx.test.espresso.ViewAction
@@ -32,7 +33,7 @@ class NewsDetailFragmentTest {
     @Before
     fun setup() {
         launchFragmentInContainer<NewsDetailFragment>(
-            bundleOf(Constants.EVENT_ID to 1),
+            bundleOf(Constants.EVENT_ID to 0),
             R.style.Theme_SimbirsoftPracticeApp
         )
     }
@@ -50,8 +51,15 @@ class NewsDetailFragmentTest {
     }
 
     @Test
-    fun contentIsScrollingTest(){
-        onView(isRoot())
-            .check(matches())
+    fun contentNotEmptyTest() {
+        onView(
+            allOf(
+                withId(R.id.tv_event_title),
+                withId(R.id.tv_end_date),
+                withId(R.id.tv_address),
+                withId(R.id.tv_phone_number)
+            )
+        ).check(matches(not(withText(""))))
+//        onView(withId(R.id.tv_event_title)).check(matches(not(withText(""))))
     }
 }
