@@ -1,5 +1,6 @@
 package com.example.simbirsoftpracticeapp.presentation.main
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import androidx.core.os.bundleOf
@@ -41,18 +42,9 @@ class MainActivity : MvpAppCompatActivity(), HasAndroidInjector, Navigator {
 
         setupBottomNavigation()
 
-        if (intent.extras?.getInt(Constants.EVENT_ID) != null) {
-            val eventId = intent?.extras?.getInt(Constants.EVENT_ID) ?: -1
-            if (eventId != -1) {
-                supportFragmentManager.beginTransaction().run {
-                    replace(R.id.fragment_container_view, NewsDetailFragment().apply {
-                        arguments = bundleOf(Constants.EVENT_ID to eventId)
-                    })
-                    addToBackStack(NewsDetailFragment::class.java.name)
-                    commit()
-                }
-            }
-        }
+//        if (intent.extras?.getInt(Constants.EVENT_ID) != null) {
+//            handlePushNotificationIntent()
+//        }
     }
 
     private fun setupBottomNavigation() {
@@ -64,6 +56,26 @@ class MainActivity : MvpAppCompatActivity(), HasAndroidInjector, Navigator {
             }
         }
         binding.bottomNavigationView.setupWithNavController(navController)
+    }
+
+    private fun handlePushNotificationIntent() {
+        val eventId = intent?.extras?.getInt(Constants.EVENT_ID) ?: -1
+        if (eventId != -1) {
+            supportFragmentManager.beginTransaction().run {
+                replace(R.id.fragment_container_view, NewsDetailFragment().apply {
+                    arguments = bundleOf(Constants.EVENT_ID to eventId)
+                })
+                addToBackStack(NewsDetailFragment::class.java.name)
+                commit()
+            }
+            navController.navigate(R.id.newsFragment)
+            navController.navigate(R.id.newsDetailFragment, bundleOf(Constants.EVENT_ID to eventId))
+        }
+    }
+
+    override fun onNewIntent(intent: Intent?) {
+        super.onNewIntent(intent)
+        navController.handleDeepLink(intent)
     }
 
     override fun onSupportNavigateUp(): Boolean {

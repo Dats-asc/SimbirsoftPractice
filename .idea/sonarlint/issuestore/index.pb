@@ -408,8 +408,6 @@ Mapp/src/main/java/com/example/simbirsoftpracticeapp/di/scope/FragmentScope.kt,
 ]app/src/main/java/com/example/simbirsoftpracticeapp/presentation/news/adapters/NewsAdapter.kt,8/2/82cb7294f78c5098ebec74f77caf144b3ef65c2b
 Œ
 \app/src/main/java/com/example/simbirsoftpracticeapp/presentation/news/adapters/NewsHolder.kt,1/8/18f5938bfb87406d73477fa05623b0f4db3dfa23
-—
-gapp/src/main/java/com/example/simbirsoftpracticeapp/presentation/news/DonationPushNotificationWorker.kt,8/b/8b1c31b9a580aadeb9fd8ee2b85008723432d759
 v
 Fapp/src/test/java/com/example/simbirsoftpracticeapp/ExampleUnitTest.kt,2/8/289a16c46cba0010e6c976991e9389cfc9f6b240
 ‚
@@ -472,8 +470,6 @@ s
 Capp/src/main/java/com/example/simbirsoftpracticeapp/common/Utils.kt,4/a/4a6290eb537375f072cc151982d38ded5cbca132
 –
 fapp/src/androidTest/java/com/example/simbirsoftpracticeapp/presentation/profile/ProfileFragmentTest.kt,d/0/d0e6ccad764da0ff9ff11c6f329658d94f8bfe8a
-‹
-[app/src/main/java/com/example/simbirsoftpracticeapp/presentation/news/NewsDetailFragment.kt,a/7/a7d12d4d93940459a544420f3e002793cf3c2529
 z
 Japp/src/main/java/com/example/simbirsoftpracticeapp/common/BaseFragment.kt,7/f/7f9f6101969d27c4e6e5207f7ca61e7159605fe4
 ‚

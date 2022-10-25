@@ -54,7 +54,7 @@ class NewsFilterFragment : BaseFragment(), NewsFilterView {
     private fun init() {
         with(binding) {
             toolbar.setNavigationOnClickListener {
-                requireActivity().supportFragmentManager.popBackStack()
+                findNavController().navigateUp()
             }
 
             toolbar.setOnMenuItemClickListener {
@@ -65,7 +65,7 @@ class NewsFilterFragment : BaseFragment(), NewsFilterView {
                             val checkedFilters = categories.filter { category -> category.isChecked }
                             setFragmentResult(NewsFragment.RESULT_KEY, bundleOf(CHECKED_FILTERS to checkedFilters))
                         }
-                        findNavController().popBackStack()
+                        findNavController().navigateUp()
                         true
                     }
                     else -> false
