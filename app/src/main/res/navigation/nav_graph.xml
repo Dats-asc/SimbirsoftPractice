@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/navigation_help">
+
+    <fragment
+        android:id="@+id/navigation_help"
+        android:name="com.example.simbirsoftpracticeapp.presentation.help.HelpFragment"
+        android:label="fragment_help"
+        tools:layout="@layout/fragment_help" />
+    <fragment
+        android:id="@+id/navigation_search"
+        android:name="com.example.simbirsoftpracticeapp.presentation.search.SearchFragment"
+        android:label="fragment_search"
+        tools:layout="@layout/fragment_search" />
+    <fragment
+        android:id="@+id/navigation_profile"
+        android:name="com.example.simbirsoftpracticeapp.presentation.profile.ProfileFragment"
+        android:label="fragment_profile"
+        tools:layout="@layout/fragment_profile" />
+    <fragment
+        android:id="@+id/authFragment"
+        android:name="com.example.simbirsoftpracticeapp.presentation.auth.AuthFragment"
+        android:label="fragment_auth"
+        tools:layout="@layout/fragment_auth">
+        <action
+            android:id="@+id/action_authFragment_to_navigation_help"
+            app:destination="@id/navigation_help"
+            app:popUpTo="@+id/nav_graph"
+            app:popUpToInclusive="true" />
+    </fragment>
+    <navigation android:id="@+id/navigation_news"
+        app:startDestination="@id/newsFragment">
+        <fragment
+            android:id="@+id/newsFragment"
+            android:name="com.example.simbirsoftpracticeapp.presentation.news.NewsFragment"
+            android:label="fragment_news"
+            tools:layout="@layout/fragment_news" >
+            <action
+                android:id="@+id/action_newsFragment_to_newsDetailFragment"
+                app:destination="@id/newsDetailFragment" />
+            <action
+                android:id="@+id/action_newsFragment_to_newsFilterFragment"
+                app:destination="@id/newsFilterFragment" />
+        </fragment>
+        <fragment
+            android:id="@+id/newsDetailFragment"
+            android:name="com.example.simbirsoftpracticeapp.presentation.news.NewsDetailFragment"
+            android:label="fragment_news_detail"
+            tools:layout="@layout/fragment_news_detail" />
+        <fragment
+            android:id="@+id/newsFilterFragment"
+            android:name="com.example.simbirsoftpracticeapp.presentation.news.NewsFilterFragment"
+            android:label="fragment_news_filter"
+            tools:layout="@layout/fragment_news_filter" />
+    </navigation>
+</navigation>

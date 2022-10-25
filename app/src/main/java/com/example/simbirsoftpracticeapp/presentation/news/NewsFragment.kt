@@ -5,6 +5,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.os.bundleOf
+import androidx.fragment.app.setFragmentResult
+import androidx.fragment.app.setFragmentResultListener
+import androidx.navigation.fragment.findNavController
 import com.example.simbirsoftpracticeapp.R
 import com.example.simbirsoftpracticeapp.common.BaseFragment
 import com.example.simbirsoftpracticeapp.common.Constants
@@ -67,7 +70,10 @@ class NewsFragment : BaseFragment(), NewsView {
     private fun initAdapter() {
         if (adapter == null) {
             adapter = NewsAdapter(events?.events ?: listOf()) { eventId ->
-                pushNewsDetail(eventId)
+                findNavController().navigate(
+                    R.id.action_newsFragment_to_newsDetailFragment,
+                    bundleOf(Constants.EVENT_ID to eventId)
+                )
             }
             binding.rvEvents.adapter = adapter
         } else {
@@ -80,26 +86,17 @@ class NewsFragment : BaseFragment(), NewsView {
             toolbar.setOnMenuItemClickListener {
                 when (it.itemId) {
                     R.id.action_filter -> {
-                        pushFilterFragment()
+                        setFragmentResultListener(RESULT_KEY) { _, bundle ->
+                            changedFilters =
+                                bundle.getSerializable(NewsFilterFragment.CHECKED_FILTERS) as List<FilterCategory>
+                            updateEvents()
+                        }
+                        findNavController().navigate(R.id.newsFilterFragment)
                         true
                     }
                     else -> false
                 }
             }
-        }
-    }
-
-    private fun pushFilterFragment() {
-        filterFragment = NewsFilterFragment().apply {
-            (this as Filterable).onFiltersChanged { filters ->
-                changedFilters = filters
-                updateEvents()
-            }
-        }
-        requireActivity().supportFragmentManager.beginTransaction().run {
-            addToBackStack(null)
-            replace(R.id.fragment_container_view, filterFragment!!)
-            commit()
         }
     }
 
@@ -109,18 +106,6 @@ class NewsFragment : BaseFragment(), NewsView {
             filter != null
         }
         adapter?.updateEvents(filteredEvents ?: listOf())
-    }
-
-    private fun pushNewsDetail(eventId: Int) {
-        requireActivity().supportFragmentManager.beginTransaction().run {
-            addToBackStack(this::class.java.name)
-            replace(
-                R.id.fragment_container_view,
-                NewsDetailFragment().apply {
-                    arguments = bundleOf(Constants.EVENT_ID to eventId)
-                })
-            commit()
-        }
     }
 
     override fun setEvents(events: CharityEvents) {
@@ -142,5 +127,6 @@ class NewsFragment : BaseFragment(), NewsView {
 
     companion object {
         const val EVENTS = "EVENTS"
+        const val RESULT_KEY = "RESULT_KEY"
     }
 }

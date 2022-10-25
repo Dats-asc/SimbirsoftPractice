@@ -1,18 +1,15 @@
 package com.example.simbirsoftpracticeapp.presentation.main
 
-import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import androidx.core.os.bundleOf
+import androidx.navigation.NavController
+import androidx.navigation.findNavController
+import androidx.navigation.ui.setupWithNavController
 import com.example.simbirsoftpracticeapp.R
 import com.example.simbirsoftpracticeapp.common.Constants
 import com.example.simbirsoftpracticeapp.databinding.ActivityMainBinding
-import com.example.simbirsoftpracticeapp.presentation.auth.AuthFragment
-import com.example.simbirsoftpracticeapp.presentation.help.HelpFragment
 import com.example.simbirsoftpracticeapp.presentation.news.NewsDetailFragment
-import com.example.simbirsoftpracticeapp.presentation.news.NewsFragment
-import com.example.simbirsoftpracticeapp.presentation.profile.ProfileFragment
-import com.example.simbirsoftpracticeapp.presentation.search.SearchFragment
 import com.jakewharton.threetenabp.AndroidThreeTen
 import dagger.android.AndroidInjection
 import dagger.android.DispatchingAndroidInjector
@@ -27,23 +24,22 @@ class MainActivity : MvpAppCompatActivity(), HasAndroidInjector, Navigator {
 
     private lateinit var binding: ActivityMainBinding
 
+    private lateinit var navController: NavController
+
     override fun androidInjector() = dispatchingAndroidInjector
 
     override fun onCreate(savedInstanceState: Bundle?) {
         AndroidInjection.inject(this)
         super.onCreate(savedInstanceState)
         AndroidThreeTen.init(this)
-
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
         if (savedInstanceState != null) {
             return
         }
-        supportFragmentManager.beginTransaction().run {
-            binding.bottomNavigationView.visibility = View.GONE
-            add(R.id.fragment_container_view, AuthFragment())
-            commit()
-        }
+
+        setupBottomNavigation()
 
         if (intent.extras?.getInt(Constants.EVENT_ID) != null) {
             val eventId = intent?.extras?.getInt(Constants.EVENT_ID) ?: -1
@@ -59,61 +55,24 @@ class MainActivity : MvpAppCompatActivity(), HasAndroidInjector, Navigator {
         }
     }
 
-    override fun onStart() {
-        super.onStart()
-        setupNavigation()
+    private fun setupBottomNavigation() {
+        navController = findNavController(R.id.fragment_container_view)
+        navController.addOnDestinationChangedListener { _, destination, _ ->
+            when (destination.id) {
+                R.id.authFragment -> binding.bottomNavigationView.visibility = View.GONE
+                else -> binding.bottomNavigationView.visibility = View.VISIBLE
+            }
+        }
+        binding.bottomNavigationView.setupWithNavController(navController)
     }
 
-    private fun setupNavigation() {
-        binding.bottomNavigationView.selectedItemId = R.id.navigation_help
-        binding.bottomNavigationView.setOnItemSelectedListener { item ->
-            onBottomNavigationItemSelected(item.itemId)
-        }
+    override fun onSupportNavigateUp(): Boolean {
+        return super.onSupportNavigateUp() || navController.navigateUp()
     }
 
-    private fun onBottomNavigationItemSelected(itemId: Int): Boolean {
-        return when (itemId) {
-            R.id.navigation_news -> {
-                supportFragmentManager.beginTransaction().run {
-                    replace(R.id.fragment_container_view, NewsFragment())
-                    commit()
-                }
-                true
-            }
-            R.id.navigation_search -> {
-                supportFragmentManager.beginTransaction().run {
-                    replace(R.id.fragment_container_view, SearchFragment())
-                    commit()
-                }
-                true
-            }
-            R.id.navigation_help -> {
-                supportFragmentManager.beginTransaction().run {
-                    replace(R.id.fragment_container_view, HelpFragment())
-                    commit()
-                }
-                true
-            }
-            R.id.navigation_history -> {
-                true
-            }
-            R.id.navigation_profile -> {
-                supportFragmentManager.beginTransaction().run {
-                    replace(R.id.fragment_container_view, ProfileFragment())
-                    commit()
-                }
-                true
-            }
-            else -> false
-        }
-    }
 
     override fun onAuthSuccesses() {
-        binding.bottomNavigationView.visibility = View.VISIBLE
-        supportFragmentManager.beginTransaction().run {
-            replace(R.id.fragment_container_view, HelpFragment())
-            commit()
-        }
+        navController.navigate(R.id.action_authFragment_to_navigation_help)
     }
 
 }

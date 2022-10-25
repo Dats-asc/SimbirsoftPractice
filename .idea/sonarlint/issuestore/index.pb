@@ -122,8 +122,6 @@ napp/build/generated/source/kapt/debug/com/example/simbirsoftpracticeapp/present
 {app/build/generated/source/kapt/debug/com/example/simbirsoftpracticeapp/presentation/main/MainActivity_MembersInjector.java,7/9/7942c769989982d46def6625c322957216f28969
 ê
 `app/build/generated/source/kapt/debug/com/example/simbirsoftpracticeapp/App_MembersInjector.java,c/9/c9868052312003dd660f4d62c8ec192e11411f4b
-Y
-)app/src/main/res/layout/fragment_help.xml,b/f/bf7f7abcec4f58e5aa4300ddc594ddd0e9e43cf7
 _
 /app/src/main/res/drawable/ic_card_separator.xml,4/3/43c5779e5d28735796160e53ccdde475e9ff8df0
 [
@@ -342,8 +340,6 @@ Yapp/src/main/java/com/example/simbirsoftpracticeapp/presentation/search/SearchF
 Wapp/src/main/java/com/example/simbirsoftpracticeapp/presentation/search/SearchResult.kt,2/2/229580ac4390bdcce4049cad69b1a7218eb45215
 â
 Yapp/src/main/java/com/example/simbirsoftpracticeapp/presentation/search/ByNkoPresenter.kt,b/2/b20bc7e8dae92f3d944dc72136571611734c0079
-Ç
-Rapp/src/main/java/com/example/simbirsoftpracticeapp/presentation/main/Navigator.kt,c/3/c3b6ad1bbf62021f67395ae5977da097db400461
 Ö
 Uapp/src/main/java/com/example/simbirsoftpracticeapp/presentation/search/Searchable.kt,0/7/07b76d22bf7c79a8d545a6b0a2b726a92e8789ad
 ë
@@ -412,8 +408,6 @@ Mapp/src/main/java/com/example/simbirsoftpracticeapp/di/scope/FragmentScope.kt,
 ]app/src/main/java/com/example/simbirsoftpracticeapp/presentation/news/adapters/NewsAdapter.kt,8/2/82cb7294f78c5098ebec74f77caf144b3ef65c2b
 å
 \app/src/main/java/com/example/simbirsoftpracticeapp/presentation/news/adapters/NewsHolder.kt,1/8/18f5938bfb87406d73477fa05623b0f4db3dfa23
-Ö
-Uapp/src/main/java/com/example/simbirsoftpracticeapp/presentation/main/MainActivity.kt,f/a/fa7bf8b9b70942142c204fe50c1e45ea074b8f13
 ó
 gapp/src/main/java/com/example/simbirsoftpracticeapp/presentation/news/DonationPushNotificationWorker.kt,8/b/8b1c31b9a580aadeb9fd8ee2b85008723432d759
 v
@@ -478,3 +472,9 @@ s
 Capp/src/main/java/com/example/simbirsoftpracticeapp/common/Utils.kt,4/a/4a6290eb537375f072cc151982d38ded5cbca132
 ñ
 fapp/src/androidTest/java/com/example/simbirsoftpracticeapp/presentation/profile/ProfileFragmentTest.kt,d/0/d0e6ccad764da0ff9ff11c6f329658d94f8bfe8a
+ã
+[app/src/main/java/com/example/simbirsoftpracticeapp/presentation/news/NewsDetailFragment.kt,a/7/a7d12d4d93940459a544420f3e002793cf3c2529
+z
+Japp/src/main/java/com/example/simbirsoftpracticeapp/common/BaseFragment.kt,7/f/7f9f6101969d27c4e6e5207f7ca61e7159605fe4
+Ç
+Rapp/src/main/java/com/example/simbirsoftpracticeapp/presentation/main/Navigator.kt,c/3/c3b6ad1bbf62021f67395ae5977da097db400461
