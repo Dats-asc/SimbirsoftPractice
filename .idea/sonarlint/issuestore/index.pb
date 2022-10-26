@@ -140,8 +140,6 @@ b
 +app/src/main/res/layout/fragment_by_nko.xml,7/9/792caef2807abeaf80407f259dccc72d5970ec94
 _
 /app/src/main/res/layout/fragment_events_tab.xml,0/1/014fff0e8ac41fb61bd8d82ddd82055267e8e39a
-Y
-)app/src/main/res/layout/fragment_news.xml,4/e/4e48f717b8abd562a2f2147f683d1ef2f5d0ae31
 `
 0app/src/main/res/layout/fragment_news_filter.xml,5/8/58af1b7f0c12e1eb3a64bb3392b8c804e83ef6c0
 [
@@ -158,10 +156,6 @@ b
 +app/src/main/res/menu/news_toolbar_menu.xml,7/5/75db0e2c4d6b30f29d582055728bf89fc8076026
 ^
 .app/src/main/res/menu/profile_toolbar_menu.xml,4/a/4acc67f63ec9a01a266fff49c66f5f25fafd6bf2
-[
-+app/src/main/res/layout/item_event_card.xml,8/1/812671fd9572634e3456176b1764b136238d5b77
-^
-.app/src/main/res/layout/item_search_result.xml,0/5/05063919c050fac24f7209ce5e088df702cdf2a4
 Y
 )app/src/main/res/layout/item_category.xml,3/8/38b9c3e3bde211654ca48f0602332e05b247fba9
 `
@@ -464,12 +458,8 @@ A
 settings.gradle,0/5/05efc8b1657769a27696d478ded1e95f38737233
 ’
 bapp/src/main/java/com/example/simbirsoftpracticeapp/presentation/profile/ProfileAlertDialogView.kt,2/2/221952bf21d5b8bbd20e5496988c90e522c647d9
-Ž
-^app/src/androidTest/java/com/example/simbirsoftpracticeapp/presentation/utils/EspressoUtils.kt,e/5/e5e9aaabbf2c8a18e3882ffd1c44c65bb325dad9
 s
 Capp/src/main/java/com/example/simbirsoftpracticeapp/common/Utils.kt,4/a/4a6290eb537375f072cc151982d38ded5cbca132
-–
-fapp/src/androidTest/java/com/example/simbirsoftpracticeapp/presentation/profile/ProfileFragmentTest.kt,d/0/d0e6ccad764da0ff9ff11c6f329658d94f8bfe8a
 z
 Japp/src/main/java/com/example/simbirsoftpracticeapp/common/BaseFragment.kt,7/f/7f9f6101969d27c4e6e5207f7ca61e7159605fe4
 ‚

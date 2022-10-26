@@ -11,6 +11,7 @@ import androidx.test.espresso.matcher.ViewMatchers.*
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.filters.MediumTest
 import com.example.simbirsoftpracticeapp.R
+import com.example.simbirsoftpracticeapp.presentation.utils.EspressoUtils
 import org.hamcrest.Description
 import org.hamcrest.Matcher
 import org.hamcrest.Matchers.allOf
@@ -44,11 +45,11 @@ class ProfileFragmentTest {
     @Test
     fun testUserIconsHasDrawable() {
         onView(withId(R.id.iv_friend_1))
-            .check(matches(imageViewHasDrawable()))
+            .check(matches(EspressoUtils.imageViewHasDrawable()))
         onView(withId(R.id.iv_friend_2))
-            .check(matches(imageViewHasDrawable()))
+            .check(matches(EspressoUtils.imageViewHasDrawable()))
         onView(withId(R.id.iv_friend_3))
-            .check(matches(imageViewHasDrawable()))
+            .check(matches(EspressoUtils.imageViewHasDrawable()))
     }
 
     @Test
@@ -102,28 +103,4 @@ class ProfileFragmentTest {
 
     private fun launchFragment() =
         launchFragmentInContainer<ProfileFragment>(bundleOf(), R.style.Theme_SimbirsoftPracticeApp)
-
-    private fun imageViewHasDrawable(): Matcher<View> {
-        return object : Matcher<View> {
-            override fun describeTo(description: Description?) {
-            }
-
-            override fun matches(item: Any?): Boolean {
-                val view = item as View
-
-                val imageView = view as ImageView
-
-                return imageView.drawable != null
-            }
-
-            override fun describeMismatch(item: Any?, mismatchDescription: Description?) {
-
-            }
-
-            override fun _dont_implement_Matcher___instead_extend_BaseMatcher_() {
-                TODO("Not yet implemented")
-            }
-
-        }
-    }
 }
