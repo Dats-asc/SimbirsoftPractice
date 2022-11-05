@@ -9,6 +9,7 @@ import androidx.fragment.app.setFragmentResult
 import androidx.navigation.fragment.findNavController
 import com.example.simbirsoftpracticeapp.R
 import com.example.simbirsoftpracticeapp.common.BaseFragment
+import com.example.simbirsoftpracticeapp.common.Utils.customGetSerializable
 import com.example.simbirsoftpracticeapp.databinding.FragmentNewsFilterBinding
 import com.example.simbirsoftpracticeapp.domain.entity.FilterCategories
 import com.example.simbirsoftpracticeapp.domain.entity.FilterCategory
@@ -31,8 +32,6 @@ class NewsFilterFragment : BaseFragment(), NewsFilterView {
 
     private var adapter: FilterCategoryAdapter? = null
 
-    private var onFilterChanged: ((List<FilterCategory>) -> Unit)? = null
-
     private var filterCategories: FilterCategories? = null
 
     override fun onCreateView(
@@ -49,6 +48,17 @@ class NewsFilterFragment : BaseFragment(), NewsFilterView {
         if (savedInstanceState == null) {
             presenter.getCategories()
         }
+        savedInstanceState?.customGetSerializable<FilterCategories>(FILTER_CATEGORIES)?.let {
+            filterCategories = it
+            initAdapter()
+        } ?: kotlin.run {
+            presenter.getCategories()
+        }
+    }
+
+    override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
+        outState.putSerializable(FILTER_CATEGORIES, filterCategories)
     }
 
     private fun init() {
@@ -62,8 +72,12 @@ class NewsFilterFragment : BaseFragment(), NewsFilterView {
                     R.id.action_apply -> {
                         filterCategories?.categories?.let { categories ->
                             presenter.updateCategories(categories)
-                            val checkedFilters = categories.filter { category -> category.isChecked }
-                            setFragmentResult(NewsFragment.RESULT_KEY, bundleOf(CHECKED_FILTERS to checkedFilters))
+                            val checkedFilters =
+                                categories.filter { category -> category.isChecked }
+                            setFragmentResult(
+                                NewsFragment.RESULT_KEY,
+                                bundleOf(CHECKED_FILTERS to checkedFilters)
+                            )
                         }
                         findNavController().navigateUp()
                         true
@@ -75,14 +89,16 @@ class NewsFilterFragment : BaseFragment(), NewsFilterView {
     }
 
     private fun initAdapter() {
-        adapter = FilterCategoryAdapter(
-            filterCategories?.categories ?: listOf()
-        ) { categoryId, isChecked ->
-            filterCategories?.categories?.find { category -> category.id == categoryId }?.let {
-                it.isChecked = isChecked
+        filterCategories?.let {
+            adapter = FilterCategoryAdapter(
+                it.categories
+            ) { categoryId, isChecked ->
+                filterCategories?.categories?.find { category -> category.id == categoryId }?.let {
+                    it.isChecked = isChecked
+                }
             }
+            binding.rvCategories.adapter = adapter
         }
-        binding.rvCategories.adapter = adapter
     }
 
     override fun setCategories(categories: FilterCategories) {
@@ -102,7 +118,8 @@ class NewsFilterFragment : BaseFragment(), NewsFilterView {
         Snackbar.make(binding.root, msg, Snackbar.LENGTH_LONG).show()
     }
 
-    companion object{
+    companion object {
         const val CHECKED_FILTERS = "CHECKED_FILTERS"
+        const val FILTER_CATEGORIES = "FILTER_CATEGORIES"
     }
 }

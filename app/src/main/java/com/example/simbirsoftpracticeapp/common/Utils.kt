@@ -2,6 +2,9 @@ package com.example.simbirsoftpracticeapp.common
 
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
+import android.os.Build
+import android.os.Bundle
+import android.os.Parcelable
 import android.widget.ImageView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
@@ -10,6 +13,7 @@ import org.threeten.bp.Instant
 import org.threeten.bp.Month
 import org.threeten.bp.ZoneId
 import org.threeten.bp.ZonedDateTime
+import java.io.Serializable
 
 object Utils {
 
@@ -47,5 +51,23 @@ object Utils {
             .diskCacheStrategy(DiskCacheStrategy.NONE)
             .skipMemoryCache(true)
             .into(view)
+    }
+
+    @Suppress("DEPRECATION")
+    inline fun <reified T : Serializable> Bundle.customGetSerializable(key: String): T? {
+        return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            getSerializable(key, T::class.java)
+        } else {
+            getSerializable(key) as? T
+        }
+    }
+
+    @Suppress("DEPRECATION")
+    inline fun <reified T : Parcelable> Bundle.customGetParcelable(key: String): T? {
+        return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            getParcelable(key, T::class.java)
+        } else {
+            getParcelable(key) as? T
+        }
     }
 }
