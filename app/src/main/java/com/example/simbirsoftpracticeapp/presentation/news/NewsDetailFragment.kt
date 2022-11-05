@@ -64,7 +64,7 @@ class NewsDetailFragment : BaseFragment(), NewsDetailView {
                             .putInt(Constants.EVENT_ID, eventId ?: 0)
                             .putString(Constants.EVENT_NAME, event?.title)
                             .putDouble(Constants.DONATION_AMOUNT, amountOfMoney)
-                            .putInt(Constants.NOTIFICATION_MODE, DonationPushNotificationWorker.NotifyMode.FIRST.ordinal)
+                            .putInt(Constants.NOTIFICATION_MODE, DonationPushNotificationWorker.NotifyMode.REGULAR.ordinal)
                             .build()
                         val workRequest =
                             OneTimeWorkRequest.Builder(DonationPushNotificationWorker::class.java)
