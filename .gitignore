@@ -8,7 +8,6 @@
 *.apk
 *.ap_
 *.aab
-
 # Files for the ART/Dalvik VM
 *.dex
 
@@ -134,3 +133,4 @@ fabric.properties
 !/gradle/wrapper/gradle-wrapper.jar
 
 # End of https://www.toptal.com/developers/gitignore/api/androidstudio
+/.idea/sonarlint/
