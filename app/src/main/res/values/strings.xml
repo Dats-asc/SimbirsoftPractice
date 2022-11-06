@@ -81,4 +81,6 @@
     <string name="edit_text_enter_amount_of_money">Введите сумму</string>
     <string name="cancel">Отмена</string>
     <string name="send">Перевести</string>
+    <string name="notification_msg">"Спасибо, что пожертвовали %1$s ₽! Будем очень признательны, если вы сможете пожертвовать еще больше."</string>
+    <string name="notification_remind_msg">Напоминаем, что мы будем очень признательны, если вы сможете пожертвовать еще больше.</string>
 </resources>

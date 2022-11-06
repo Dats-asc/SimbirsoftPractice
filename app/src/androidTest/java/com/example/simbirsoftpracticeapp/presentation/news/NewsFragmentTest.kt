@@ -10,7 +10,7 @@ import androidx.test.ext.junit.rules.ActivityScenarioRule
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.example.simbirsoftpracticeapp.R
 import com.example.simbirsoftpracticeapp.presentation.main.MainActivity
-import com.example.simbirsoftpracticeapp.presentation.news.adapters.NewsHolder
+import com.example.simbirsoftpracticeapp.presentation.news.adapters.NewsAdapter
 import com.example.simbirsoftpracticeapp.presentation.utils.EspressoUtils.atPosition
 import com.example.simbirsoftpracticeapp.presentation.utils.EspressoUtils.waitFor
 import org.hamcrest.Matchers.not
@@ -46,7 +46,7 @@ class NewsFragmentTest {
             .check(matches(isDisplayed()))
             .check(matches(atPosition(0, hasDescendant(not(withText(""))))))
             .check(matches(atPosition(0, isClickable())))
-            .perform(RecyclerViewActions.scrollToPosition<NewsHolder>(3))
+            .perform(RecyclerViewActions.scrollToPosition<NewsAdapter.NewsHolder>(3))
             .check(matches(atPosition(3, hasDescendant(not(withText(""))))))
     }
 }

@@ -1,14 +1,13 @@
 package com.example.simbirsoftpracticeapp.presentation.news
 
+import android.app.Notification
 import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.app.PendingIntent
 import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
-import android.net.Uri
 import android.os.Build
-import android.util.Log
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
 import androidx.core.os.bundleOf
@@ -26,26 +25,29 @@ class DonationPushNotificationWorker(
 ) : Worker(appContext, workRequest) {
 
     override fun doWork(): Result {
-
-        val notifyMode = NotifyMode.values()[inputData.getInt(Constants.NOTIFICATION_MODE, 0)]
-
-        when (notifyMode) {
-            NotifyMode.FIRST -> {
-                regularNotification()
+        return try {
+            when (NotifyMode.values()[inputData.getInt(Constants.NOTIFICATION_MODE, 0)]) {
+                NotifyMode.REGULAR -> {
+                    regularNotification()
+                }
+                NotifyMode.REMINDER -> {
+                    remindNotification()
+                }
             }
-            NotifyMode.REMINDER -> {
-                remindNotification()
-            }
+            Result.success()
+        } catch (e: Exception) {
+            Result.failure()
         }
-
-        return Result.success()
     }
 
     private fun regularNotification() {
         val remindIntent = Intent(appContext, RemindLaterBroadcastReceiver::class.java)
             .putExtra(Constants.EVENT_ID, inputData.getInt(Constants.EVENT_ID, 0))
             .putExtra(Constants.EVENT_NAME, inputData.getString(Constants.EVENT_NAME))
-            .putExtra(Constants.EVENT_ID, inputData.getDouble(Constants.DONATION_AMOUNT, 0.0))
+            .putExtra(
+                Constants.DONATION_AMOUNT,
+                inputData.getDouble(Constants.DONATION_AMOUNT, 0.0)
+            )
             .putExtra(Constants.NOTIFICATION_MODE, inputData.getInt(Constants.NOTIFICATION_MODE, 0))
 
         val remindPendingIntent =
@@ -58,42 +60,25 @@ class DonationPushNotificationWorker(
             setComponentName(MainActivity::class.java)
         }.createPendingIntent()
 
-        val notificationBuilder =
+        val notification =
             NotificationCompat.Builder(appContext, CHANNEL_ID)
                 .setAutoCancel(true)
                 .setContentIntent(deepLink)
                 .setSmallIcon(R.mipmap.ic_icon2)
                 .setContentTitle(inputData.getString(Constants.EVENT_NAME))
                 .setContentText(
-                    "Спасибо, что пожертвовали ${
-                        inputData.getDouble(
-                            Constants.DONATION_AMOUNT,
-                            0.0
-                        )
-                    } ₽! Будем очень признательны, если вы сможете пожертвовать еще больше."
+                    appContext.getString(
+                        R.string.notification_msg,
+                        inputData.getDouble(Constants.DONATION_AMOUNT, 0.0).toString()
+                    )
                 )
                 .addAction(R.mipmap.ic_icon2, "Напомнить позже", remindPendingIntent)
                 .setPriority(NotificationCompat.PRIORITY_DEFAULT)
-
-        val notificationManager = NotificationManagerCompat.from(appContext)
-
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            val notificationChannel = NotificationChannel(
-                CHANNEL_ID,
-                "Donation notification",
-                NotificationManager.IMPORTANCE_HIGH
-            )
-            notificationManager.createNotificationChannel(notificationChannel)
-            notificationBuilder.setChannelId(CHANNEL_ID)
-        }
-
-        notificationManager.notify(NOTIFICATION_ID, notificationBuilder.build())
+                .build()
+        showNotification(notification)
     }
 
     private fun remindNotification() {
-        val intent = Intent(appContext, MainActivity::class.java)
-            .putExtra(Constants.EVENT_ID, inputData.getInt(Constants.EVENT_ID, 0))
-
         val deepLink = NavDeepLinkBuilder(appContext).apply {
             setGraph(R.navigation.nav_graph)
             setDestination(R.id.newsDetailFragment)
@@ -101,33 +86,37 @@ class DonationPushNotificationWorker(
             setComponentName(MainActivity::class.java)
         }.createPendingIntent()
 
-        val notificationBuilder =
+        val notification =
             NotificationCompat.Builder(appContext, CHANNEL_ID)
                 .setAutoCancel(true)
                 .setContentIntent(deepLink)
                 .setSmallIcon(R.mipmap.ic_icon2)
                 .setContentTitle(inputData.getString(Constants.EVENT_NAME))
-                .setContentText("Напоминаем, что мы будем очень признательны, если вы сможете пожертвовать еще больше.")
+                .setContentText(appContext.getString(R.string.notification_remind_msg))
                 .setPriority(NotificationCompat.PRIORITY_DEFAULT)
+                .build()
+        showNotification(notification)
+    }
 
-
+    private fun showNotification(notification: Notification) {
         val notificationManager = NotificationManagerCompat.from(appContext)
-
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            val notificationChannel = NotificationChannel(
+            val channel = NotificationChannel(
                 CHANNEL_ID,
-                "Donation notification",
+                "Charity notification",
                 NotificationManager.IMPORTANCE_HIGH
             )
-            notificationManager.createNotificationChannel(notificationChannel)
-            notificationBuilder.setChannelId(CHANNEL_ID)
+            notificationManager.createNotificationChannel(channel)
         }
+        notificationManager.notify(NOTIFICATION_ID, notification)
+    }
 
-        notificationManager.notify(NOTIFICATION_ID, notificationBuilder.build())
+    enum class NotifyMode {
+        REGULAR,
+        REMINDER
     }
 
     class RemindLaterBroadcastReceiver : BroadcastReceiver() {
-
         override fun onReceive(p0: Context?, p1: Intent?) {
             NotificationManagerCompat.from(p0!!).cancel(null, NOTIFICATION_ID)
             val data = Data.Builder()
@@ -139,7 +128,7 @@ class DonationPushNotificationWorker(
                 )
                 .putInt(
                     Constants.NOTIFICATION_MODE,
-                    DonationPushNotificationWorker.NotifyMode.REMINDER.ordinal
+                    NotifyMode.REMINDER.ordinal
                 )
                 .build()
             val scheduleWork =
@@ -147,18 +136,12 @@ class DonationPushNotificationWorker(
                     .setInputData(data)
                     .setInitialDelay(30, TimeUnit.MINUTES)
                     .build()
-            WorkManager.getInstance(p0!!).enqueue(scheduleWork)
+            WorkManager.getInstance(p0).enqueue(scheduleWork)
         }
-
-    }
-
-    enum class NotifyMode {
-        FIRST,
-        REMINDER
     }
 
     companion object {
-        const val CHANNEL_ID = "notify_001"
+        const val CHANNEL_ID = "charity_notification"
         const val NOTIFICATION_ID = 0
     }
 }

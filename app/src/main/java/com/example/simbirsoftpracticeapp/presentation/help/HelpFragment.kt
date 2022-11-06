@@ -1,12 +1,18 @@
 package com.example.simbirsoftpracticeapp.presentation.help
 
+import android.graphics.Bitmap
+import android.os.Build
 import android.os.Bundle
+import android.os.Parcelable
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.recyclerview.widget.RecyclerView.LayoutManager
 import com.example.simbirsoftpracticeapp.R
 import com.example.simbirsoftpracticeapp.common.BaseFragment
+import com.example.simbirsoftpracticeapp.common.Utils.customGetParcelable
 import com.example.simbirsoftpracticeapp.databinding.FragmentHelpBinding
+import com.example.simbirsoftpracticeapp.presentation.profile.ProfileFragment
 
 class HelpFragment : BaseFragment(), HelpView {
 
@@ -24,6 +30,8 @@ class HelpFragment : BaseFragment(), HelpView {
 
     private lateinit var binding: FragmentHelpBinding
 
+    private var listState: Parcelable? = null
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -34,8 +42,13 @@ class HelpFragment : BaseFragment(), HelpView {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
+        listState = savedInstanceState?.customGetParcelable(LIST_STATE)
         initAdapter()
+    }
+
+    override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
+        outState.putParcelable(LIST_STATE, listState)
     }
 
     private fun initAdapter() {
@@ -43,5 +56,14 @@ class HelpFragment : BaseFragment(), HelpView {
             TODO("do on item click")
         }
         binding.rvCategories.adapter = categoryAdapter
+        listState?.let {
+            binding.rvCategories.layoutManager?.onRestoreInstanceState(listState)
+        } ?: kotlin.run {
+            listState = binding.rvCategories.layoutManager?.onSaveInstanceState()
+        }
+    }
+
+    companion object {
+        const val LIST_STATE = "LIST_STATE"
     }
 }

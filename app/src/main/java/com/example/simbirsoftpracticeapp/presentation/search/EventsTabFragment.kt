@@ -8,6 +8,7 @@ import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.DividerItemDecoration
 import com.example.simbirsoftpracticeapp.R
 import com.example.simbirsoftpracticeapp.common.BaseFragment
+import com.example.simbirsoftpracticeapp.common.Utils.customGetSerializable
 import com.example.simbirsoftpracticeapp.databinding.FragmentEventsTabBinding
 import com.example.simbirsoftpracticeapp.domain.entity.CharityEvent
 import com.example.simbirsoftpracticeapp.domain.entity.CharityEvents
@@ -46,8 +47,8 @@ class EventsTabFragment : BaseFragment(), EventsTabView, Searchable {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        savedInstanceState?.getSerializable(EVENTS)?.let {
-            events = (it as CharityEvents).events
+        savedInstanceState?.customGetSerializable<CharityEvents>(EVENTS)?.let {
+            events = it.events
             initAdapter()
         }
         binding.placeholder.visibility = View.GONE
