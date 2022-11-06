@@ -1,6 +1,7 @@
 package com.example.simbirsoftpracticeapp.presentation.news
 
 import android.util.Log
+import com.example.simbirsoftpracticeapp.domain.entity.FilterCategories
 import com.example.simbirsoftpracticeapp.domain.entity.FilterCategory
 import com.example.simbirsoftpracticeapp.domain.usecase.GetCategoriesUseCase
 import com.example.simbirsoftpracticeapp.domain.usecase.UpdateCategoriesUseCase
@@ -29,13 +30,16 @@ class NewsFilterPresenter @Inject constructor(
                 .subscribe({ categories ->
                     viewState.setCategories(categories)
                 }, { e ->
-                    Log.e("NewsFilterPresenter", e.message.orEmpty())
+                    viewState.hideProgressbar()
+                    viewState.showError(e.message.orEmpty())
                 })
         )
     }
 
     fun updateCategories(categories: List<FilterCategory>) {
-        updateCategoriesUseCase(categories)
+        if (categories.isNotEmpty()) {
+            updateCategoriesUseCase(categories)
+        }
     }
 
     override fun onDestroy() {

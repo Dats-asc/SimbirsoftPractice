@@ -4,17 +4,21 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.os.bundleOf
+import androidx.fragment.app.setFragmentResult
+import androidx.navigation.fragment.findNavController
 import com.example.simbirsoftpracticeapp.R
 import com.example.simbirsoftpracticeapp.common.BaseFragment
 import com.example.simbirsoftpracticeapp.databinding.FragmentNewsFilterBinding
 import com.example.simbirsoftpracticeapp.domain.entity.FilterCategories
 import com.example.simbirsoftpracticeapp.domain.entity.FilterCategory
 import com.example.simbirsoftpracticeapp.presentation.news.adapters.FilterCategoryAdapter
+import com.google.android.material.snackbar.Snackbar
 import moxy.presenter.InjectPresenter
 import moxy.presenter.ProvidePresenter
 import javax.inject.Inject
 
-class NewsFilterFragment : BaseFragment(), NewsFilterView, Filterable {
+class NewsFilterFragment : BaseFragment(), NewsFilterView {
 
     private lateinit var binding: FragmentNewsFilterBinding
 
@@ -50,7 +54,7 @@ class NewsFilterFragment : BaseFragment(), NewsFilterView, Filterable {
     private fun init() {
         with(binding) {
             toolbar.setNavigationOnClickListener {
-                requireActivity().supportFragmentManager.popBackStack()
+                findNavController().navigateUp()
             }
 
             toolbar.setOnMenuItemClickListener {
@@ -58,9 +62,10 @@ class NewsFilterFragment : BaseFragment(), NewsFilterView, Filterable {
                     R.id.action_apply -> {
                         filterCategories?.categories?.let { categories ->
                             presenter.updateCategories(categories)
-                            onFilterChanged?.invoke(categories.filter { category -> category.isChecked })
+                            val checkedFilters = categories.filter { category -> category.isChecked }
+                            setFragmentResult(NewsFragment.RESULT_KEY, bundleOf(CHECKED_FILTERS to checkedFilters))
                         }
-                        requireActivity().supportFragmentManager.popBackStack()
+                        findNavController().navigateUp()
                         true
                     }
                     else -> false
@@ -80,10 +85,6 @@ class NewsFilterFragment : BaseFragment(), NewsFilterView, Filterable {
         binding.rvCategories.adapter = adapter
     }
 
-    override fun onFiltersChanged(onFiltersChanged: (List<FilterCategory>) -> Unit) {
-        this.onFilterChanged = onFiltersChanged
-    }
-
     override fun setCategories(categories: FilterCategories) {
         filterCategories = categories
         initAdapter()
@@ -95,5 +96,13 @@ class NewsFilterFragment : BaseFragment(), NewsFilterView, Filterable {
 
     override fun hideProgressbar() {
         binding.progressBar.visibility = View.GONE
+    }
+
+    override fun showError(msg: String) {
+        Snackbar.make(binding.root, msg, Snackbar.LENGTH_LONG).show()
+    }
+
+    companion object{
+        const val CHECKED_FILTERS = "CHECKED_FILTERS"
     }
 }

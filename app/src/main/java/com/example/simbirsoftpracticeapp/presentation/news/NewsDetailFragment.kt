@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.fragment.findNavController
 import androidx.work.Constraints
 import androidx.work.Data
 import androidx.work.OneTimeWorkRequest
@@ -46,7 +47,7 @@ class NewsDetailFragment : BaseFragment(), NewsDetailView {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.toolbar.setNavigationOnClickListener {
-            requireActivity().supportFragmentManager.popBackStack()
+            findNavController().navigateUp()
         }
         presenter.getEvent(eventId ?: 0)
 
@@ -98,6 +99,7 @@ class NewsDetailFragment : BaseFragment(), NewsDetailView {
             tvPhoneNumber.text = phoneNumbers
             if (event.membersCount - 5 > 0) {
                 tvMembersCount.text = "+${event.membersCount - 5}"
+                val a = 0
             }
         }
     }
